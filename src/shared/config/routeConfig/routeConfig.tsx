@@ -1,15 +1,29 @@
+import React from 'react';
 import { RouteProps } from 'react-router-dom';
 import { MainPage } from 'pages/MainPage';
 import { AboutPage } from 'pages/AboutPage';
+import MensPage from 'pages/MensPage/ui/MensPage';
 
 export enum AppRoutes {
   MAIN = 'main',
   ABOUT = 'about',
+  MENS = 'mens',
+  // WOMEN = 'women',
+  // EQUIPMENT = 'equipment',
+  // SALE = 'sale',
+  // CLEARANCE = 'clearance',
+  // NEW = 'new',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
   [AppRoutes.ABOUT]: '/about',
+  [AppRoutes.MENS]: '/shop/mens',
+  // [AppRoutes.WOMEN]: '/shop/women"s',
+  // [AppRoutes.EQUIPMENT]: '/shop/equipment',
+  // [AppRoutes.SALE]: '/shop/sale',
+  // [AppRoutes.CLEARANCE]: '/shop/clearance',
+  // [AppRoutes.NEW]: '/shop/new',
 };
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -21,4 +35,24 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     path: RoutePath.about,
     element: <AboutPage />,
   },
+  [AppRoutes.MENS]: {
+    path: RoutePath.mens,
+    element: <MensPage />,
+  },
+  // [AppRoutes.ABOUT]: {
+  //   path: RoutePath.about,
+  //   element: <AboutPage />,
+  // },
+  // [AppRoutes.ABOUT]: {
+  //   path: RoutePath.about,
+  //   element: <AboutPage />,
+  // },
+  // [AppRoutes.ABOUT]: {
+  //   path: RoutePath.about,
+  //   element: <AboutPage />,
+  // },
+  // [AppRoutes.ABOUT]: {
+  //   path: RoutePath.about,
+  //   element: <AboutPage />,
+  // },
 };

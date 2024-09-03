@@ -1,12 +1,11 @@
 import './styles/index.scss';
-import { Link } from 'react-router-dom';
 import { AppRouter } from './providers/router';
+import { Navbar } from 'widgets/Navbar/ui/Navbar';
 
 const App = () => {
   return (
     <div className="app">
-      <Link to={'/'}>Главная</Link>
-      <Link to={'/about'}>О сайте</Link>
+      <Navbar />
       <AppRouter />
     </div>
   );
