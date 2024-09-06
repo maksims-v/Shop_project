@@ -1,0 +1,23 @@
+.Input[type='text'],
+select {
+  width: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 6px 16px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgba(27, 31, 35, 0.4);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+select .size_m {
+  font: var(--font-m);
+}
+
+select .size_l {
+  font: var(--font-l);
+}
+
+select .size_xl {
+  font: var(--font-xl);
+}

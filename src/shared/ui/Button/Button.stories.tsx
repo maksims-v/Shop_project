@@ -26,16 +26,22 @@ export const Error: Story = {
   },
 };
 
-export const Success: Story = {
+export const SizeM: Story = {
   args: {
     children: 'Text',
-    theme: ButtonTheme.SUCCESS,
   },
 };
 
-export const sizeL: Story = {
+export const SizeL: Story = {
   args: {
     children: 'Text',
     size: ButtonSize.L,
+  },
+};
+
+export const SizeXL: Story = {
+  args: {
+    children: 'Text',
+    size: ButtonSize.XL,
   },
 };
