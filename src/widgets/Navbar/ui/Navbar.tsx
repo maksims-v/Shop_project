@@ -12,6 +12,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { PersonOutline, ShoppingBagOutlined } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { loginByUsername } from 'features/AuthByUserName/model/services/loginByUsername';
+import { useAppDispatch } from 'shared/lib/hooks/hook';
+import { LoginModal } from 'features/AuthByUserName/ui/LoginModal/LoginModal';
 
 export interface NavbarProps {
   className?: string;
@@ -19,8 +21,22 @@ export interface NavbarProps {
 
 export const Navbar = ({ className }: NavbarProps) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [isAuthModal, setIsAuthModal] = useState(false);
 
-  const dispatch = useDispatch();
+  const onCloseModal = useCallback(() => {
+    console.log('hai');
+    setIsAuthModal(false);
+  }, []);
+
+  const onShowModal = useCallback(() => {
+    setIsAuthModal(true);
+  }, []);
+
+  const onLogout = useCallback(() => {
+    setIsAuthModal(false);
+  }, []);
+
+  const dispatch = useAppDispatch();
 
   const userData = {
     identifier: 'test@inbox.lv',
@@ -151,13 +167,14 @@ export const Navbar = ({ className }: NavbarProps) => {
                 </>
               ) : (
                 <IconButton>
-                  <PersonOutline onClick={onLoginClick} />
+                  <PersonOutline onClick={onShowModal} />
                 </IconButton>
               )}
             </Box>
           </Box>
         </Box>
       </Container>
+      <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
     </Box>
   );
 };

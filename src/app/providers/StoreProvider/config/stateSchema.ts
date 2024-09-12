@@ -9,5 +9,5 @@ interface LoginSchema {
 
 export interface StateSchema {
   user: UserSchema;
-  loginForm: LoginSchema;
+  // loginForm: LoginSchema;
 }
