@@ -1,5 +1,5 @@
 export interface Token {
-  jwt: string;
+  jwt?: string;
 }
 
 export interface User {

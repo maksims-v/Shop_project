@@ -3,29 +3,29 @@ import { Box, IconButton, InputBase, Divider, Container, Badge, Link } from '@mu
 import { classNames } from 'shared/lib/classNames/classNames';
 import * as cls from './Navbar.module.scss';
 import Logo from 'shared/assets/logo/logo_small.png';
-import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
-import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
+import { AppLink } from 'shared/ui/AppLink/AppLink';
 import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { PersonOutline, ShoppingBagOutlined } from '@mui/icons-material';
-import { useDispatch } from 'react-redux';
-import { loginByUsername } from 'features/AuthByUserName/model/services/loginByUsername';
-import { useAppDispatch } from 'shared/lib/hooks/hook';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/hook';
 import { LoginModal } from 'features/AuthByUserName/ui/LoginModal/LoginModal';
+import { getUserAuthData, userActions } from 'entities/User';
+import { loginActions } from 'features/AuthByUserName/model/slice/loginSlice';
 
 export interface NavbarProps {
   className?: string;
 }
 
 export const Navbar = ({ className }: NavbarProps) => {
-  const [isAuth, setIsAuth] = useState(false);
   const [isAuthModal, setIsAuthModal] = useState(false);
 
+  const dispatch = useAppDispatch();
+  const authData = useAppSelector(getUserAuthData);
+
   const onCloseModal = useCallback(() => {
-    console.log('hai');
     setIsAuthModal(false);
+    dispatch(loginActions.clearUserState());
   }, []);
 
   const onShowModal = useCallback(() => {
@@ -33,19 +33,9 @@ export const Navbar = ({ className }: NavbarProps) => {
   }, []);
 
   const onLogout = useCallback(() => {
+    dispatch(userActions.logout());
     setIsAuthModal(false);
-  }, []);
-
-  const dispatch = useAppDispatch();
-
-  const userData = {
-    identifier: 'test@inbox.lv',
-    password: '12345a',
-  };
-
-  const onLoginClick = () => {
-    dispatch(loginByUsername(userData));
-  };
+  }, [dispatch]);
 
   return (
     <Box
@@ -153,7 +143,7 @@ export const Navbar = ({ className }: NavbarProps) => {
                 </Badge>
               </Link>
 
-              {isAuth ? (
+              {authData ? (
                 <>
                   <Link href="/userdashboard">
                     <IconButton>
@@ -161,13 +151,13 @@ export const Navbar = ({ className }: NavbarProps) => {
                     </IconButton>
                   </Link>
 
-                  <IconButton>
+                  <IconButton onClick={onLogout}>
                     <LogoutIcon />
                   </IconButton>
                 </>
               ) : (
-                <IconButton>
-                  <PersonOutline onClick={onShowModal} />
+                <IconButton onClick={onShowModal}>
+                  <PersonOutline />
                 </IconButton>
               )}
             </Box>

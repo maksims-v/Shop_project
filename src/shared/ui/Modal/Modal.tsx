@@ -1,7 +1,7 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import * as cls from './Modal.module.scss';
-import { Portal } from '@mui/material';
+import { Portal } from 'shared/ui/Portal/Portal';
 
 interface ModalProps {
   className?: string;
@@ -36,10 +36,9 @@ export const Modal = (props: ModalProps) => {
     }
   }, [onClose]);
 
+  // Новые ссылки!!!
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      console.log('hai');
-
       if (e.key === 'Escape') {
         closeHandler();
       }
@@ -55,7 +54,7 @@ export const Modal = (props: ModalProps) => {
     if (isOpen) {
       window.addEventListener('keydown', onKeyDown);
     }
-    console.log('hai');
+
     return () => {
       clearTimeout(timerRef.current);
       window.removeEventListener('keydown', onKeyDown);

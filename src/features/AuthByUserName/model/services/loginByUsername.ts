@@ -1,11 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { User, userActions } from 'entities/User';
-
-const userData = {
-  identifier: 'test@inbox.lv',
-  password: '12345a',
-};
+import { Token, User, userActions } from 'entities/User';
+import { setToken } from 'shared/lib/auth/auth';
+import Cookies from 'js-cookie';
 
 export interface LoginByUsernameProps {
   identifier: string;
@@ -30,46 +27,59 @@ export const loginByUsername = createAsyncThunk<
         },
       },
     );
-
     if (!response.data) {
       throw new Error('error');
     }
 
-    thunkAPI.dispatch(userActions.setAuthData(response.data));
-
+    setToken(response.data);
+    thunkAPI.dispatch(userActions.setAuthData(response.data.user));
     return response.data;
   } catch (e) {
-    console.log(e);
     return thunkAPI.rejectWithValue('Вы ввели неверный логин или пароль');
   }
 });
 
-// export const loginByUsername = createAsyncThunk<
-//   User,
-//   LoginByUsernameProps,
-//   { rejectValue: string }
-// >('auth/login', async function (credentials, thunkAPI) {
-//   try {
-//     const response = await fetch('http://127.0.0.1:1337/api/auth/local', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         identifier: credentials.identifier,
-//         password: credentials.password,
-//       }),
-//     });
+export const authUserCookies = createAsyncThunk<User, string, { rejectValue: string }>(
+  'auth/loginByCookies',
+  async (token, thunkAPI) => {
+    try {
+      const response = await axios('http://127.0.0.1:1337/api/users/me', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.data) {
+        throw new Error('error');
+      }
+      thunkAPI.dispatch(userActions.setAuthData(response.data));
 
-//     if (!response.ok) {
-//       throw new Error('error');
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Вы ввели неверный логин или пароль');
+    }
+  },
+);
+
+// export const authUserCookie = createAsyncThunk(
+//   'auth/getUserFromLocalCookie',
+//   async function (jwt, { rejectWithValue }) {
+//     try {
+//       const response = await fetch(`${process.env.API_URL}/api/users/me`, {
+//         headers: {
+//           'Content-Type': 'application/json',
+//           Authorization: `Bearer ${jwt}`,
+//         },
+//       });
+//       if (!response.ok) {
+//         throw new Error('Server Error!');
+//       }
+
+//       const data = response.json();
+
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
 //     }
-//     const data = response.json();
-
-//     thunkAPI.dispatch(userActions.setAuthData(data));
-
-//     return data;
-//   } catch (error) {
-//     return thunkAPI.rejectWithValue(error.message);
-//   }
-// });
+//   },
+// );
