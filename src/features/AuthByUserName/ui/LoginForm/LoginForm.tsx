@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 
 import {
   Box,
@@ -10,22 +10,39 @@ import {
   Button,
 } from '@mui/material';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
-import { loginActions } from 'features/AuthByUserName/model/slice/loginSlice';
-import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/hook';
-import { getLoginState } from 'features/AuthByUserName/model/selectors/getLoginState/getLoginState';
+import { loginActions, loginReducer } from 'features/AuthByUserName/model/slice/loginSlice';
+import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { loginByUsername } from 'features/AuthByUserName/model/services/loginByUsername';
 import { classNames } from 'shared/lib/classNames/classNames';
 import * as cls from './LoginForm.module.scss';
-import { getUserAuthData } from 'entities/User';
+import { ReduxStoreWithManager } from 'app/providers/StoreProvider/config/stateSchema';
+import { getLoginError } from 'features/AuthByUserName/model/selectors/getLoginError/getLoginError';
+import { getLoginIsLoading } from 'features/AuthByUserName/model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { getLoginPassword } from 'features/AuthByUserName/model/selectors/getLoginPassword/getLoginPassword';
+import { getLoginUsername } from 'features/AuthByUserName/model/selectors/getLoginUserName/getLoginUserName';
+import { useSelector, useStore } from 'react-redux';
 
 export interface LoginFormProps {
   className?: string;
 }
 
-export const LoginForm: FC<LoginFormProps> = ({ className }) => {
+const LoginForm: FC<LoginFormProps> = ({ className }) => {
   const dispatch = useAppDispatch();
-  const { identifier, isLoading, password, error } = useAppSelector(getLoginState);
-  const authData = useAppSelector(getUserAuthData);
+  const identifier = useSelector(getLoginUsername);
+  const password = useSelector(getLoginPassword);
+  const isLoading = useSelector(getLoginIsLoading);
+  const error = useSelector(getLoginError);
+
+  const store = useStore() as ReduxStoreWithManager;
+
+  useEffect(() => {
+    store.reducerManager.add('loginForm', loginReducer);
+    dispatch({ type: '@init' });
+    return () => {
+      store.reducerManager.remove('loginForm');
+      dispatch({ type: '@destroy' });
+    };
+  }, []);
 
   const onChangeUsername = useCallback(
     (value: string) => {
@@ -94,3 +111,5 @@ export const LoginForm: FC<LoginFormProps> = ({ className }) => {
     </div>
   );
 };
+
+export default LoginForm;
