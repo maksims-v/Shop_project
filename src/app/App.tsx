@@ -21,7 +21,9 @@ const App = () => {
   return (
     <div className="app">
       <Navbar />
-      <AppRouter />
+      <div className="content-page">
+        <AppRouter />
+      </div>
     </div>
   );
 };

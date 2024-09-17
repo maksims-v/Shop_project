@@ -2,12 +2,15 @@ import React from 'react';
 import { RouteProps } from 'react-router-dom';
 import { MainPage } from 'pages/MainPage';
 import { AboutPage } from 'pages/AboutPage';
-import MensPage from 'pages/MensPage/ui/MensPage';
+import { MensPage } from 'pages/MensPage';
+import { ProfilePage } from 'pages/ProfilePage';
 
 export enum AppRoutes {
   MAIN = 'main',
   ABOUT = 'about',
   MENS = 'mens',
+  PROFILE = 'profile',
+
   // WOMEN = 'women',
   // EQUIPMENT = 'equipment',
   // SALE = 'sale',
@@ -18,7 +21,9 @@ export enum AppRoutes {
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
   [AppRoutes.ABOUT]: '/about',
-  [AppRoutes.MENS]: '/shop/mens',
+  [AppRoutes.MENS]: '/mens',
+  [AppRoutes.PROFILE]: '/profile',
+
   // [AppRoutes.WOMEN]: '/shop/women"s',
   // [AppRoutes.EQUIPMENT]: '/shop/equipment',
   // [AppRoutes.SALE]: '/shop/sale',
@@ -38,6 +43,10 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.MENS]: {
     path: RoutePath.mens,
     element: <MensPage />,
+  },
+  [AppRoutes.PROFILE]: {
+    path: RoutePath.profile,
+    element: <ProfilePage />,
   },
   // [AppRoutes.ABOUT]: {
   //   path: RoutePath.about,

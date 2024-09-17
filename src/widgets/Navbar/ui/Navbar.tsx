@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Box, IconButton, InputBase, Divider, Container, Badge, Link } from '@mui/material';
+import { Box, IconButton, InputBase, Divider, Container, Badge } from '@mui/material';
 import { classNames } from 'shared/lib/classNames/classNames';
 import * as cls from './Navbar.module.scss';
 import Logo from 'shared/assets/logo/logo_small.png';
@@ -67,7 +67,7 @@ export const Navbar = ({ className }: NavbarProps) => {
             color: 'white',
             gap: '20px',
           }}>
-          <AppLink to={'/'}>
+          <AppLink to={'/mens'}>
             <Box
               sx={{
                 color: 'black',
@@ -124,7 +124,7 @@ export const Navbar = ({ className }: NavbarProps) => {
               </AppLink>
             </Box>
             <Box>
-              <Link href="/basket">
+              <AppLink to="/basket">
                 <Badge
                   badgeContent={5}
                   color="primary"
@@ -141,15 +141,15 @@ export const Navbar = ({ className }: NavbarProps) => {
                     <ShoppingBagOutlined />
                   </IconButton>
                 </Badge>
-              </Link>
+              </AppLink>
 
               {authData ? (
                 <>
-                  <Link href="/userdashboard">
+                  <AppLink to="/profile">
                     <IconButton>
                       <SettingsIcon />
                     </IconButton>
-                  </Link>
+                  </AppLink>
 
                   <IconButton onClick={onLogout}>
                     <LogoutIcon />
