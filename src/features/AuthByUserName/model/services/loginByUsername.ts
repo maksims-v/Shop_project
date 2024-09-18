@@ -32,34 +32,35 @@ export const loginByUsername = createAsyncThunk<
     }
 
     setToken(response.data);
-    thunkAPI.dispatch(userActions.setAuthData(response.data.user));
+    thunkAPI.dispatch(userActions.setAuthData(response.data.jwt));
+
     return response.data;
   } catch (e) {
     return thunkAPI.rejectWithValue('Вы ввели неверный логин или пароль');
   }
 });
 
-export const authUserCookies = createAsyncThunk<User, string, { rejectValue: string }>(
-  'auth/loginByCookies',
-  async (token, thunkAPI) => {
-    try {
-      const response = await axios('http://127.0.0.1:1337/api/users/me', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.data) {
-        throw new Error('error');
-      }
-      thunkAPI.dispatch(userActions.setAuthData(response.data));
+// export const authUserCookies = createAsyncThunk<User, Token, { rejectValue: string }>(
+//   'auth/loginByCookies',
+//   async (token, thunkAPI) => {
+//     try {
+//       const response = await axios('http://127.0.0.1:1337/api/users/me', {
+//         headers: {
+//           'Content-Type': 'application/json',
+//           Authorization: `Bearer ${token.jwt}`,
+//         },
+//       });
+//       if (!response.data) {
+//         throw new Error('error');
+//       }
+//       thunkAPI.dispatch(userActions.setAuthData(response.data));
 
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue('Вы ввели неверный логин или пароль');
-    }
-  },
-);
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue('Вы ввели неверный логин или пароль');
+//     }
+//   },
+// );
 
 // export const authUserCookie = createAsyncThunk(
 //   'auth/getUserFromLocalCookie',
