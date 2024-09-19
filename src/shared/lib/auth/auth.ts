@@ -12,7 +12,7 @@ export const setToken = (data: authProps) => {
     return;
   }
   Cookies.set('id', data.user.id);
-  Cookies.set('username', data.user.email);
+  Cookies.set('username', data.user.username);
   Cookies.set('jwt', data.jwt);
 
   if (Cookies.get('username')) {

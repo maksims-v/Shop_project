@@ -15,7 +15,20 @@ export const userSlice = createSlice({
     initAuthData: (state) => {
       const jwt = Cookies.get('jwt');
       if (jwt) {
-        state.authData = JSON.parse(jwt);
+        const id = Cookies.get('id');
+        const username = Cookies.get('username');
+
+        if (!state.authData) {
+          state.authData = {
+            token: { jwt: '' },
+            id: '',
+            username: '',
+          };
+        }
+
+        state.authData.token = { jwt };
+        state.authData.id = id;
+        state.authData.username = username;
       }
     },
     logout: (state) => {

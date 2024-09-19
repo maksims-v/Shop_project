@@ -12,8 +12,8 @@ export function buildPlugins({ paths, isDev }: BuildOptions): webpack.WebpackPlu
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].css',
     }),
-    // new BundleAnalyzerPlugin({
-    //   openAnalyzer: false,
-    // }),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+    }),
   ];
 }

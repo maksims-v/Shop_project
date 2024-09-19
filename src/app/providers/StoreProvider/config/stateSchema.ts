@@ -1,9 +1,11 @@
 import { ReducersMapObject, Action, Reducer, EnhancedStore } from '@reduxjs/toolkit';
+import { ProfileSchema } from 'entities/Profile/model/types/profile';
 import { UserSchema } from 'entities/User/model/types/user';
 import { LoginSchema } from 'features/AuthByUserName';
 
 export interface StateSchema {
   user: UserSchema;
+  profile?: ProfileSchema;
   loginForm?: LoginSchema;
 }
 

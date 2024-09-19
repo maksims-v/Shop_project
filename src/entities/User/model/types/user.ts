@@ -5,7 +5,7 @@ export interface Token {
 export interface User {
   token: Token;
   id: string;
-  email: string;
+  username: string;
 }
 
 export interface UserSchema {
