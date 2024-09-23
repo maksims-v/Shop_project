@@ -17,6 +17,9 @@ export const profileSlice = createSlice({
     updateProfile: (state, action: PayloadAction<Profile>) => {
       state.form = { ...state.form, ...action.payload };
     },
+    cancelEdit: (state) => {
+      state.form = state.data;
+    },
   },
   extraReducers: (builder) => {
     builder

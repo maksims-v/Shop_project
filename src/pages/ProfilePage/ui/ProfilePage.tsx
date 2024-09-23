@@ -10,6 +10,7 @@ import { getProfileError } from 'entities/Profile/model/selectors/getProfileErro
 import { getProfileIsLoading } from 'entities/Profile/model/selectors/getProfileIsLoading/getProfileIsLoading';
 import { getProfileReadonly } from 'entities/Profile/model/selectors/getProfileReadonly/getProfileReadonly';
 import { fetchProfileData } from 'entities/Profile/model/services/fetchProfileData/fetchProfileData';
+import { ProfilePagebottom } from './profilePageBottom/ProfilePagebottom';
 
 const ProfilePage = () => {
   const [value, setValue] = useState(0);
@@ -100,7 +101,7 @@ const ProfilePage = () => {
   );
 
   return (
-    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+    <Box sx={{ width: '100%', bgcolor: 'background.paper', justifyContent: 'center' }}>
       <Tabs value={value} onChange={handleChange} centered>
         <Tab label="My profile" />
         <Tab label="My orders" />
@@ -123,6 +124,7 @@ const ProfilePage = () => {
           changePostCode={changePostCode}
         />
       )}
+      <ProfilePagebottom />
     </Box>
   );
 };

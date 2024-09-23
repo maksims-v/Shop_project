@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Box, IconButton, InputBase, Divider, Container, Badge } from '@mui/material';
 import { classNames } from 'shared/lib/classNames/classNames';
 import * as cls from './Navbar.module.scss';
@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/hook';
 import { LoginModal } from 'features/AuthByUserName/ui/LoginModal/LoginModal';
 import { getUserAuthData, userActions } from 'entities/User';
 import { loginActions } from 'features/AuthByUserName/model/slice/loginSlice';
-
+import { getNavbarData } from '../model/selectors/getNavbarData/getNavbarData';
 export interface NavbarProps {
   className?: string;
 }
@@ -22,6 +22,48 @@ export const Navbar = ({ className }: NavbarProps) => {
 
   const dispatch = useAppDispatch();
   const authData = useAppSelector(getUserAuthData);
+  const data = useAppSelector(getNavbarData);
+  // @ts-ignore:next-line
+  console.log(data && data[0]);
+
+  const render = useMemo(
+    () =>
+      // @ts-ignore:next-line
+      data &&
+      // @ts-ignore:next-line
+      data[0].attributes?.linkList.map((item) => {
+        return (
+          <AppLink key={item.label} to={`${item.href}`}>
+            <Box
+              sx={{
+                color: 'black',
+                display: 'inline-block',
+                position: 'relative',
+                fontWeight: '600',
+                '&:after': {
+                  content: "''",
+                  position: 'absolute',
+                  width: '100%',
+                  transform: 'scaleX(0)',
+                  height: '2px',
+                  bottom: '0',
+                  left: '0',
+                  backgroundColor: '#f5b950',
+                  transformOrigin: 'bottom right',
+                  transition: 'transform 0.25s ease-out',
+                },
+                '&:hover:after': {
+                  transform: 'scaleX(1)',
+                  transformOrigin: 'bottom left',
+                },
+              }}>
+              {item.label}
+            </Box>
+          </AppLink>
+        );
+      }),
+    [],
+  );
 
   const onCloseModal = useCallback(() => {
     setIsAuthModal(false);
@@ -67,34 +109,9 @@ export const Navbar = ({ className }: NavbarProps) => {
             color: 'white',
             gap: '20px',
           }}>
-          <AppLink to={'/mens'}>
-            <Box
-              sx={{
-                color: 'black',
-                display: 'inline-block',
-                position: 'relative',
-                fontWeight: '600',
-                '&:after': {
-                  content: "''",
-                  position: 'absolute',
-                  width: '100%',
-                  transform: 'scaleX(0)',
-                  height: '2px',
-                  bottom: '0',
-                  left: '0',
-                  backgroundColor: '#f5b950',
-                  transformOrigin: 'bottom right',
-                  transition: 'transform 0.25s ease-out',
-                },
-                '&:hover:after': {
-                  transform: 'scaleX(1)',
-                  transformOrigin: 'bottom left',
-                },
-              }}>
-              MENS
-            </Box>
-          </AppLink>
+          {render}
         </Box>
+
         <Box sx={{ position: 'relative' }}>
           <Box
             sx={{

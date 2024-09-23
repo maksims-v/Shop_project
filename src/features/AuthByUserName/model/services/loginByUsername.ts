@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Token, User, userActions } from 'entities/User';
+import { User, userActions } from 'entities/User';
 import { setToken } from 'shared/lib/auth/auth';
-import Cookies from 'js-cookie';
 
 export interface LoginByUsernameProps {
   identifier: string;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Profile } from '../model/types/profile';
 import { Box, TextField } from '@mui/material';
-import { ProfilePagebottom } from 'pages/ProfilePage/ui/ProfilePagebottom';
 
 export interface ProfileCardProps {
   data?: Profile;
@@ -124,7 +123,6 @@ export const ProfileCard = (props: ProfileCardProps) => {
           variant="outlined"
         />
       </Box>
-      <ProfilePagebottom />
     </Box>
   );
 };

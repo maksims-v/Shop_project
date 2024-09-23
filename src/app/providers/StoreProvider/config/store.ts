@@ -3,9 +3,11 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
 import { userReducer } from 'entities/User';
 import { StateSchema } from './stateSchema';
 import { createReducerManager } from './reducerManager';
+import { navbarReducer } from 'widgets/Navbar';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
+  navbar: navbarReducer,
 };
 
 const reducerManager = createReducerManager(rootReducers);

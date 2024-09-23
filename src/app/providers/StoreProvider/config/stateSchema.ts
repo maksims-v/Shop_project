@@ -2,9 +2,11 @@ import { ReducersMapObject, Action, Reducer, EnhancedStore } from '@reduxjs/tool
 import { ProfileSchema } from 'entities/Profile/model/types/profile';
 import { UserSchema } from 'entities/User/model/types/user';
 import { LoginSchema } from 'features/AuthByUserName';
+import { NavbarSchema } from 'widgets/Navbar/model/types/navbar';
 
 export interface StateSchema {
   user: UserSchema;
+  navbar: NavbarSchema;
   profile?: ProfileSchema;
   loginForm?: LoginSchema;
 }

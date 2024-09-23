@@ -4,14 +4,15 @@ import { AppRouter } from './providers/router';
 import { Navbar } from 'widgets/Navbar/ui/Navbar';
 import { useEffect } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
-
 import { userActions } from 'entities/User';
+import { fetchNavbarData } from 'widgets/Navbar';
 
 const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(userActions.initAuthData());
+    dispatch(fetchNavbarData());
   }, [dispatch]);
 
   return (
