@@ -1,8 +1,5 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Box, IconButton, InputBase, Divider, Container, Badge } from '@mui/material';
-import { classNames } from 'shared/lib/classNames/classNames';
-import * as cls from './Navbar.module.scss';
-import Logo from 'shared/assets/logo/logo_small.png';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -13,57 +10,25 @@ import { LoginModal } from 'features/AuthByUserName/ui/LoginModal/LoginModal';
 import { getUserAuthData, userActions } from 'entities/User';
 import { loginActions } from 'features/AuthByUserName/model/slice/loginSlice';
 import { getNavbarData } from '../model/selectors/getNavbarData/getNavbarData';
-export interface NavbarProps {
-  className?: string;
-}
+import { NavbarLinks } from './NavbarLinks/NavbarLinks';
+import { NavbarSubLinks } from './NavbarSubLinks/NavbarSubLinks';
+import { ISubLink } from '../model/types/navbar';
+import { Logo } from 'shared/ui/Logo/Logo';
 
-export const Navbar = ({ className }: NavbarProps) => {
+export const Navbar = memo(() => {
   const [isAuthModal, setIsAuthModal] = useState(false);
+
+  const [subHeaderOpenLink, setSubHeaderOpenLink] = useState<ISubLink[]>([]);
+  const [subHeaderMenuOpen, setSubHeaderMenuOpen] = useState(false);
+
+  const openMenu = (listLink: ISubLink[]) => {
+    setSubHeaderOpenLink(listLink);
+    setSubHeaderMenuOpen(true);
+  };
 
   const dispatch = useAppDispatch();
   const authData = useAppSelector(getUserAuthData);
   const data = useAppSelector(getNavbarData);
-  // @ts-ignore:next-line
-  console.log(data && data[0]);
-
-  const render = useMemo(
-    () =>
-      // @ts-ignore:next-line
-      data &&
-      // @ts-ignore:next-line
-      data[0].attributes?.linkList.map((item) => {
-        return (
-          <AppLink key={item.label} to={`${item.href}`}>
-            <Box
-              sx={{
-                color: 'black',
-                display: 'inline-block',
-                position: 'relative',
-                fontWeight: '600',
-                '&:after': {
-                  content: "''",
-                  position: 'absolute',
-                  width: '100%',
-                  transform: 'scaleX(0)',
-                  height: '2px',
-                  bottom: '0',
-                  left: '0',
-                  backgroundColor: '#f5b950',
-                  transformOrigin: 'bottom right',
-                  transition: 'transform 0.25s ease-out',
-                },
-                '&:hover:after': {
-                  transform: 'scaleX(1)',
-                  transformOrigin: 'bottom left',
-                },
-              }}>
-              {item.label}
-            </Box>
-          </AppLink>
-        );
-      }),
-    [],
-  );
 
   const onCloseModal = useCallback(() => {
     setIsAuthModal(false);
@@ -89,29 +54,8 @@ export const Navbar = ({ className }: NavbarProps) => {
         zIndex: '99',
       }}>
       <Container maxWidth="xl" sx={{ height: '100%', width: '100%' }}>
-        <AppLink to={'/'}>
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '52%',
-              transform: 'translate(0%, -50%)',
-            }}>
-            <img className={classNames(cls.logo, {}, [className])} src={Logo} alt="Logo" />
-          </Box>
-        </AppLink>
-        <Box
-          sx={{
-            display: 'flex',
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-            color: 'white',
-            gap: '20px',
-          }}>
-          {render}
-        </Box>
-
+        <Logo />
+        <NavbarLinks data={data} openMenu={openMenu} />
         <Box sx={{ position: 'relative' }}>
           <Box
             sx={{
@@ -181,7 +125,13 @@ export const Navbar = ({ className }: NavbarProps) => {
           </Box>
         </Box>
       </Container>
+      <NavbarSubLinks
+        subHeaderOpenLink={subHeaderOpenLink}
+        setSubHeaderMenuOpen={setSubHeaderMenuOpen}
+        subHeaderMenuOpen={subHeaderMenuOpen}
+      />
+
       {isAuthModal && <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />}
     </Box>
   );
-};
+});
