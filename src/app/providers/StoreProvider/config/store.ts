@@ -4,10 +4,12 @@ import { userReducer } from 'entities/User';
 import { StateSchema } from './stateSchema';
 import { createReducerManager } from './reducerManager';
 import { navbarReducer } from 'widgets/Navbar';
+import { productsReducer } from 'pages/ProductsPage/model/slice/productsSlice';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
   navbar: navbarReducer,
+  products: productsReducer,
 };
 
 const reducerManager = createReducerManager(rootReducers);

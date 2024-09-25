@@ -24,9 +24,12 @@ import { useSelector, useStore } from 'react-redux';
 
 export interface LoginFormProps {
   className?: string;
+  onSuccess: () => void;
 }
 
-const LoginForm: FC<LoginFormProps> = ({ className }) => {
+const LoginForm = (props: LoginFormProps) => {
+  const { onSuccess, className } = props;
+
   const dispatch = useAppDispatch();
   const identifier = useSelector(getLoginUsername);
   const password = useSelector(getLoginPassword);
@@ -58,8 +61,12 @@ const LoginForm: FC<LoginFormProps> = ({ className }) => {
     [dispatch],
   );
 
-  const onLoginClick = useCallback(() => {
-    dispatch(loginByUsername({ identifier, password }));
+  const onLoginClick = useCallback(async () => {
+    const result = await dispatch(loginByUsername({ identifier, password }));
+
+    if (result.meta.requestStatus === 'fulfilled') {
+      onSuccess();
+    }
   }, [dispatch, identifier, password]);
 
   return (

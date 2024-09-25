@@ -9,6 +9,7 @@ export interface StateSchema {
   navbar: NavbarSchema;
   profile?: ProfileSchema;
   loginForm?: LoginSchema;
+  products?: any;
 }
 
 export type StateSchemaKey = keyof StateSchema;

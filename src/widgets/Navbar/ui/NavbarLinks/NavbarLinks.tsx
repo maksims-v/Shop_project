@@ -1,14 +1,22 @@
 import { Box } from '@mui/material';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { ILinkListItem, ISubLink } from 'widgets/Navbar/model/types/navbar';
+import { NavbarSubLinks } from '../NavbarSubLinks/NavbarSubLinks';
 
 export interface NavbarLinksProps {
   data?: ILinkListItem[];
-  openMenu?: (value: ISubLink[]) => void;
 }
 
-export const NavbarLinks = memo(({ data, openMenu }: NavbarLinksProps) => {
+export const NavbarLinks = memo(({ data }: NavbarLinksProps) => {
+  const [subHeaderOpenLink, setSubHeaderOpenLink] = useState<ISubLink[]>([]);
+  const [subHeaderMenuOpen, setSubHeaderMenuOpen] = useState(false);
+
+  const openMenu = (listLink: ISubLink[]) => {
+    setSubHeaderOpenLink(listLink);
+    setSubHeaderMenuOpen(true);
+  };
+
   const renderNavLinks = useMemo(() => {
     return data?.map((item) => (
       <AppLink key={item.label} to={`${item.href}`}>
@@ -43,17 +51,24 @@ export const NavbarLinks = memo(({ data, openMenu }: NavbarLinksProps) => {
   }, [data]);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-        color: 'white',
-        gap: '20px',
-      }}>
-      {renderNavLinks}
-    </Box>
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          color: 'white',
+          gap: '20px',
+        }}>
+        {renderNavLinks}
+      </Box>
+      <NavbarSubLinks
+        subHeaderOpenLink={subHeaderOpenLink}
+        setSubHeaderMenuOpen={setSubHeaderMenuOpen}
+        subHeaderMenuOpen={subHeaderMenuOpen}
+      />
+    </>
   );
 });

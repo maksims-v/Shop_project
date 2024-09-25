@@ -5,6 +5,7 @@ import { AboutPage } from 'pages/AboutPage';
 import { MensPage } from 'pages/MensPage';
 import { ProfilePage } from 'pages/ProfilePage';
 import { NotFoundPage } from 'pages/NotFoundPage';
+import { ProductsPage } from 'pages/ProductsPage';
 
 export enum AppRoutes {
   MAIN = 'main',
@@ -12,7 +13,7 @@ export enum AppRoutes {
   MENS = 'mens',
   PROFILE = 'profile',
   NOT_FOUND = 'not_found',
-
+  PRODUCTS = 'products',
   // WOMEN = 'women',
   // EQUIPMENT = 'equipment',
   // SALE = 'sale',
@@ -25,6 +26,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.ABOUT]: '/about',
   [AppRoutes.MENS]: '/mens',
   [AppRoutes.PROFILE]: '/profile',
+  [AppRoutes.PRODUCTS]: '/shop/products',
   [AppRoutes.NOT_FOUND]: '*',
 
   // [AppRoutes.WOMEN]: '/shop/women"s',
@@ -50,6 +52,10 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.PROFILE]: {
     path: RoutePath.profile,
     element: <ProfilePage />,
+  },
+  [AppRoutes.PRODUCTS]: {
+    path: RoutePath.products,
+    element: <ProductsPage />,
   },
   [AppRoutes.NOT_FOUND]: {
     path: RoutePath.not_found,

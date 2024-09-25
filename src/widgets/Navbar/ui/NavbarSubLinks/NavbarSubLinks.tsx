@@ -20,9 +20,10 @@ export const NavbarSubLinks = memo(
               sx={{
                 borderTop: '1px solid #aeaeae',
                 borderBottom: '1px solid #aeaeae',
-                position: 'absolute',
+                position: 'fixed',
                 pr: '25px',
                 top: '60px',
+                left: '0',
                 height: '50px',
                 width: '100%',
                 display: subHeaderMenuOpen ? 'flex' : 'none',
