@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { userActions } from 'entities/User';
 import { fetchNavbarData, Navbar } from 'widgets/Navbar';
+import { fetchProductsData } from 'pages/ProductsPage/model/services/fetchProductsData/fetchProductsData';
 
 const App = () => {
   const dispatch = useAppDispatch();

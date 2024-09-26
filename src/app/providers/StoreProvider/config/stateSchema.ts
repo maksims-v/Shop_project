@@ -1,5 +1,6 @@
 import { ReducersMapObject, Action, Reducer, EnhancedStore } from '@reduxjs/toolkit';
 import { ProfileSchema } from 'entities/Profile/model/types/profile';
+import { SliderSchema } from 'entities/Slider/model/types/slider';
 import { UserSchema } from 'entities/User/model/types/user';
 import { LoginSchema } from 'features/AuthByUserName';
 import { NavbarSchema } from 'widgets/Navbar/model/types/navbar';
@@ -10,6 +11,7 @@ export interface StateSchema {
   profile?: ProfileSchema;
   loginForm?: LoginSchema;
   products?: any;
+  slider?: SliderSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
