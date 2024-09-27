@@ -4,13 +4,15 @@ import { userReducer } from 'entities/User';
 import { StateSchema } from './stateSchema';
 import { createReducerManager } from './reducerManager';
 import { navbarReducer } from 'widgets/Navbar';
-import { productsReducer } from 'pages/ProductsPage/model/slice/productsSlice';
-import { sliderReducer } from 'entities/Slider/model/slice/sliderSlice';
+import { BannerReducer } from 'entities/Banner';
+import { productsReducer } from 'pages/ProductsPage';
+import { sliderReducer } from 'entities/Slider';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
   navbar: navbarReducer,
   products: productsReducer,
+  banner: BannerReducer,
   slider: sliderReducer,
 };
 

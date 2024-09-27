@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchSliderData } from '../services/fetchSliderData';
-import { SliderProductAttributes, SliderSchema } from '../types/slider';
+import { SliderSchema } from '../types/slider';
+import { ProductList } from 'entities/Product/model/types/Product';
 
 const initialState: SliderSchema = {
-  isLoading: false,
-  error: false,
-  data: [],
+  isLoading: true,
+  error: undefined,
 };
 
 export const sliderSlice = createSlice({
@@ -14,19 +14,13 @@ export const sliderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchSliderData.pending, (state) => {
-        state.error = undefined;
-        state.isLoading = true;
-      })
-      .addCase(
-        fetchSliderData.fulfilled,
-        (state, action: PayloadAction<SliderProductAttributes[]>) => {
-          state.isLoading = false;
-          state.data = action.payload;
-        },
-      )
-      .addCase(fetchSliderData.rejected, (state, action) => {
+      .addCase(fetchSliderData.pending, (state) => {})
+      .addCase(fetchSliderData.fulfilled, (state, action: PayloadAction<ProductList[]>) => {
+        state.data = action.payload.map((item) => item.attributes);
         state.isLoading = false;
+      })
+      .addCase(fetchSliderData.rejected, (state) => {
+        state.isLoading = true;
         state.error = true;
       });
   },

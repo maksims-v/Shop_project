@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { SliderProductAttributes } from '../model/types/slider';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import { error } from 'console';
 import { ProductCard } from 'entities/Product';
 import AliceCarousel from 'react-alice-carousel';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
-import { Product, ProductList, ProductSchema } from 'entities/Product/model/types/Product';
+import { Product } from 'entities/Product/model/types/Product';
+import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
+import 'react-alice-carousel/lib/alice-carousel.css';
+
 const responsive = {
   0: { items: 2 },
   500: { items: 3 },
@@ -13,7 +14,9 @@ const responsive = {
 };
 
 type SliderProps = {
-  data?: ProductList;
+  data?: Product[];
+  isLoading?: boolean;
+  isError?: boolean;
 };
 
 export const Slider = (props: SliderProps) => {
@@ -25,32 +28,30 @@ export const Slider = (props: SliderProps) => {
     setIsClient(true);
   }, []);
 
-  console.log(data);
+  const removeNullAttributes = data ? data.map((item) => removeNullValuesInProduct(item)) : [];
 
-  const carouselItems = data
-    ? data?.map((item, index) => <ProductCard key={item.id} product={item} />)
-    : [];
-
-  return <></>;
-
-  // if (carouselItems)
-  //   return (
-  //     <Box width="100%" mb={'60px'}>
-  //       <AppLink to="/newArrivals">
-  //         <Typography variant="h2" sx={{ textAlign: 'center', mb: '15px' }}>
-  //           New Arrivals
-  //         </Typography>{' '}
-  //       </AppLink>
-  //       {isClient && (
-  //         <AliceCarousel
-  //           animationDuration={800}
-  //           infinite
-  //           autoPlay
-  //           autoPlayInterval={3000}
-  //           items={carouselItems}
-  //           responsive={responsive}
-  //         />
-  //       )}
-  //     </Box>
-  //   );
+  const carouselItems = useMemo(
+    () => removeNullAttributes?.map((item, index) => <ProductCard product={item} />),
+    [removeNullAttributes],
+  );
+  return (
+    <Box sx={{ m: '0 auto', width: '100%' }}>
+      <AppLink to="/newArrivals">
+        <Typography variant="h2" sx={{ textAlign: 'center', mb: '15px' }}>
+          New Arrivals
+        </Typography>{' '}
+      </AppLink>
+      {isClient && (
+        <AliceCarousel
+          animationDuration={800}
+          disableDotsControls={true}
+          infinite
+          autoPlay
+          autoPlayInterval={3000}
+          items={carouselItems}
+          responsive={responsive}
+        />
+      )}
+    </Box>
+  );
 };

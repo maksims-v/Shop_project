@@ -1,30 +1,28 @@
 import { Card, CardActionArea, CardMedia, CardContent, Typography, Box } from '@mui/material';
-import { Product, ProductList, ProductSchema } from 'entities/Product/model/types/Product';
+import { Product } from 'entities/Product/model/types/Product';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 export interface ProductCardProps {
-  product?: ProductList;
-  isLoading?: boolean;
+  product?: Product;
 }
 
 export const ProductCard = (props: ProductCardProps) => {
-  const { product, isLoading } = props;
-
-  console.log(product);
+  const { product } = props;
 
   return (
     <Card sx={{ maxWidth: 235, boxShadow: 'none' }}>
-      <AppLink to={`/shop/`}>
+      <AppLink
+        to={`shop/${product?.pageCategory}/${product?.category || product?.equipmentCategory}/${product?.clothingCategory || product?.footwearCategory || product?.accessoriesCategory || product?.activityCategory || product?.toolsGearCategory || product?.lampsLanternsCategory || product?.campSleepCategory || product?.otherCategory}`}>
         <CardActionArea>
-          {/* <CardMedia
+          <CardMedia
             component="img"
             sx={{ p: '0px 5px' }}
-            image={`http://127.0.0.1:1337${product.image.data[0].attributes.formats.small.url}`}
+            image={`http://127.0.0.1:1337${product?.image?.data[0]?.attributes?.formats?.small?.url}`}
             alt="img"
-          /> */}
+          />
 
-          {product && (
+          {product?.new && (
             <FiberNewIcon
               sx={{ color: '#0070d6', position: 'absolute', top: '7px', left: '7px' }}
             />
@@ -61,7 +59,6 @@ export const ProductCard = (props: ProductCardProps) => {
                   <Typography
                     sx={{
                       fontSize: '13px',
-                      pt: '9px',
                       textDecoration: 'line-through',
                     }}>
                     {product?.sale ? product?.oldPrice : product?.price} $

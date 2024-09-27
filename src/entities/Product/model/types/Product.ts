@@ -73,10 +73,10 @@ export interface Product {
 
 export interface ProductList {
   id?: number;
-  attributes?: Product[];
+  attributes?: Product;
 }
 
 export interface ProductSchema {
   id?: number;
-  attributes?: Product | Product[];
+  attributes?: Product[];
 }

@@ -1,4 +1,5 @@
 import { ReducersMapObject, Action, Reducer, EnhancedStore } from '@reduxjs/toolkit';
+import { BannerSchema } from 'entities/Banner/model/types/banner';
 import { ProfileSchema } from 'entities/Profile/model/types/profile';
 import { SliderSchema } from 'entities/Slider/model/types/slider';
 import { UserSchema } from 'entities/User/model/types/user';
@@ -11,6 +12,7 @@ export interface StateSchema {
   profile?: ProfileSchema;
   loginForm?: LoginSchema;
   products?: any;
+  banner?: BannerSchema;
   slider?: SliderSchema;
 }
 

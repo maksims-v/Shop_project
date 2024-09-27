@@ -5,7 +5,9 @@ import { useEffect } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { userActions } from 'entities/User';
 import { fetchNavbarData, Navbar } from 'widgets/Navbar';
-import { fetchProductsData } from 'pages/ProductsPage/model/services/fetchProductsData/fetchProductsData';
+import { Container } from '@mui/material';
+import { fetchBannerData } from 'entities/Banner';
+import { fetchSliderData } from 'entities/Slider';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -13,14 +15,18 @@ const App = () => {
   useEffect(() => {
     dispatch(userActions.initAuthData());
     dispatch(fetchNavbarData());
+    dispatch(fetchSliderData());
+    dispatch(fetchBannerData());
   }, [dispatch]);
 
   return (
     <div className="app">
       <Navbar />
-      <div className="content-page">
-        <AppRouter />
-      </div>
+      <Container maxWidth="lg">
+        <div className="content-page">
+          <AppRouter />
+        </div>
+      </Container>
     </div>
   );
 };
