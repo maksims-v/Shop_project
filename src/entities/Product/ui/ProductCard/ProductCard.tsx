@@ -5,15 +5,18 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 export interface ProductCardProps {
   product?: Product;
+  brandSection?: boolean;
 }
 
 export const ProductCard = (props: ProductCardProps) => {
-  const { product } = props;
+  const { product, brandSection = false } = props;
+
+  console.log(product);
 
   return (
     <Card sx={{ maxWidth: 235, boxShadow: 'none' }}>
       <AppLink
-        to={`shop/${product?.pageCategory}/${product?.category || product?.equipmentCategory}/${product?.clothingCategory || product?.footwearCategory || product?.accessoriesCategory || product?.activityCategory || product?.toolsGearCategory || product?.lampsLanternsCategory || product?.campSleepCategory || product?.otherCategory}`}>
+        to={`${product?.pageCategory}/${product?.category || product?.equipmentCategory}/${product?.clothingCategory || product?.footwearCategory || product?.accessoriesCategory || product?.activityCategory || product?.toolsGearCategory || product?.lampsLanternsCategory || product?.campSleepCategory || product?.otherCategory || product?.accessoriesCategory}`}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -38,7 +41,12 @@ export const ProductCard = (props: ProductCardProps) => {
               flexDirection: 'column',
             }}>
             <Typography sx={{ fontWeight: 'bold' }}>{product?.brand}</Typography>
-            <Typography sx={{ lineHeight: '15px', flex: '1 1 auto', overflow: 'hidden' }}>
+            <Typography
+              sx={{
+                lineHeight: brandSection ? '15px' : '18px',
+                flex: '1 1 auto',
+                overflow: brandSection ? 'hidden' : undefined,
+              }}>
               {product?.title}
             </Typography>
             <Box
@@ -70,6 +78,7 @@ export const ProductCard = (props: ProductCardProps) => {
                     fontWeight: 'bold',
                     fontSize: '20px',
                     width: '100%',
+                    pt: brandSection && '5px',
                   }}>
                   {product?.price} $
                 </Typography>

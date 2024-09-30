@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { SliderResponse } from '../types/slider';
-import { ProductList } from 'entities/Product/model/types/Product';
+import { ProductItem } from 'entities/Product/model/types/Product';
 const qs = require('qs');
 
 const query = qs.stringify({
@@ -14,7 +14,7 @@ const query = qs.stringify({
   },
 });
 
-export const fetchSliderData = createAsyncThunk<ProductList[], void, { rejectValue: string }>(
+export const fetchSliderData = createAsyncThunk<ProductItem[], void, { rejectValue: string }>(
   'fetchSliderData',
   async (_, { rejectWithValue }) => {
     try {

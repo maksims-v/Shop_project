@@ -71,7 +71,7 @@ export interface Product {
   toolsGearCategory?: string | null;
 }
 
-export interface ProductList {
+export interface ProductItem {
   id?: number;
   attributes?: Product;
 }

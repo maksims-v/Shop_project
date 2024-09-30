@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchSliderData } from '../services/fetchSliderData';
 import { SliderSchema } from '../types/slider';
-import { ProductList } from 'entities/Product/model/types/Product';
+import { ProductItem } from 'entities/Product/model/types/Product';
 
 const initialState: SliderSchema = {
   isLoading: true,
@@ -15,7 +15,7 @@ export const sliderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchSliderData.pending, (state) => {})
-      .addCase(fetchSliderData.fulfilled, (state, action: PayloadAction<ProductList[]>) => {
+      .addCase(fetchSliderData.fulfilled, (state, action: PayloadAction<ProductItem[]>) => {
         state.data = action.payload.map((item) => item.attributes);
         state.isLoading = false;
       })

@@ -1,5 +1,5 @@
-export interface ProductListProps {}
+export interface ProductItemProps {}
 
-export const ProductList = ({}: ProductListProps) => {
+export const ProductItem = ({}: ProductItemProps) => {
   return <div></div>;
 };

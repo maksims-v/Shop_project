@@ -3,7 +3,9 @@ import { UserSchema, User } from '../types/user';
 import { unsetToken } from 'shared/lib/auth/auth';
 import Cookies from 'js-cookie';
 
-const initialState: UserSchema = {};
+const initialState: UserSchema = {
+  _inited: false,
+};
 
 export const userSlice = createSlice({
   name: 'user',
@@ -30,6 +32,7 @@ export const userSlice = createSlice({
         state.authData.id = id;
         state.authData.username = username;
       }
+      state._inited = true;
     },
     logout: (state) => {
       unsetToken();
