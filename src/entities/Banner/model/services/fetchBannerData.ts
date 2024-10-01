@@ -6,20 +6,17 @@ export const fetchBannerData = createAsyncThunk<BannerAttributes, void, { reject
   'fetchBannerData',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios<BannerResponse>(
-        `http://127.0.0.1:1337/api/section-banners?populate=*`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const response = await axios<BannerResponse>(`${__API__}/api/section-banners?populate=*`, {
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+      });
 
       if (!response.data) {
         throw new Error('error');
       }
 
-      return response.data.data[0].attributes;
+      return response?.data?.data[0]?.attributes;
     } catch (e) {
       return rejectWithValue('Что-то случилось ( ');
     }

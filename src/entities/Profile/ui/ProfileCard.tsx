@@ -55,20 +55,20 @@ export const ProfileCard = (props: ProfileCardProps) => {
           onChange={changeUsername}
           id="standard-basic"
           name="username"
-          value={data?.username}
+          value={data?.username || ''}
           variant="outlined"
         />
         <TextField
           onChange={changeEmail}
           id="standard-basic"
           name="email"
-          value={data?.email}
+          value={data?.email || ''}
           label={data?.email ? '' : 'Email'}
           variant="outlined"
         />
         <TextField
           onChange={changeFullName}
-          value={data?.fullName}
+          value={data?.fullName || ''}
           name="fullName"
           id="standard-basic"
           label={data?.fullName ? '' : 'First Name'}
@@ -78,7 +78,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
           onChange={changeLastName}
           id="standard-basic"
           name="lastName"
-          value={data?.lastName}
+          value={data?.lastName || ''}
           label={data?.lastName ? '' : 'Last Name'}
           variant="outlined"
         />
@@ -86,7 +86,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
           onChange={changeCountry}
           id="standard-basic"
           name="country"
-          value={data?.country}
+          value={data?.country || ''}
           label={data?.country ? '' : 'Country'}
           variant="outlined"
         />
@@ -94,7 +94,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
           onChange={changeCity}
           id="standard-basic"
           name="city"
-          value={data?.city}
+          value={data?.city || ''}
           label={data?.city ? '' : 'City'}
           variant="outlined"
         />
@@ -102,7 +102,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
           onChange={changeAdress}
           id="standard-basic"
           name="adress"
-          value={data?.adress}
+          value={data?.adress || ''}
           label={data?.adress ? '' : 'Adress'}
           variant="outlined"
         />
@@ -110,7 +110,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
           onChange={changePostCode}
           id="standard-basic"
           name="postCode"
-          value={data?.postCode}
+          value={data?.postCode || ''}
           label={data?.postCode ? '' : 'Post Code'}
           variant="outlined"
         />
@@ -118,8 +118,8 @@ export const ProfileCard = (props: ProfileCardProps) => {
           onChange={changePhone}
           id="standard-basic"
           name="phone"
-          value={'+' + data?.phone}
-          label={data?.phone ? '' : 'Phone'}
+          value={`+${data?.phone || ''}`}
+          label={data?.phone ? `+${data?.phone}` : ''}
           variant="outlined"
         />
       </Box>

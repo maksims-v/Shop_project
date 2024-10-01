@@ -1,10 +1,21 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack from 'webpack';
 import { BuildOptions } from './types/config';
 import buildCssLoader from './loaders/buildCssLoader';
 
 export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
   const cssLoaders = buildCssLoader(isDev);
+
+  const babelLoader = {
+    test: /\.(js|jsx||tsx)$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env'],
+        plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean),
+      },
+    },
+  };
 
   const fileLoader = {
     test: /\.(png|jpe?g|gif|woff2|woff)$/i,
@@ -21,5 +32,5 @@ export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
     exclude: /node_modules/,
   };
 
-  return [fileLoader, typeScriptLoader, cssLoaders];
+  return [fileLoader, babelLoader, typeScriptLoader, cssLoaders];
 }

@@ -15,16 +15,12 @@ export const updateProfileData = createAsyncThunk<
     const data = getProfileForm(getState());
     const { id } = data;
 
-    const response = await axios.put(
-      `http://127.0.0.1:1337/api/users/${id}`,
-      JSON.stringify(data),
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${jwt}`,
-        },
+    const response = await axios.put(`${__API__}/api/users/${id}`, JSON.stringify(data), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
       },
-    );
+    });
 
     if (!response.data) {
       throw new Error('error');

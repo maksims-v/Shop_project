@@ -17,14 +17,11 @@ export const fetchBrandSectionData = createAsyncThunk<
   { rejectValue: string }
 >('fetchBrandSectionData', async (_, { rejectWithValue }) => {
   try {
-    const response = await axios<BrandSectionResponse>(
-      `http://127.0.0.1:1337/api/section-brands?${query}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    const response = await axios<BrandSectionResponse>(`${__API__}/api/section-brands?${query}`, {
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+    });
 
     if (!response.data) {
       throw new Error('error');

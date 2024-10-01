@@ -1,3 +1,5 @@
+import React, { FC } from 'react';
+
 import { Card, CardActionArea, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { Product } from 'entities/Product/model/types/Product';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
@@ -11,17 +13,26 @@ export interface ProductCardProps {
 export const ProductCard = (props: ProductCardProps) => {
   const { product, brandSection = false } = props;
 
-  console.log(product);
-
   return (
     <Card sx={{ maxWidth: 235, boxShadow: 'none' }}>
       <AppLink
-        to={`${product?.pageCategory}/${product?.category || product?.equipmentCategory}/${product?.clothingCategory || product?.footwearCategory || product?.accessoriesCategory || product?.activityCategory || product?.toolsGearCategory || product?.lampsLanternsCategory || product?.campSleepCategory || product?.otherCategory || product?.accessoriesCategory}`}>
+        to={`${product?.pageCategory}/${product?.category || product?.equipmentCategory}/${
+          product?.clothingCategory ||
+          product?.footwearCategory ||
+          product?.accessoriesCategory ||
+          product?.activityCategory ||
+          product?.toolsGearCategory ||
+          product?.lampsLanternsCategory ||
+          product?.campSleepCategory ||
+          product?.otherCategory ||
+          product?.accessoriesCategory
+        }/${product?.slug}`}>
         <CardActionArea>
           <CardMedia
             component="img"
             sx={{ p: '0px 5px' }}
-            image={`http://127.0.0.1:1337${product?.image?.data[0]?.attributes?.formats?.small?.url}`}
+            height="255"
+            image={`${__API__}${product?.image?.data[0]?.attributes?.formats?.small?.url}`}
             alt="img"
           />
 
@@ -78,7 +89,7 @@ export const ProductCard = (props: ProductCardProps) => {
                     fontWeight: 'bold',
                     fontSize: '20px',
                     width: '100%',
-                    pt: brandSection && '5px',
+                    pt: brandSection ? '5px' : '0px',
                   }}>
                   {product?.price} $
                 </Typography>

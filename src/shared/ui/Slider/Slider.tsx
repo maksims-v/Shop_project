@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { ProductCard } from 'entities/Product';
 import AliceCarousel from 'react-alice-carousel';
@@ -6,6 +6,8 @@ import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { Product } from 'entities/Product/model/types/Product';
 import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
 import 'react-alice-carousel/lib/alice-carousel.css';
+
+type SliderSection = 'clearance' | 'newArrivals';
 
 const responsive = {
   0: { items: 2 },
@@ -17,10 +19,12 @@ type SliderProps = {
   data?: Product[];
   isLoading?: boolean;
   isError?: boolean;
+  section: SliderSection;
+  title?: string;
 };
 
-export const Slider = (props: SliderProps) => {
-  const { data } = props;
+export const Slider = memo((props: SliderProps) => {
+  const { data, title, section } = props;
 
   const [isClient, setIsClient] = useState(false);
 
@@ -31,14 +35,15 @@ export const Slider = (props: SliderProps) => {
   const removeNullAttributes = data ? data.map((item) => removeNullValuesInProduct(item)) : [];
 
   const carouselItems = useMemo(
-    () => removeNullAttributes?.map((item, index) => <ProductCard product={item} />),
+    () => removeNullAttributes?.map((item) => <ProductCard product={item} />),
     [removeNullAttributes],
   );
+
   return (
     <Box sx={{ m: '0 auto', width: '100%' }}>
-      <AppLink to="/newArrivals">
+      <AppLink to={`/${section}`}>
         <Typography variant="h2" sx={{ textAlign: 'center', mb: '15px' }}>
-          New Arrivals
+          {title}
         </Typography>{' '}
       </AppLink>
       {isClient && (
@@ -54,4 +59,4 @@ export const Slider = (props: SliderProps) => {
       )}
     </Box>
   );
-};
+});

@@ -12,7 +12,7 @@ export const fetchProfileData = createAsyncThunk<
   try {
     const jwt = Cookies.get('jwt');
 
-    const response = await axios('http://127.0.0.1:1337/api/users/me', {
+    const response = await axios(`${__API__}/api/users/me`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${jwt}`,

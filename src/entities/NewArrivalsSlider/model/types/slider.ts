@@ -2,7 +2,7 @@ import { Product, ProductItem } from 'entities/Product/model/types/Product';
 
 export interface SliderResponse {
   data?: ProductItem[];
-  meta?: [];
+  meta?: {};
 }
 
 export interface SliderSchema {

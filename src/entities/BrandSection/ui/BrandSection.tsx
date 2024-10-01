@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { Box, Typography } from '@mui/material';
-import { error } from 'console';
 import { ProductCard } from 'entities/Product';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { BrandSectionTypes } from '../model/types/brandSection';
 import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
+import { Product } from 'entities/Product/model/types/Product';
 
 type BrandSectionProps = {
   data?: BrandSectionTypes;
@@ -12,25 +12,29 @@ type BrandSectionProps = {
   isError?: boolean;
 };
 
-export const BrandSection = (props: BrandSectionProps) => {
+export const BrandSection = memo((props: BrandSectionProps) => {
   const { data, isError, isLoading } = props;
 
-  const removeNullAttributes = data?.brandSection?.products?.data
-    ? data?.brandSection?.products?.data?.map((item) => removeNullValuesInProduct(item))
+  const removeIdFromData = data?.brandSection?.products?.data.map((item) => item.attributes);
+
+  const removeNullAttributes = removeIdFromData
+    ? removeIdFromData?.map((item) => removeNullValuesInProduct(item))
     : [];
 
-  console.log(removeNullAttributes);
-
-  const productsRender = removeNullAttributes?.map((item) => {
-    return <ProductCard product={item.attributes} brandSection={true} />;
-  });
+  const productsRender = useMemo(
+    () =>
+      removeNullAttributes?.map((item: Product) => {
+        return <ProductCard key={item.slug} product={item} brandSection={true} />;
+      }),
+    [removeNullAttributes],
+  );
 
   return (
-    data &&
+    productsRender.length &&
     data?.isShow && (
       <Box mb="60px">
         <Typography variant="h2" sx={{ textAlign: 'center', mb: '15px' }}>
-          {data?.brandSection.title}
+          {data?.brandSection?.title}
         </Typography>
         <Box
           sx={{
@@ -46,7 +50,7 @@ export const BrandSection = (props: BrandSectionProps) => {
               <img
                 alt="banner"
                 style={{ width: '100%', objectFit: 'cover', height: '720px' }}
-                src={`http://127.0.0.1:1337${data?.brandSection?.image?.data?.attributes?.url}`}
+                src={`${__API__}${data?.brandSection?.image?.data?.attributes?.url}`}
               />
             </AppLink>
           </Box>
@@ -65,4 +69,4 @@ export const BrandSection = (props: BrandSectionProps) => {
       </Box>
     )
   );
-};
+});

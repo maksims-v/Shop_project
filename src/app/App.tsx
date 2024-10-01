@@ -7,9 +7,12 @@ import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { getUserInited, userActions } from 'entities/User';
 import { fetchNavbarData, Navbar } from 'widgets/Navbar';
 import { fetchBannerData } from 'entities/Banner';
-import { fetchSliderData } from 'entities/Slider';
+import { fetchSliderData } from 'entities/NewArrivalsSlider';
 import { useSelector } from 'react-redux';
 import { fetchBrandSectionData } from 'entities/BrandSection';
+import { fetchPopularSectionData } from 'entities/PopularSection';
+import { fetchSecondBannerData } from 'entities/SecondBanner';
+import { fetchClearanceSliderData } from 'entities/ClearanceSlider';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +25,9 @@ const App = () => {
     dispatch(fetchSliderData());
     dispatch(fetchBannerData());
     dispatch(fetchBrandSectionData());
+    dispatch(fetchPopularSectionData());
+    dispatch(fetchSecondBannerData());
+    dispatch(fetchClearanceSliderData());
   }, [dispatch]);
 
   return (

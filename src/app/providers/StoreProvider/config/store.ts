@@ -6,8 +6,11 @@ import { createReducerManager } from './reducerManager';
 import { navbarReducer } from 'widgets/Navbar';
 import { BannerReducer } from 'entities/Banner';
 import { productsReducer } from 'pages/ProductsPage';
-import { sliderReducer } from 'entities/Slider';
+import { sliderReducer } from 'entities/NewArrivalsSlider';
 import { brandSectionReducer } from 'entities/BrandSection';
+import { popularSectionReducer } from 'entities/PopularSection';
+import { secondBannerReducer } from 'entities/SecondBanner';
+import { clearanceSliderReducer } from 'entities/ClearanceSlider';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
@@ -16,6 +19,9 @@ const rootReducers: ReducersMapObject<StateSchema> = {
   banner: BannerReducer,
   slider: sliderReducer,
   brandSection: brandSectionReducer,
+  popularSection: popularSectionReducer,
+  secondBanner: secondBannerReducer,
+  clearanceSlider: clearanceSliderReducer,
 };
 
 const reducerManager = createReducerManager(rootReducers);

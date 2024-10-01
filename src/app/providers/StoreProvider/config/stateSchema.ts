@@ -1,8 +1,11 @@
 import { ReducersMapObject, Action, Reducer, EnhancedStore } from '@reduxjs/toolkit';
 import { BannerSchema } from 'entities/Banner/model/types/banner';
 import { BrandSectionSchema } from 'entities/BrandSection';
+import { ClearanceSliderSchema } from 'entities/ClearanceSlider';
+import { PopularSectionSchema } from 'entities/PopularSection';
 import { ProfileSchema } from 'entities/Profile/model/types/profile';
-import { SliderSchema } from 'entities/Slider/model/types/slider';
+import { SecondBannerSchema } from 'entities/SecondBanner';
+import { SliderSchema } from 'entities/NewArrivalsSlider/model/types/slider';
 import { UserSchema } from 'entities/User/model/types/user';
 import { LoginSchema } from 'features/AuthByUserName';
 import { NavbarSchema } from 'widgets/Navbar/model/types/navbar';
@@ -15,7 +18,10 @@ export interface StateSchema {
   products?: any;
   banner?: BannerSchema;
   slider?: SliderSchema;
-  brandSection: BrandSectionSchema;
+  brandSection?: BrandSectionSchema;
+  popularSection?: PopularSectionSchema;
+  secondBanner?: SecondBannerSchema;
+  clearanceSlider: ClearanceSliderSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
