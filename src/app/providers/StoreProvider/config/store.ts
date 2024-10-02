@@ -5,7 +5,6 @@ import { StateSchema } from './stateSchema';
 import { createReducerManager } from './reducerManager';
 import { navbarReducer } from 'widgets/Navbar';
 import { BannerReducer } from 'entities/Banner';
-import { productsReducer } from 'pages/ProductsPage';
 import { sliderReducer } from 'entities/NewArrivalsSlider';
 import { brandSectionReducer } from 'entities/BrandSection';
 import { popularSectionReducer } from 'entities/PopularSection';
@@ -15,7 +14,6 @@ import { clearanceSliderReducer } from 'entities/ClearanceSlider';
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
   navbar: navbarReducer,
-  products: productsReducer,
   banner: BannerReducer,
   slider: sliderReducer,
   brandSection: brandSectionReducer,

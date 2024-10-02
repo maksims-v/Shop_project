@@ -15,7 +15,6 @@ export interface StateSchema {
   navbar: NavbarSchema;
   profile?: ProfileSchema;
   loginForm?: LoginSchema;
-  products?: any;
   banner?: BannerSchema;
   slider?: SliderSchema;
   brandSection?: BrandSectionSchema;

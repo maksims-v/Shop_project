@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { ReduxStoreWithManager } from 'app/providers/StoreProvider/config/stateSchema';
 import { useSelector, useStore } from 'react-redux';
@@ -11,6 +11,7 @@ import { getProfileIsLoading } from 'entities/Profile/model/selectors/getProfile
 import { getProfileReadonly } from 'entities/Profile/model/selectors/getProfileReadonly/getProfileReadonly';
 import { fetchProfileData } from 'entities/Profile/model/services/fetchProfileData/fetchProfileData';
 import { ProfilePagebottom } from './profilePageBottom/ProfilePagebottom';
+import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
 
 const ProfilePage = () => {
   const [value, setValue] = useState(0);
@@ -101,32 +102,36 @@ const ProfilePage = () => {
   );
 
   return (
-    <Box sx={{ width: '100%', bgcolor: 'background.paper', justifyContent: 'center' }}>
-      <Tabs value={value} onChange={handleChange} centered>
-        <Tab label="My profile" />
-        <Tab label="My orders" />
-        <Tab label="Delivery address" />
-      </Tabs>
-      {value === 0 && (
-        <ProfileCard
-          data={formData}
-          error={error}
-          isLoading={isLoading}
-          readonly={readonly}
-          changeUsername={changeUsername}
-          changeAdress={changeAdress}
-          changeCity={changeCity}
-          changeCountry={changeCountry}
-          changeEmail={changeEmail}
-          changeFullName={changeFullName}
-          changePhone={changePhone}
-          changeLastName={changeLastName}
-          changePostCode={changePostCode}
-        />
-      )}
-      <ProfilePagebottom />
-    </Box>
+    <>
+      <PageBreadcrumbs />
+
+      <Box sx={{ width: '100%', bgcolor: 'background.paper', justifyContent: 'center' }}>
+        <Tabs value={value} onChange={handleChange} centered>
+          <Tab label="My profile" />
+          <Tab label="My orders" />
+          <Tab label="Delivery address" />
+        </Tabs>
+        {value === 0 && (
+          <ProfileCard
+            data={formData}
+            error={error}
+            isLoading={isLoading}
+            readonly={readonly}
+            changeUsername={changeUsername}
+            changeAdress={changeAdress}
+            changeCity={changeCity}
+            changeCountry={changeCountry}
+            changeEmail={changeEmail}
+            changeFullName={changeFullName}
+            changePhone={changePhone}
+            changeLastName={changeLastName}
+            changePostCode={changePostCode}
+          />
+        )}
+        <ProfilePagebottom />
+      </Box>
+    </>
   );
 };
 
-export default ProfilePage;
+export default memo(ProfilePage);

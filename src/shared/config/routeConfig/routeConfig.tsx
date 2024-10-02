@@ -5,7 +5,10 @@ import { AboutPage } from 'pages/AboutPage';
 import { MensPage } from 'pages/MensPage';
 import { ProfilePage } from 'pages/ProfilePage';
 import { NotFoundPage } from 'pages/NotFoundPage';
-import { ProductsPage } from 'pages/ProductsPage';
+import { CategoryPage } from 'pages/CategoryPage';
+import { SubCategoryPage } from 'pages/SubCategoryPage';
+import { SectionPage } from 'pages/SectionPage';
+import { ProductDetailPage } from 'pages/ProductDetailPage';
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -16,8 +19,12 @@ export enum AppRoutes {
   ABOUT = 'about',
   MENS = 'mens',
   PROFILE = 'profile',
+  PAGE_SECTION = 'pagesection',
+  CATEGORY = 'category',
+  SUB_CATEGORY = 'subcategory',
+  PRODUCT_DETAIL = 'productdetail',
   NOT_FOUND = 'not_found',
-  PRODUCTS = 'products',
+
   // WOMEN = 'women',
   // EQUIPMENT = 'equipment',
   // SALE = 'sale',
@@ -30,7 +37,10 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.ABOUT]: '/about',
   [AppRoutes.MENS]: '/mens',
   [AppRoutes.PROFILE]: '/profile',
-  [AppRoutes.PRODUCTS]: '/shop/products',
+  [AppRoutes.PAGE_SECTION]: '/:pagesection',
+  [AppRoutes.CATEGORY]: '/:pagesection/:category',
+  [AppRoutes.SUB_CATEGORY]: '/:pagesection/:category/:subcategory',
+  [AppRoutes.PRODUCT_DETAIL]: '/:pagesection/:category/:subcategory/:productdetail',
   [AppRoutes.NOT_FOUND]: '*',
 
   // [AppRoutes.WOMEN]: '/shop/women"s',
@@ -58,9 +68,21 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     element: <ProfilePage />,
     authOnly: true,
   },
-  [AppRoutes.PRODUCTS]: {
-    path: RoutePath.products,
-    element: <ProductsPage />,
+  [AppRoutes.PAGE_SECTION]: {
+    path: RoutePath.pagesection,
+    element: <SectionPage />,
+  },
+  [AppRoutes.CATEGORY]: {
+    path: RoutePath.category,
+    element: <CategoryPage />,
+  },
+  [AppRoutes.SUB_CATEGORY]: {
+    path: RoutePath.subcategory,
+    element: <SubCategoryPage />,
+  },
+  [AppRoutes.PRODUCT_DETAIL]: {
+    path: RoutePath.productdetail,
+    element: <ProductDetailPage />,
   },
   [AppRoutes.NOT_FOUND]: {
     path: RoutePath.not_found,
