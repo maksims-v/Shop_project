@@ -10,6 +10,7 @@ import { brandSectionReducer } from 'entities/BrandSection';
 import { popularSectionReducer } from 'entities/PopularSection';
 import { secondBannerReducer } from 'entities/SecondBanner';
 import { clearanceSliderReducer } from 'entities/ClearanceSlider';
+import { productListReducer } from 'entities/Product';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
@@ -20,6 +21,7 @@ const rootReducers: ReducersMapObject<StateSchema> = {
   popularSection: popularSectionReducer,
   secondBanner: secondBannerReducer,
   clearanceSlider: clearanceSliderReducer,
+  productsList: productListReducer,
 };
 
 const reducerManager = createReducerManager(rootReducers);

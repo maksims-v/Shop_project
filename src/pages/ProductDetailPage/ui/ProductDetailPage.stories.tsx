@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { ProductDetailPage } from './ProductDetailPage';
+import { ProductDetailPage } from '..';
 
 const meta: Meta<typeof ProductDetailPage> = {
   title: 'shared/ProductDetailPage',

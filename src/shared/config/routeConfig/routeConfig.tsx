@@ -19,7 +19,7 @@ export enum AppRoutes {
   ABOUT = 'about',
   MENS = 'mens',
   PROFILE = 'profile',
-  PAGE_SECTION = 'pagesection',
+  PAGE_SECTION = 'pageCategory',
   CATEGORY = 'category',
   SUB_CATEGORY = 'subcategory',
   PRODUCT_DETAIL = 'productdetail',
@@ -37,10 +37,10 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.ABOUT]: '/about',
   [AppRoutes.MENS]: '/mens',
   [AppRoutes.PROFILE]: '/profile',
-  [AppRoutes.PAGE_SECTION]: '/:pagesection',
-  [AppRoutes.CATEGORY]: '/:pagesection/:category',
-  [AppRoutes.SUB_CATEGORY]: '/:pagesection/:category/:subcategory',
-  [AppRoutes.PRODUCT_DETAIL]: '/:pagesection/:category/:subcategory/:productdetail',
+  [AppRoutes.PAGE_SECTION]: '/:pageCategory',
+  [AppRoutes.CATEGORY]: '/:pageCategory/:category',
+  [AppRoutes.SUB_CATEGORY]: '/:pageCategory/:category/:subcategory',
+  [AppRoutes.PRODUCT_DETAIL]: '/:pageCategory/:category/:subcategory/:productdetail',
   [AppRoutes.NOT_FOUND]: '*',
 
   // [AppRoutes.WOMEN]: '/shop/women"s',
@@ -69,7 +69,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     authOnly: true,
   },
   [AppRoutes.PAGE_SECTION]: {
-    path: RoutePath.pagesection,
+    path: RoutePath.pageCategory,
     element: <SectionPage />,
   },
   [AppRoutes.CATEGORY]: {

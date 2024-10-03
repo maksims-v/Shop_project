@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 export interface ProductItemProps {}
 
-export const ProductItem = ({}: ProductItemProps) => {
+export const ProductsListData = ({}: ProductItemProps) => {
   return (
     <Box m="0 auto" width="100%">
       <Box

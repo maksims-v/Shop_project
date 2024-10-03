@@ -47,13 +47,14 @@ export interface Product {
   category?: string;
   clearance?: boolean;
   clothingCategory?: string | null;
-  createdAt?: string; // ISO date string
+  createdAt?: string;
   description?: string;
   equipmentCategory?: string | null;
   footwearCategory?: string | null;
   image?: {
     data: ProductImage[];
   };
+
   lampsLanternsCategory?: string | null;
   locale?: string;
   new?: boolean;
@@ -61,7 +62,7 @@ export interface Product {
   otherCategory?: string | null;
   pageCategory?: string;
   price?: number;
-  publishedAt?: string; // ISO date string
+  publishedAt?: string;
   sale?: boolean;
   showOnBanner?: boolean | null;
   showOnCategoryBanner?: boolean;
@@ -69,6 +70,7 @@ export interface Product {
   techDescription?: string;
   title?: string;
   toolsGearCategory?: string | null;
+  size?: Size;
 }
 
 export interface ProductItem {
@@ -79,4 +81,86 @@ export interface ProductItem {
 export interface ProductSchema {
   id?: number;
   attributes?: Product[];
+}
+
+export interface ProductList {
+  mobile: boolean;
+  error: boolean;
+  isLoading: boolean;
+  sale: boolean;
+  searchFlag: boolean;
+  newSearch: boolean;
+  status: null;
+  sortValue: 'Sort By';
+  data: [];
+  metaData: [];
+  inputSearchValue: '';
+  pageCategory: [];
+  pageCategoryChecked: [];
+  category: [];
+  categoryChecked: [];
+  subCategory: [];
+  subCategoryChecked: [];
+  brands: [];
+  brandsChecked: [];
+  sizes: [];
+  sizesChecked: [];
+  priceMinAndMax: [1, 9999];
+  changePrice: [1, 9999];
+  allSizesFromApi: [];
+  currentPage: 1;
+}
+
+interface Size {
+  id: number;
+  size: string;
+  qnty: number | null;
+}
+
+interface ProductsListAttributes {
+  sortedProducts: Product[];
+}
+
+interface ProductsListData {
+  attributes: ProductsListAttributes;
+}
+
+interface ProductsListMeta {
+  priceMin: number;
+  priceMax: number;
+  total: number;
+  pages: number;
+  category: string[];
+  pageCategory: string[];
+  subCategory: string[];
+  brands: string[];
+  sizes: string[];
+}
+
+export interface ProductsListSchema {
+  isLoading?: boolean;
+  mobile?: boolean;
+  error?: boolean;
+  searchFlag?: boolean;
+  sale?: boolean;
+  allSizesFromApi?: string[];
+  status?: 'loading' | 'resolved' | 'rejected' | null; // статус загрузки
+  data?: ProductsListData; // сюда можно добавить точную типизацию для данных товаров
+  metaData?: ProductsListMeta | null; // объект мета-данных или null
+  inputSearchValue?: string; // строка для поиска
+  newSearch?: boolean; // флаг нового поиска
+  pageCategory?: string[]; // категории страницы
+  pageCategoryChecked?: string[]; // выбранные категории страницы
+  category?: string[]; // категории
+  categoryChecked?: string[]; // выбранные категории
+  subCategory?: string[]; // подкатегории
+  subCategoryChecked?: string[]; // выбранные подкатегории
+  brands?: string[]; // бренды
+  brandsChecked?: string[]; // выбранные бренды
+  sizes?: string[]; // доступные размеры
+  sizesChecked?: string[]; // выбранные размеры
+  priceMinAndMax?: [number, number]; // минимальная и максимальная цена
+  changePrice?: [number, number]; // измененная цена
+  currentPage?: number; // текущая страница
+  sortValue?: string; // выбранное значение сортировки
 }
