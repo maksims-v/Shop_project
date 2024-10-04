@@ -51,10 +51,9 @@ export interface Product {
   description?: string;
   equipmentCategory?: string | null;
   footwearCategory?: string | null;
-  image?: {
-    data: ProductImage[];
-  };
-
+  image?:
+    | { data: ProductImage[] } // Либо объект с массивом ProductImage
+    | string;
   lampsLanternsCategory?: string | null;
   locale?: string;
   new?: boolean;
@@ -126,15 +125,15 @@ interface ProductsListData {
 }
 
 interface ProductsListMeta {
-  priceMin: number;
-  priceMax: number;
-  total: number;
-  pages: number;
-  category: string[];
-  pageCategory: string[];
-  subCategory: string[];
-  brands: string[];
-  sizes: string[];
+  priceMin?: number;
+  priceMax?: number;
+  total?: number;
+  pages?: number;
+  category?: string[];
+  pageCategory?: string[];
+  subCategory?: string[];
+  brands?: string[];
+  sizes?: string[];
 }
 
 export interface ProductsListSchema {
@@ -145,7 +144,7 @@ export interface ProductsListSchema {
   sale?: boolean;
   allSizesFromApi?: string[];
   status?: 'loading' | 'resolved' | 'rejected' | null; // статус загрузки
-  data?: ProductsListData; // сюда можно добавить точную типизацию для данных товаров
+  data?: Product[]; // сюда можно добавить точную типизацию для данных товаров
   metaData?: ProductsListMeta | null; // объект мета-данных или null
   inputSearchValue?: string; // строка для поиска
   newSearch?: boolean; // флаг нового поиска
@@ -163,4 +162,10 @@ export interface ProductsListSchema {
   changePrice?: [number, number]; // измененная цена
   currentPage?: number; // текущая страница
   sortValue?: string; // выбранное значение сортировки
+  price?: string | number;
+}
+
+export interface ProductListResponse {
+  data?: ProductsListData;
+  meta?: ProductsListMeta | null;
 }

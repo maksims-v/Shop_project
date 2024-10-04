@@ -1,5 +1,4 @@
-import React, { FC } from 'react';
-
+import React from 'react';
 import { Card, CardActionArea, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { Product } from 'entities/Product/model/types/Product';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
@@ -30,9 +29,12 @@ export const ProductCard = (props: ProductCardProps) => {
         <CardActionArea>
           <CardMedia
             component="img"
-            sx={{ p: '0px 5px' }}
-            height="255"
-            image={`${__API__}${product?.image?.data[0]?.attributes?.formats?.small?.url}`}
+            sx={{ p: '0px 5px', flexGrow: '1' }}
+            image={`${__API__}${
+              typeof product.image === 'string'
+                ? product.image
+                : product.image?.data?.[0]?.attributes?.formats?.small?.url
+            }`}
             alt="img"
           />
 
@@ -50,6 +52,7 @@ export const ProductCard = (props: ProductCardProps) => {
               height: '100px',
               display: 'flex',
               flexDirection: 'column',
+              flexGrow: '0',
             }}>
             <Typography sx={{ fontWeight: 'bold' }}>{product?.brand}</Typography>
             <Typography

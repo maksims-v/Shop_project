@@ -24,7 +24,6 @@ export enum AppRoutes {
   SUB_CATEGORY = 'subcategory',
   PRODUCT_DETAIL = 'productdetail',
   NOT_FOUND = 'not_found',
-
   // WOMEN = 'women',
   // EQUIPMENT = 'equipment',
   // SALE = 'sale',

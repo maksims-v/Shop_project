@@ -21,8 +21,8 @@ export interface StateSchema {
   brandSection?: BrandSectionSchema;
   popularSection?: PopularSectionSchema;
   secondBanner?: SecondBannerSchema;
-  clearanceSlider: ClearanceSliderSchema;
-  productsList: ProductsListSchema;
+  clearanceSlider?: ClearanceSliderSchema;
+  productsList?: ProductsListSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
