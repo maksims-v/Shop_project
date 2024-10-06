@@ -14,7 +14,6 @@ export const ProductsCategorySelector = (props: ProductsCategorySelectorProps) =
   const dispatch = useAppDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name);
     dispatch(productListActions.setCategoryChecked(event.target.name));
   };
 

@@ -7,4 +7,6 @@ export { getPageCategoryData } from './model/selectors/getPageCategoryData';
 export { getPageSubCategoryData } from './model/selectors/getPageSubCategoryData';
 export { getPageBrandsData } from './model/selectors/getPageBrandsData';
 export { getProductsListData } from './model/selectors/getProductsListData';
-export { getSectionFilterCheckedData } from './model/selectors/getSectionFilterCheckedData';
+export { getCategoryFilterCheckedData } from './model/selectors/getCategoryFilterCheckedData';
+export { getSubCategoryFilterCheckedData } from './model/selectors/getSubCategoryFilterCheckedData';
+export { getBrandFilterCheckedData } from './model/selectors/getBrandFilterCheckedData';

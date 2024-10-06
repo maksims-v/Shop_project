@@ -1,4 +1,4 @@
 import { StateSchema } from 'app/providers/StoreProvider';
 
-export const getSectionFilterCheckedData = (state: StateSchema) =>
+export const getCategoryFilterCheckedData = (state: StateSchema) =>
   state.productsList.categoryChecked;

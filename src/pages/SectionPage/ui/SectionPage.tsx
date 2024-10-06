@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import {
   fetchProductsListData,
+  getBrandFilterCheckedData,
+  getCategoryFilterCheckedData,
   getPageBrandsData,
   getPageCategoryData,
   getPageSubCategoryData,
   getProductsListData,
-  getSectionFilterCheckedData,
+  getSubCategoryFilterCheckedData,
 } from 'entities/Product';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
 import { ProductsListData } from 'entities/Product/ui/ProductsListData/ProductsListData';
@@ -17,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
+import { productListActions } from 'entities/Product/model/slice/productsListSlice';
 
 type SectionPageProps = {};
 
@@ -29,11 +32,17 @@ const SectionPage = (props: SectionPageProps) => {
   const subCategoryData = useSelector(getPageSubCategoryData);
   const brandsData = useSelector(getPageBrandsData);
   const productsList = useSelector(getProductsListData);
-  const checkedSectionData = useSelector(getSectionFilterCheckedData);
+  const checkedCategoryData = useSelector(getCategoryFilterCheckedData);
+  const checkedSubCategoryData = useSelector(getSubCategoryFilterCheckedData);
+  const checkedBrandsData = useSelector(getBrandFilterCheckedData);
+
+  useEffect(() => {
+    dispatch(productListActions.clearAllFilters());
+  }, [pathParams]);
 
   useEffect(() => {
     dispatch(fetchProductsListData(pathParams));
-  }, [pathParams, checkedSectionData]);
+  }, [checkedCategoryData, checkedSubCategoryData, checkedBrandsData]);
 
   return (
     <div>

@@ -51,7 +51,6 @@ export const productsListSlice = createSlice({
     },
 
     setCategoryChecked(state, action) {
-      console.log(action.payload);
       state.categoryChecked = toggleItemInArray(state.categoryChecked, action.payload);
       updateSearchState(state);
     },
