@@ -11,11 +11,10 @@ export interface ProductCardProps {
 
 export const ProductCard = (props: ProductCardProps) => {
   const { product, brandSection = false } = props;
-
   return (
     <Card sx={{ maxWidth: 235, boxShadow: 'none' }}>
       <AppLink
-        to={`${product?.pageCategory}/${product?.category || product?.equipmentCategory}/${
+        to={`/${product?.pageCategory}/${product?.category || product?.equipmentCategory}/${
           product?.clothingCategory ||
           product?.footwearCategory ||
           product?.accessoriesCategory ||

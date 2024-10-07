@@ -1,4 +1,6 @@
 import { Box } from '@mui/material';
+import { productListActions } from 'entities/Product/model/slice/productsListSlice';
+import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { FilterCheckbox } from 'shared/ui/FilterCheckbox/FilterCheckbox';
 
 export interface ProductSectionSelectorProps {
@@ -8,10 +10,10 @@ export interface ProductSectionSelectorProps {
 
 export const ProductSectionSelector = (props: ProductSectionSelectorProps) => {
   const { data = [], isLoading } = props;
+  const dispatch = useAppDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name);
-    // dispatch(setPageCategoryChecked(event.target.name));
+    dispatch(productListActions.setPageCategoryChecked(event.target.name));
   };
 
   return (

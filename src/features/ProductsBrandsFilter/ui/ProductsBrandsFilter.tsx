@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
+import { memo } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { FilterCheckbox } from 'shared/ui/FilterCheckbox/FilterCheckbox';
 
@@ -8,7 +9,7 @@ export interface ProductsBrandsFilterProps {
   isLoading?: boolean;
 }
 
-export const ProductsBrandsFilter = (props: ProductsBrandsFilterProps) => {
+export const ProductsBrandsFilter = memo((props: ProductsBrandsFilterProps) => {
   const { data = [], isLoading } = props;
 
   const dispatch = useAppDispatch();
@@ -21,4 +22,4 @@ export const ProductsBrandsFilter = (props: ProductsBrandsFilterProps) => {
       <FilterCheckbox data={data} handleChange={handleChange} title={'BRAND'} />
     </Box>
   );
-};
+});

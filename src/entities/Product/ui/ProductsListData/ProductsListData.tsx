@@ -1,7 +1,8 @@
 import { Box } from '@mui/material';
 import { Product } from 'entities/Product/model/types/Product';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
+import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
 
 export interface ProductItemProps {
   data?: Product[];
@@ -12,8 +13,13 @@ export interface ProductItemProps {
 export const ProductsListData = (props: ProductItemProps) => {
   const { data = [], error, isLoading } = props;
 
+  const removeNullAttributes = data.map((item) => removeNullValuesInProduct(item));
+
   const productsListRender = useMemo(
-    () => data.map((product) => <ProductCard key={product.slug} product={product} />),
+    () =>
+      removeNullAttributes.map((product: Product) => (
+        <ProductCard key={product.slug} product={product} />
+      )),
     [data],
   );
 

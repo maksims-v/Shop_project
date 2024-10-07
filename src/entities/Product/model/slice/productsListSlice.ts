@@ -41,7 +41,7 @@ export const productsListSlice = createSlice({
       state.inputSearchValue = action.payload;
       state.newSearch = true;
     },
-    setSale(state, action) {
+    setSale(state) {
       state.sale = !state.sale;
       updateSearchState(state);
     },
@@ -132,7 +132,7 @@ export const productsListSlice = createSlice({
             ? [action.payload.meta.priceMin, action.payload.meta.priceMax]
             : state.priceMinAndMax;
 
-          // state.sizes = state.newSearch ? action.payload.meta.sizes : state.sizes;
+          state.sizes = state.newSearch ? action.payload.meta.sizes : state.sizes;
 
           state.status = 'resolved';
         },
