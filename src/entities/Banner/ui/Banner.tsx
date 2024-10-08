@@ -9,7 +9,6 @@ type BannerProps = {
 
 export const Banner = memo((props: BannerProps) => {
   const { data } = props;
-  console.log('hai');
   if (!data) return null;
 
   return (

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ProductListResponse } from '../types/Product';
 import { StateSchema } from 'app/providers/StoreProvider';
 
-type Paths = 'pageCategory' | 'category' | 'subcategory';
+type Paths = 'pageCategory' | 'category' | 'subcategory' | 'productdetail';
 
 export type PathsParams = {
   [key in Paths]?: string;

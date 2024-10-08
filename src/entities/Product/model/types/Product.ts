@@ -70,6 +70,7 @@ export interface Product {
   title?: string;
   toolsGearCategory?: string | null;
   size?: Size;
+  color?: Color;
 }
 
 export interface ProductItem {
@@ -80,6 +81,11 @@ export interface ProductItem {
 export interface ProductSchema {
   id?: number;
   attributes?: Product[];
+}
+
+interface Color {
+  id: number;
+  color: string;
 }
 
 export interface ProductList {
@@ -168,4 +174,15 @@ export interface ProductsListSchema {
 export interface ProductListResponse {
   data?: ProductsListData;
   meta?: ProductsListMeta | null;
+}
+
+export interface ProductDetailResponse {
+  data?: ProductItem[];
+  meta: {};
+}
+
+export interface ProductDetailSchema {
+  data?: ProductItem;
+  isLoading?: boolean;
+  error?: boolean;
 }

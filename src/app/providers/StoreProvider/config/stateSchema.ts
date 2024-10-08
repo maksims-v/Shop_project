@@ -9,7 +9,8 @@ import { SliderSchema } from 'entities/NewArrivalsSlider/model/types/slider';
 import { UserSchema } from 'entities/User/model/types/user';
 import { LoginSchema } from 'features/AuthByUserName';
 import { NavbarSchema } from 'widgets/Navbar/model/types/navbar';
-import { ProductsListSchema } from 'entities/Product/model/types/Product';
+import { ProductDetailSchema, ProductsListSchema } from 'entities/Product/model/types/Product';
+import { SimilarProductsSchema } from 'features/SimilarProducts';
 
 export interface StateSchema {
   user: UserSchema;
@@ -23,6 +24,8 @@ export interface StateSchema {
   secondBanner?: SecondBannerSchema;
   clearanceSlider?: ClearanceSliderSchema;
   productsList?: ProductsListSchema;
+  productDetail?: ProductDetailSchema;
+  similarProducts?: SimilarProductsSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

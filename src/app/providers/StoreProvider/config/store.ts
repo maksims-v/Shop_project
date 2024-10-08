@@ -10,7 +10,8 @@ import { brandSectionReducer } from 'entities/BrandSection';
 import { popularSectionReducer } from 'entities/PopularSection';
 import { secondBannerReducer } from 'entities/SecondBanner';
 import { clearanceSliderReducer } from 'entities/ClearanceSlider';
-import { productListReducer } from 'entities/Product';
+import { productDetailReducer, productListReducer } from 'entities/Product';
+import { similarProductsReducer } from 'features/SimilarProducts';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
@@ -22,6 +23,8 @@ const rootReducers: ReducersMapObject<StateSchema> = {
   secondBanner: secondBannerReducer,
   clearanceSlider: clearanceSliderReducer,
   productsList: productListReducer,
+  productDetail: productDetailReducer,
+  similarProducts: similarProductsReducer,
 };
 
 const reducerManager = createReducerManager(rootReducers);

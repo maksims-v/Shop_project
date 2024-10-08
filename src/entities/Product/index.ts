@@ -1,3 +1,5 @@
+export { ProductDetailSchema } from './model/types/Product';
+export { productDetailReducer } from './model/slice/productDetailSlice';
 export { ProductCard } from './ui/ProductCard/ProductCard';
 export { ProductItem } from './model/types/Product';
 export { fetchProductsListData } from './model/services/fetchProductsListData';
