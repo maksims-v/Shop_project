@@ -11,6 +11,7 @@ import { LoginSchema } from 'features/AuthByUserName';
 import { NavbarSchema } from 'widgets/Navbar/model/types/navbar';
 import { ProductDetailSchema, ProductsListSchema } from 'entities/Product/model/types/Product';
 import { SimilarProductsSchema } from 'features/SimilarProducts';
+import { BasketSchema } from 'pages/Basket';
 
 export interface StateSchema {
   user: UserSchema;
@@ -26,6 +27,7 @@ export interface StateSchema {
   productsList?: ProductsListSchema;
   productDetail?: ProductDetailSchema;
   similarProducts?: SimilarProductsSchema;
+  basket?: BasketSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

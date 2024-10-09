@@ -3,13 +3,7 @@ import { Box, Typography } from '@mui/material';
 import {
   getPageBrandsData,
   getProductsListData,
-  getCategoryFilterCheckedData,
-  getSubCategoryFilterCheckedData,
-  getBrandFilterCheckedData,
-  getSizesCheckedData,
   getSizesData,
-  getChangePriceFromPriceFilter,
-  getSaleFilterFlag,
   fetchProductsListData,
   getSearchFlag,
   getTotalProductsCount,
@@ -35,13 +29,7 @@ const SubCategoryPage = (props: SubCategoryPageProps) => {
   const pathParams = useParams<PathsParams>();
   const brandsData = useSelector(getPageBrandsData);
   const productsList = useSelector(getProductsListData);
-  const checkedCategoryData = useSelector(getCategoryFilterCheckedData);
-  const checkedSubCategoryData = useSelector(getSubCategoryFilterCheckedData);
-  const checkedBrandsData = useSelector(getBrandFilterCheckedData);
-  const sizesChecked = useSelector(getSizesCheckedData);
   const sizesData = useSelector(getSizesData);
-  const filterPriceChange = useSelector(getChangePriceFromPriceFilter);
-  const saleFilterFlag = useSelector(getSaleFilterFlag);
   const searchFlag = useSelector(getSearchFlag);
   const totalProducts = useSelector(getTotalProductsCount);
 
@@ -51,15 +39,7 @@ const SubCategoryPage = (props: SubCategoryPageProps) => {
 
   useEffect(() => {
     dispatch(fetchProductsListData(pathParams));
-  }, [
-    checkedCategoryData,
-    checkedSubCategoryData,
-    checkedBrandsData,
-    sizesChecked,
-    filterPriceChange,
-    saleFilterFlag,
-    searchFlag,
-  ]);
+  }, [searchFlag, pathParams]);
 
   return (
     <Box>

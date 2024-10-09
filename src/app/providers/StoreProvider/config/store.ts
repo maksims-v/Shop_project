@@ -12,6 +12,7 @@ import { secondBannerReducer } from 'entities/SecondBanner';
 import { clearanceSliderReducer } from 'entities/ClearanceSlider';
 import { productDetailReducer, productListReducer } from 'entities/Product';
 import { similarProductsReducer } from 'features/SimilarProducts';
+import { basketSliceReducer } from 'pages/Basket';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
@@ -25,6 +26,7 @@ const rootReducers: ReducersMapObject<StateSchema> = {
   productsList: productListReducer,
   productDetail: productDetailReducer,
   similarProducts: similarProductsReducer,
+  basket: basketSliceReducer,
 };
 
 const reducerManager = createReducerManager(rootReducers);

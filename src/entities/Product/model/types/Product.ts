@@ -69,7 +69,7 @@ export interface Product {
   techDescription?: string;
   title?: string;
   toolsGearCategory?: string | null;
-  size?: Size;
+  size?: Size[];
   color?: Color;
 }
 

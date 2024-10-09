@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { ProductDetailResponse } from '../types/Product';
+import { similarProductsActions } from 'features/SimilarProducts';
 
 const qs = require('qs');
 
@@ -8,7 +9,7 @@ export const fetchProductDetailData = createAsyncThunk<
   ProductDetailResponse,
   string,
   { rejectValue: string }
->('fetchProductDetailData', async (slug, { rejectWithValue }) => {
+>('fetchProductDetailData', async (slug, { rejectWithValue, dispatch }) => {
   try {
     const query = qs.stringify({
       filters: { slug: slug },

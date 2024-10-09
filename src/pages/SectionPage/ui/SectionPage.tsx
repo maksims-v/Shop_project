@@ -2,20 +2,13 @@ import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import {
   fetchProductsListData,
-  getBrandFilterCheckedData,
-  getCategoryFilterCheckedData,
-  getChangePriceFromPriceFilter,
   getPageBrandsData,
   getPageCategoryData,
   getPageSectionData,
   getPageSubCategoryData,
   getProductsListData,
-  getSaleFilterFlag,
   getSearchFlag,
-  getSectionPageFilterData,
-  getSizesCheckedData,
   getSizesData,
-  getSubCategoryFilterCheckedData,
   getTotalProductsCount,
 } from 'entities/Product';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
@@ -46,15 +39,8 @@ const SectionPage = (props: SectionPageProps) => {
   const subCategoryData = useSelector(getPageSubCategoryData);
   const brandsData = useSelector(getPageBrandsData);
   const productsList = useSelector(getProductsListData);
-  const checkedCategoryData = useSelector(getCategoryFilterCheckedData);
-  const checkedSubCategoryData = useSelector(getSubCategoryFilterCheckedData);
-  const checkedBrandsData = useSelector(getBrandFilterCheckedData);
-  const sizesChecked = useSelector(getSizesCheckedData);
   const sizesData = useSelector(getSizesData);
-  const filterPriceChange = useSelector(getChangePriceFromPriceFilter);
-  const saleFilterFlag = useSelector(getSaleFilterFlag);
   const totalProducts = useSelector(getTotalProductsCount);
-  const checkedPageCategoryData = useSelector(getSectionPageFilterData);
   const searchFlag = useSelector(getSearchFlag);
 
   useEffect(() => {
@@ -63,16 +49,7 @@ const SectionPage = (props: SectionPageProps) => {
 
   useEffect(() => {
     dispatch(fetchProductsListData(pathParams));
-  }, [
-    checkedCategoryData,
-    checkedSubCategoryData,
-    checkedBrandsData,
-    sizesChecked,
-    filterPriceChange,
-    saleFilterFlag,
-    checkedPageCategoryData,
-    searchFlag,
-  ]);
+  }, [pathParams, searchFlag]);
 
   return (
     <Box>

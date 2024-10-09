@@ -1,7 +1,6 @@
 import { Box, CardActionArea, CardMedia } from '@mui/material';
 import React, { memo, useMemo } from 'react';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
-import { SimilarProduct } from '../model/types/similarProducts';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -13,8 +12,6 @@ type SimilarProductsProps = {
 };
 
 export const SimilarProducts = memo((props: SimilarProductsProps) => {
-  const { error, isLoading } = props;
-
   const { category, pageCategory, subcategory } = useParams<PathsParams>();
 
   const data = useSelector(getSimilarProductsData);

@@ -9,6 +9,7 @@ import { CategoryPage } from 'pages/CategoryPage';
 import { SubCategoryPage } from 'pages/SubCategoryPage';
 import { SectionPage } from 'pages/SectionPage';
 import { ProductDetailPage } from 'pages/ProductDetailPage';
+import { BasketPage } from 'pages/Basket';
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -24,6 +25,7 @@ export enum AppRoutes {
   SUB_CATEGORY = 'subcategory',
   PRODUCT_DETAIL = 'productdetail',
   NOT_FOUND = 'not_found',
+  BASKET = 'basket',
   // WOMEN = 'women',
   // EQUIPMENT = 'equipment',
   // SALE = 'sale',
@@ -40,6 +42,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.CATEGORY]: '/:pageCategory/:category',
   [AppRoutes.SUB_CATEGORY]: '/:pageCategory/:category/:subcategory',
   [AppRoutes.PRODUCT_DETAIL]: '/:pageCategory/:category/:subcategory/:productdetail',
+  [AppRoutes.BASKET]: '/basket',
   [AppRoutes.NOT_FOUND]: '*',
 
   // [AppRoutes.WOMEN]: '/shop/women"s',
@@ -82,6 +85,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.PRODUCT_DETAIL]: {
     path: RoutePath.productdetail,
     element: <ProductDetailPage />,
+  },
+  [AppRoutes.BASKET]: {
+    path: RoutePath.basket,
+    element: <BasketPage />,
   },
   [AppRoutes.NOT_FOUND]: {
     path: RoutePath.not_found,

@@ -14,7 +14,7 @@ export interface ProductPriceFilterProps {
 
 export const ProductPriceFilter = memo((props: ProductPriceFilterProps) => {
   const { resetPriceSlider } = props;
-  const { pageCategory } = useParams<PathsParams>();
+  const params = useParams<PathsParams>();
 
   const [value, setValue] = useState<[number, number]>([1, 9999]);
   const [debouncedValue] = useDebounce(value, 800);
@@ -30,7 +30,7 @@ export const ProductPriceFilter = memo((props: ProductPriceFilterProps) => {
 
   useEffect(() => {
     setValue([1, 9999]);
-  }, [inputSearchValue, resetPriceSlider, pageCategory]);
+  }, [inputSearchValue, resetPriceSlider, params]);
 
   useEffect(() => {
     if (debouncedValue[1] !== 9999) {
