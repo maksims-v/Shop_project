@@ -23,3 +23,4 @@ export { getSectionPageFilterData } from './model/selectors/getSectionPageFilter
 export { getSortValue } from './model/selectors/getSortValue';
 export { getSearchFlag } from './model/selectors/getSearchFlag';
 export { getFetchStatus } from './model/selectors/getFetchStatus';
+export { ProductDetail } from './ui/ProductDetail/ProductDetail';

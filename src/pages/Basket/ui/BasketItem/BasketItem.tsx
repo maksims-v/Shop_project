@@ -27,18 +27,16 @@ export const BasketItem = (props: BasketItemProps) => {
         }}>
         <Box flex="1 1 40%">
           <AppLink
-            to={`/${item?.item?.pageCategory}/${
-              (item?.item?.category !== 'null' && item?.item?.category) ||
-              (item?.item?.equipmentCategory !== 'null' && item?.item?.equipmentCategory)
-            }/${
-              (item?.item?.campSleepCategory !== 'null' && item?.item?.campSleepCategory) ||
-              (item?.item?.lampsLanternsCategory !== 'null' && item?.item?.lampsLanternsCategory) ||
-              (item?.item?.toolsGearCategory !== 'null' && item?.item?.toolsGearCategory) ||
-              (item?.item?.footwearCategory !== 'null' && item?.item?.footwearCategory) ||
-              (item?.item?.clothingCategory !== 'null' && item?.item?.clothingCategory) ||
-              (item?.item?.otherCategory !== 'null' && item?.item?.otherCategory) ||
-              (item?.item?.activityCategory !== 'null' && item?.item?.activityCategory) ||
-              (item?.item?.accessoriesCategory !== 'null' && item?.item?.accessoriesCategory)
+            to={`/${item?.item?.pageCategory}/${item?.item?.category || item?.item?.equipmentCategory}/${
+              item?.item?.clothingCategory ||
+              item?.item?.footwearCategory ||
+              item?.item?.accessoriesCategory ||
+              item?.item?.activityCategory ||
+              item?.item?.toolsGearCategory ||
+              item?.item?.lampsLanternsCategory ||
+              item?.item?.campSleepCategory ||
+              item?.item?.otherCategory ||
+              item?.item?.accessoriesCategory
             }/${item?.item?.slug}`}>
             <img
               src={`${__API__}${
@@ -56,19 +54,16 @@ export const BasketItem = (props: BasketItemProps) => {
             mb="10px"
             sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <AppLink
-              to={`/${item?.item?.pageCategory}/${
-                (item?.item?.category !== 'null' && item?.item?.category) ||
-                (item?.item?.equipmentCategory !== 'null' && item?.item?.equipmentCategory)
-              }/${
-                (item?.item?.campSleepCategory !== 'null' && item?.item?.campSleepCategory) ||
-                (item?.item?.lampsLanternsCategory !== 'null' &&
-                  item?.item?.lampsLanternsCategory) ||
-                (item?.item?.toolsGearCategory !== 'null' && item?.item?.toolsGearCategory) ||
-                (item?.item?.footwearCategory !== 'null' && item?.item?.footwearCategory) ||
-                (item?.item?.clothingCategory !== 'null' && item?.item?.clothingCategory) ||
-                (item?.item?.otherCategory !== 'null' && item?.item?.otherCategory) ||
-                (item?.item?.activityCategory !== 'null' && item?.item?.activityCategory) ||
-                (item?.item?.accessoriesCategory !== 'null' && item?.item?.accessoriesCategory)
+              to={`/${item?.item?.pageCategory}/${item?.item?.category || item?.item?.equipmentCategory}/${
+                item?.item?.clothingCategory ||
+                item?.item?.footwearCategory ||
+                item?.item?.accessoriesCategory ||
+                item?.item?.activityCategory ||
+                item?.item?.toolsGearCategory ||
+                item?.item?.lampsLanternsCategory ||
+                item?.item?.campSleepCategory ||
+                item?.item?.otherCategory ||
+                item?.item?.accessoriesCategory
               }/${item?.item?.slug}`}>
               <Typography
                 sx={{

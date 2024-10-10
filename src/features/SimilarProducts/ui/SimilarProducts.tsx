@@ -1,5 +1,5 @@
-import { Box, CardActionArea, CardMedia } from '@mui/material';
 import React, { memo, useMemo } from 'react';
+import { Box, CardActionArea, CardMedia } from '@mui/material';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
 import { useParams } from 'react-router-dom';

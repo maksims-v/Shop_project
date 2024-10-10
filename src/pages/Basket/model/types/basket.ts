@@ -1,4 +1,10 @@
-import { Product } from 'entities/Product/model/types/Product';
+import { Product, ProductItem } from 'entities/Product/model/types/Product';
+
+export interface AddToBasketPayload {
+  data: ProductItem;
+  size: string;
+  count: number;
+}
 
 export interface BasketItem {
   item?: Product;
@@ -9,7 +15,8 @@ export interface BasketItem {
 }
 
 export interface BasketSchema {
+  basket?: BasketItem[];
+  totalPrice?: number;
   isLoading?: boolean;
   error?: boolean;
-  basket?: BasketItem[];
 }
