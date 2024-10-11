@@ -24,7 +24,7 @@ export const fetchSliderData = createAsyncThunk<ProductItem[], void, { rejectVal
         },
       });
 
-      if (!response.data) {
+      if (!response.data || !response.data.data) {
         throw new Error('error');
       }
 

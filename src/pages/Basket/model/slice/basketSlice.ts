@@ -28,7 +28,7 @@ export const basketSlice = createSlice({
     increaseProduct(state, action: PayloadAction<BasketItem>) {
       state.basket = state.basket.map((product) =>
         product.id === action.payload.id && product.productSize === action.payload.productSize
-          ? { ...product, qnty: product.qnty + 1 }
+          ? { ...product, qnty: (product?.qnty ?? 0) + 1 }
           : product,
       );
 
@@ -37,13 +37,15 @@ export const basketSlice = createSlice({
     decreaseProduct(state, action: PayloadAction<BasketItem>) {
       state.basket = state.basket.map((product) => {
         if (
+          product &&
           product.id === action.payload.id &&
           product.productSize === action.payload.productSize
         ) {
-          const newCount = product.qnty - 1 > 1 ? product.qnty - 1 : 1;
+          const newCount = (product?.qnty ?? 1) - 1 > 1 ? (product?.qnty ?? 1) - 1 : 1;
           return { ...product, qnty: newCount };
+        } else {
+          return product;
         }
-        return product;
       });
 
       updateBasketState(state);
@@ -63,17 +65,17 @@ export const basketSlice = createSlice({
 export const { actions: basketSliceActions } = basketSlice;
 export const { reducer: basketSliceReducer } = basketSlice;
 
-const calculateTotalPrice = (basket: BasketItem[]) => {
+const calculateTotalPrice = (basket: BasketItem[] = []) => {
   return basket.reduce((summ, item) => {
-    return summ + item.qnty * item.item.price;
+    return summ + (item?.qnty ?? 1) * (item?.item?.price ?? 0);
   }, 0);
 };
 
 const updateBasketState = (state: BasketSchema) => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('cart', JSON.stringify(state.basket));
+    localStorage.setItem('cart', JSON.stringify(state.basket ?? []));
   }
-  state.totalPrice = calculateTotalPrice(state.basket);
+  state.totalPrice = calculateTotalPrice(state.basket ?? []);
 };
 
 function removeNullValuesInBasket(value: BasketItem[]) {

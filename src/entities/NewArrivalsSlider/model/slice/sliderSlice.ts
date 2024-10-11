@@ -4,6 +4,7 @@ import { SliderSchema } from '../types/slider';
 import { ProductItem } from 'entities/Product/model/types/Product';
 
 const initialState: SliderSchema = {
+  data: [],
   isLoading: true,
   error: undefined,
 };
@@ -16,7 +17,7 @@ export const sliderSlice = createSlice({
     builder
       .addCase(fetchSliderData.pending, (state) => {})
       .addCase(fetchSliderData.fulfilled, (state, action: PayloadAction<ProductItem[]>) => {
-        state.data = action.payload.map((item) => item.attributes);
+        state.data = action.payload.map((item) => item.attributes ?? {});
         state.isLoading = false;
       })
       .addCase(fetchSliderData.rejected, (state) => {

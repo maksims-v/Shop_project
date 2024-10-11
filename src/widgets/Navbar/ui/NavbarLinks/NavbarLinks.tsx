@@ -43,7 +43,7 @@ export const NavbarLinks = memo(({ data }: NavbarLinksProps) => {
               transformOrigin: 'bottom left',
             },
           }}
-          onMouseEnter={() => openMenu(item.link)}>
+          onMouseEnter={() => (item.link ? openMenu(item.link) : setSubHeaderOpenLink([]))}>
           {item.label}
         </Box>
       </AppLink>

@@ -14,7 +14,7 @@ export const FilterCheckbox = (props: FilterCheckboxProps) => {
   return (
     <>
       <Typography sx={{ mb: '2px' }} fontWeight="bold">
-        {title.toUpperCase()}
+        {title?.toUpperCase()}
       </Typography>
       <FormControl sx={{ pl: '8px' }} component="fieldset" variant="standard">
         <FormGroup>

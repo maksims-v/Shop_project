@@ -1,7 +1,9 @@
+// @ts-nocheck
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import path from 'path';
 import buildCssLoader from '../loaders/buildCssLoader';
 import { BuildPaths } from '../types/config';
+
 const config: StorybookConfig = {
   stories: ['../../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [

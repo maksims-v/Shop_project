@@ -17,7 +17,7 @@ export const clearanceSliderSlice = createSlice({
       .addCase(
         fetchClearanceSliderData.fulfilled,
         (state, action: PayloadAction<ClearanceSliderResponse>) => {
-          state.data = action.payload?.data?.map((item) => item.attributes);
+          state.data = action.payload?.data?.map((item) => item.attributes ?? {});
           state.isLoading = false;
         },
       )

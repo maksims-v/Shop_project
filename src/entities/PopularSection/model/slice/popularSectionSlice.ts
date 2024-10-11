@@ -3,6 +3,7 @@ import { fetchPopularSectionData } from '../services/fetchPopularSectionData';
 import { PopularSectionSchema, PopularSectionResponse } from '../types/popularSection';
 
 const initialState: PopularSectionSchema = {
+  data: [],
   isLoading: true,
   error: undefined,
 };
@@ -17,7 +18,9 @@ export const popularSectionSlice = createSlice({
       .addCase(
         fetchPopularSectionData.fulfilled,
         (state, action: PayloadAction<PopularSectionResponse>) => {
-          state.data = action.payload?.data[0]?.attributes?.popularCategeory;
+          state.data = action.payload.data?.length
+            ? action.payload?.data[0]?.attributes?.popularCategeory
+            : [];
           state.isLoading = false;
         },
       )

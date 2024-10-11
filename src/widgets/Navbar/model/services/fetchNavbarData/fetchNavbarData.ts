@@ -21,7 +21,7 @@ export const fetchNavbarData = createAsyncThunk<ILinkListItem[], void, { rejectV
       if (!response.data) {
         throw new Error('error');
       }
-      return response.data.data[0].attributes.linkList;
+      return response?.data?.data?.length ? response.data.data[0]?.attributes?.linkList : [];
     } catch (e) {
       return thunkAPI.rejectWithValue('Вы ввели неверный логин или пароль');
     }

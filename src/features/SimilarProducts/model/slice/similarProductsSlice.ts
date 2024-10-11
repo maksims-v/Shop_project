@@ -17,15 +17,16 @@ export const similarProductsSlice = createSlice({
       .addCase(
         fetchSimilarProductsData.fulfilled,
         (state, action: PayloadAction<SimilarProductsResponse>) => {
-          const formatData = action.payload?.data?.map((item) => ({
-            slug: item.attributes.slug,
-            title: item.attributes.title,
-            imageUrl:
-              typeof item?.attributes?.image !== 'string'
-                ? item.attributes.image.data[0].attributes.formats.thumbnail.url
-                : '',
-          }));
-
+          const formatData = action.payload?.data?.length
+            ? action.payload?.data?.map((item) => ({
+                slug: item?.attributes?.slug ?? '',
+                title: item?.attributes?.title ?? '',
+                imageUrl:
+                  typeof item?.attributes?.image !== 'string'
+                    ? item?.attributes?.image?.data[0]?.attributes?.formats?.thumbnail?.url
+                    : '',
+              }))
+            : [];
           state.data = formatData;
           state.isLoading = false;
         },

@@ -18,7 +18,7 @@ export const BrandSection = memo((props: BrandSectionProps) => {
   const removeIdFromData = data?.brandSection?.products?.data.map((item) => item.attributes);
 
   const removeNullAttributes = removeIdFromData
-    ? removeIdFromData?.map((item) => removeNullValuesInProduct(item))
+    ? removeIdFromData?.map((item) => removeNullValuesInProduct(item ?? {}))
     : [];
 
   const productsRender = useMemo(

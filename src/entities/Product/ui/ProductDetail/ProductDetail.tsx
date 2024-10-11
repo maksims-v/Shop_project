@@ -40,12 +40,13 @@ export const ProductDetail = (props: ProductDetailProps) => {
         sx={{
           fontSize: '12px',
           pl: '5px',
-          color: data?.attributes?.oldPrice && 'red',
+          color: data?.attributes?.oldPrice ? 'red' : undefined,
         }}>
         {data?.attributes?.sale &&
           `Save:
        ${
-         data?.attributes?.sale && (data?.attributes?.price - data?.attributes?.oldPrice).toFixed(2)
+         data?.attributes?.sale &&
+         ((data?.attributes?.price ?? 0) - (data?.attributes?.oldPrice ?? 0)).toFixed(2)
        }
        $`}
       </Typography>

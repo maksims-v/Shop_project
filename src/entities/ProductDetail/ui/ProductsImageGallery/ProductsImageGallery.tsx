@@ -21,8 +21,8 @@ export const ProductsImageGallery = memo((props: ProductsImageGalleryProps) => {
   const transformDataToImageArr =
     data?.attributes && typeof data?.attributes?.image !== 'string'
       ? data?.attributes?.image?.data?.map((item) => ({
-          original: `${__API__}${item.attributes.url}`,
-          thumbnail: `${__API__}${item.attributes.formats.thumbnail.url}`,
+          original: `${__API__}${item?.attributes?.url}`,
+          thumbnail: `${__API__}${item?.attributes?.formats?.thumbnail?.url}`,
         }))
       : [];
 

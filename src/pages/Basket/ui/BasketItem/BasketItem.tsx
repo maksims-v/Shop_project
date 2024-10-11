@@ -71,22 +71,22 @@ export const BasketItem = (props: BasketItemProps) => {
                   color: '#1976d2',
                   fontWeight: 'bold',
                 }}>
-                {item.item.title}
+                {item?.item?.title}
               </Typography>
             </AppLink>
 
-            <IconButton onClick={() => deleteProduct(item)}>
+            <IconButton onClick={() => deleteProduct && deleteProduct(item ?? {})}>
               <CloseIcon />
             </IconButton>
           </Box>
 
           <Box display="flex">
             <Box display="flex" alignItems="center" border={`1.5px solid black`}>
-              <IconButton onClick={() => decrease(item)}>
+              <IconButton onClick={() => decrease && decrease(item ?? {})}>
                 <RemoveIcon fontSize="large" />
               </IconButton>
-              <Typography>{item.qnty}</Typography>
-              <IconButton onClick={() => increase(item)}>
+              <Typography>{item?.qnty}</Typography>
+              <IconButton onClick={() => increase && increase(item ?? {})}>
                 <AddIcon />
               </IconButton>
             </Box>
@@ -95,20 +95,20 @@ export const BasketItem = (props: BasketItemProps) => {
                 <Box>Price: </Box>
 
                 <Box display="flex" flexDirection="column" pl="5px">
-                  {item.item.sale ? (
+                  {item?.item?.sale ? (
                     <>
                       <Box
                         fontWeight="bold"
                         color="red"
-                        lineHeight="13px">{` €${item.item.price}`}</Box>
+                        lineHeight="13px">{` €${item?.item?.price}`}</Box>
                       <Box
                         sx={{
                           textDecorationLine: 'line-through',
                           fontSize: '11px',
-                        }}>{` €${item.item.oldPrice}`}</Box>
+                        }}>{` €${item?.item?.oldPrice}`}</Box>
                     </>
                   ) : (
-                    <Box fontWeight="bold">{` €${item.item.price}`}</Box>
+                    <Box fontWeight="bold">{` €${item?.item?.price}`}</Box>
                   )}
                 </Box>
               </Box>

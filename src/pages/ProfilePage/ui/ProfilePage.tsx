@@ -89,7 +89,7 @@ const ProfilePage = () => {
 
   const changePhone = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      dispatch(profileActions.updateProfile({ phone: Number(event.target.value) || '' }));
+      dispatch(profileActions.updateProfile({ phone: Number(event.target.value) || 0 }));
     },
     [dispatch],
   );

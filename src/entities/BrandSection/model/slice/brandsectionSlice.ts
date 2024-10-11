@@ -17,7 +17,7 @@ export const brandSectionSlice = createSlice({
       .addCase(
         fetchBrandSectionData.fulfilled,
         (state, action: PayloadAction<BrandSectionResponse>) => {
-          state.data = action.payload.data[0].attributes;
+          state.data = action?.payload?.data ? action?.payload?.data[0]?.attributes : {};
           state.isLoading = false;
         },
       )

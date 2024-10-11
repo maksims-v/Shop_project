@@ -172,7 +172,7 @@ export const BasketCart = (props: BasketCartProps) => {
                     {item?.productSize?.toUpperCase()}
                   </Box>
                   <Box sx={{ textAlign: 'center', width: '15%', fontWeight: 'bold' }}>
-                    €{(item?.item?.price * item?.qnty)?.toFixed(2)}
+                    €{((item?.item?.price ?? 1) * (item?.qnty ?? 1))?.toFixed(2)}
                   </Box>
                 </>
               ) : (
@@ -186,7 +186,7 @@ export const BasketCart = (props: BasketCartProps) => {
                     {item?.productSize?.toUpperCase()}
                   </Box>
                   <Box sx={{ textAlign: 'center', fontWeight: 'bold' }}>
-                    €{(item?.item?.price * item?.qnty)?.toFixed(2)}
+                    €{((item?.item?.price ?? 1) * (item?.qnty ?? 1))?.toFixed(2)}
                   </Box>
                 </Box>
               )}

@@ -15,7 +15,7 @@ export interface BasketItem {
 }
 
 export interface BasketSchema {
-  basket?: BasketItem[];
+  basket: BasketItem[];
   totalPrice?: number;
   isLoading?: boolean;
   error?: boolean;
