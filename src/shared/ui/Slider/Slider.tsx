@@ -7,7 +7,7 @@ import { Product } from 'entities/Product/model/types/Product';
 import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
-type SliderSection = 'clearance' | 'newArrivals';
+type SliderSection = 'clearance' | 'newArrivals' | 'relatedProducts';
 
 const responsive = {
   0: { items: 2 },

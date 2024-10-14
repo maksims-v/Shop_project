@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BasketItem, BasketSchema } from '../types/basket';
 import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
+import { ProductItem } from 'entities/Product';
+
+interface PayloadItem {
+  data: ProductItem;
+  size: string;
+  qnty: number;
+}
 
 const initialState: BasketSchema = {
   isLoading: true,
@@ -21,8 +28,23 @@ export const basketSlice = createSlice({
       }
       state.totalPrice = calculateTotalPrice(state.basket);
     },
-    addToBasket(state, action: PayloadAction<BasketItem[]>) {
-      state.basket = removeNullValuesInBasket(action.payload);
+    addToBasket(state, action: PayloadAction<PayloadItem>) {
+      const basketFilter = state.basket?.filter(
+        (item) => item.id === action.payload.data.id && item.productSize === action.payload.size,
+      );
+
+      if (!basketFilter.length) {
+        const item = {
+          item: action.payload.data.attributes,
+          name: action.payload.data.attributes.slug,
+          qnty: action.payload.qnty,
+          productSize: action.payload.size,
+          id: action.payload.data.id,
+        };
+
+        state.basket = [...state.basket, item];
+      }
+
       updateBasketState(state);
     },
     increaseProduct(state, action: PayloadAction<BasketItem>) {

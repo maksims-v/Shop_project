@@ -1,4 +1,4 @@
-import { Product, ProductItem } from 'entities/Product/model/types/Product';
+import { Product, ProductItem, ProductList } from 'entities/Product/model/types/Product';
 
 export interface AddToBasketPayload {
   data: ProductItem;

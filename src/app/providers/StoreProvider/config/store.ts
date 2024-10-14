@@ -13,6 +13,7 @@ import { clearanceSliderReducer } from 'entities/ClearanceSlider';
 import { productDetailReducer, productListReducer } from 'entities/Product';
 import { similarProductsReducer } from 'features/SimilarProducts';
 import { basketSliceReducer } from 'pages/Basket';
+import { relatedProductsSliderReducer } from 'entities/RelatedProductsSlider';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
@@ -26,6 +27,7 @@ const rootReducers: ReducersMapObject<StateSchema> = {
   productsList: productListReducer,
   productDetail: productDetailReducer,
   similarProducts: similarProductsReducer,
+  relatedProductsSlider: relatedProductsSliderReducer,
   basket: basketSliceReducer,
 };
 
