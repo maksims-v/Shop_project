@@ -9,11 +9,12 @@ type BannerProps = {
 
 export const Banner = memo((props: BannerProps) => {
   const { data } = props;
+
   if (!data) return null;
 
   return (
     <Box sx={{ mb: '50px', width: '100%', position: 'relative' }}>
-      <AppLink to={`shop/${data?.pageCategory}/${data?.category}/${data?.subcategory}`}>
+      <AppLink to={`/${data?.pageCategory}/${data?.category}/${data?.subcategory}`}>
         <Typography
           variant="h2"
           sx={{
@@ -55,7 +56,7 @@ export const Banner = memo((props: BannerProps) => {
             objectFit: 'cover',
             height: 'auto',
           }}
-          src={`http://127.0.0.1:1337${data?.image?.data?.attributes?.url}`}
+          src={`${__API__}${data?.image?.data?.attributes?.url}`}
         />
       </AppLink>
     </Box>

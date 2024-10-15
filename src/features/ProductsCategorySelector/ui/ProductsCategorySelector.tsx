@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { FilterCheckbox } from 'shared/ui/FilterCheckbox/FilterCheckbox';
 
@@ -14,9 +14,12 @@ export const ProductsCategorySelector = memo((props: ProductsCategorySelectorPro
 
   const dispatch = useAppDispatch();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(productListActions.setCategoryChecked(event.target.name));
-  };
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(productListActions.setCategoryChecked(event.target.name));
+    },
+    [dispatch],
+  );
 
   return (
     <Box mb="10px">

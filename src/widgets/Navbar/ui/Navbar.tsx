@@ -8,6 +8,7 @@ import { getNavbarData } from '../model/selectors/getNavbarData/getNavbarData';
 import { NavbarLinks } from './NavbarLinks/NavbarLinks';
 import { Logo } from 'shared/ui/Logo/Logo';
 import { NavbarRightPanel } from './NavbarRightPanel/NavbarRightPanel';
+import { getBasketProducts } from 'entities/Basket';
 
 export const Navbar = memo(() => {
   const [isAuthModal, setIsAuthModal] = useState(false);
@@ -15,6 +16,10 @@ export const Navbar = memo(() => {
   const dispatch = useAppDispatch();
   const authData = useAppSelector(getUserAuthData);
   const data = useAppSelector(getNavbarData);
+
+  const basketProductsQnty = useAppSelector(getBasketProducts);
+
+  console.log(basketProductsQnty.length);
 
   const onCloseModal = useCallback(() => {
     setIsAuthModal(false);
@@ -46,6 +51,7 @@ export const Navbar = memo(() => {
           onShowModal={onShowModal}
           onLogout={onLogout}
           authData={authData ? true : false}
+          productsQnty={basketProductsQnty?.length}
         />
       </Container>
 

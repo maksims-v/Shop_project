@@ -2,7 +2,7 @@ import { Box, Typography, Slider } from '@mui/material';
 import { getMinAndMaxPriceData, getSearchInputValue } from 'entities/Product';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
@@ -24,9 +24,12 @@ export const ProductPriceFilter = memo((props: ProductPriceFilterProps) => {
   const priceMinAndMax = useSelector(getMinAndMaxPriceData);
   const inputSearchValue = useSelector(getSearchInputValue);
 
-  const handleChange = (event: Event, newValue: [number, number]) => {
-    setValue(newValue);
-  };
+  const handleChange = useCallback(
+    (event: Event, newValue: [number, number]) => {
+      setValue(newValue);
+    },
+    [setValue],
+  );
 
   useEffect(() => {
     setValue([1, 9999]);

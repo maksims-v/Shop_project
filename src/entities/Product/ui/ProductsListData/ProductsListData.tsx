@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { Product } from 'entities/Product/model/types/Product';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
 
@@ -10,7 +10,7 @@ export interface ProductItemProps {
   error?: boolean;
 }
 
-export const ProductsListData = (props: ProductItemProps) => {
+export const ProductsListData = memo((props: ProductItemProps) => {
   const { data = [], error, isLoading } = props;
 
   const removeNullAttributes = data.map((item) => removeNullValuesInProduct(item));
@@ -24,7 +24,7 @@ export const ProductsListData = (props: ProductItemProps) => {
   );
 
   return (
-    <Box m="0 auto" width="100%">
+    <Box sx={{ m: '0 auto', width: '100%' }}>
       <Box
         sx={{
           mt: '20px',
@@ -39,4 +39,4 @@ export const ProductsListData = (props: ProductItemProps) => {
       </Box>
     </Box>
   );
-};
+});

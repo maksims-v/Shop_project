@@ -13,7 +13,7 @@ export const PopularSection = memo((props: PopularSectionProps) => {
   const renderData = useMemo(
     () =>
       data.map((item) => {
-        return item.isShow && <PopularSectionItem key={item.id} itemData={item} />;
+        return item?.isShow && <PopularSectionItem key={item.id} itemData={item} />;
       }),
     [data],
   );
@@ -26,7 +26,14 @@ export const PopularSection = memo((props: PopularSectionProps) => {
           Popular Categories
         </Typography>
 
-        <Box mb="20px" display="flex" justifyContent="space-between" flexWrap="wrap" width="100%">
+        <Box
+          mb="20px"
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            width: '100%',
+          }}>
           {renderData}
         </Box>
       </Box>

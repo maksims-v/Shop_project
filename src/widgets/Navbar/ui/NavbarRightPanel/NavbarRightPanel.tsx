@@ -4,16 +4,32 @@ import { AppLink } from 'shared/ui/AppLink/AppLink';
 import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { memo } from 'react';
+import { memo, useCallback, useState } from 'react';
+import { useAppDispatch } from 'shared/lib/hooks/hook';
+import { productListActions } from 'entities/Product/model/slice/productsListSlice';
+import { getInputSearchValue } from 'entities/Product';
+import { useSelector } from 'react-redux';
 
 export interface NavbarRightPanelProps {
-  onShowModal?: () => void;
-  onLogout?: () => void;
+  onShowModal: () => void;
+  onLogout: () => void;
   authData: boolean;
+  productsQnty: number;
 }
 
 export const NavbarRightPanel = memo((props: NavbarRightPanelProps) => {
-  const { onLogout, onShowModal, authData } = props;
+  const { onLogout, onShowModal, authData, productsQnty = 0 } = props;
+
+  const inputValue = useSelector(getInputSearchValue);
+
+  const dispatch = useAppDispatch();
+
+  const onChangeSearch = useCallback(
+    (value: string) => {
+      dispatch(productListActions.inputValue(value));
+    },
+    [dispatch],
+  );
 
   return (
     <Box sx={{ position: 'relative' }}>
@@ -36,9 +52,14 @@ export const NavbarRightPanel = memo((props: NavbarRightPanelProps) => {
             border: '1px solid #727272',
             borderRadius: '5px',
           }}>
-          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search" />
+          <InputBase
+            onChange={(event) => onChangeSearch(event.target.value)}
+            value={inputValue}
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Search"
+          />
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" color="#727272" />
-          <AppLink to={`/search/`}>
+          <AppLink to={`/search`}>
             <IconButton type="button" sx={{ p: '10px', color: '#f5b950' }} aria-label="search">
               <SearchIcon fontSize="small" />
             </IconButton>
@@ -47,7 +68,7 @@ export const NavbarRightPanel = memo((props: NavbarRightPanelProps) => {
         <Box>
           <AppLink to="/basket">
             <Badge
-              badgeContent={5}
+              badgeContent={productsQnty}
               color="primary"
               sx={{
                 '& .MuiBadge-badge': {

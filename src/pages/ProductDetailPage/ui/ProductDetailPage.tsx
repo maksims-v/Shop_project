@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, Box, Divider, Snackbar, Stack } from '@mui/material';
 import { getProductDetailData } from 'entities/Product/model/selectors/getProductDetailData';
 import { fetchProductDetailData } from 'entities/Product/model/services/fetchProductDetailData';
@@ -11,13 +11,13 @@ import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
 import { fetchSimilarProductsData } from 'features/SimilarProducts';
 import { productDetailActions } from 'entities/Product/model/slice/productDetailSlice';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
-import { basketSliceActions } from 'pages/Basket';
 import { ProductDetail } from 'entities/Product';
 import {
   fetchRelatedProductsSliderData,
   getRelatedProductsData,
 } from 'entities/RelatedProductsSlider';
 import { Slider } from 'shared/ui/Slider/Slider';
+import { basketSliceActions } from 'entities/Basket';
 
 const ProductDetailPage = () => {
   const [qnty, setQnty] = useState(1);
@@ -54,24 +54,30 @@ const ProductDetailPage = () => {
     }
   }, [data]);
 
-  const sizeHandleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: any) => {
-    setSize(newAlignment);
-  };
+  const sizeHandleChange = useCallback(
+    (event: React.MouseEvent<HTMLElement>, newAlignment: any) => {
+      setSize(newAlignment);
+    },
+    [setSize],
+  );
 
-  const handleSnackbarClose = (event: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  const handleSnackbarClose = useCallback(
+    (event: React.SyntheticEvent, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpenSuccess(false);
+      setError(false);
+    },
+    [setOpenSuccess, setError],
+  );
+
+  const handleAlertClose = useCallback(() => {
     setOpenSuccess(false);
     setError(false);
-  };
+  }, [setOpenSuccess, setError]);
 
-  const handleAlertClose = (event: React.SyntheticEvent) => {
-    setOpenSuccess(false);
-    setError(false);
-  };
-
-  const addToBag = () => {
+  const addToBag = useCallback(() => {
     if (size && productQnty !== 0) {
       dispatch(basketSliceActions.addToBasket({ data, size, qnty }));
       setOpenSuccess(true);
@@ -79,15 +85,16 @@ const ProductDetailPage = () => {
       setError(true);
       setChangeSizeColor('red');
     }
-  };
+  }, [size, productQnty, dispatch, data, qnty, setOpenSuccess, setError, setChangeSizeColor]);
+
   return (
     <Box sx={{ width: '100%', m: '40px auto 10px auto' }}>
       <PageBreadcrumbs />
-      <Box display="flex" columnGap="40px">
+      <Box sx={{ display: 'flex', columnGap: '40px' }}>
         <Box sx={{ flex: '1 1 50%', maxWidth: '50%' }}>
           <ProductsImageGallery data={data} />
         </Box>
-        <Box flex="1 1 50%" mb="40px">
+        <Box sx={{ flex: '1 1 50%', mb: '40px' }}>
           <ProductDetail
             data={data}
             sizeHandleChange={sizeHandleChange}

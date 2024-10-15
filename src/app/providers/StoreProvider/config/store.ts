@@ -12,8 +12,8 @@ import { secondBannerReducer } from 'entities/SecondBanner';
 import { clearanceSliderReducer } from 'entities/ClearanceSlider';
 import { productDetailReducer, productListReducer } from 'entities/Product';
 import { similarProductsReducer } from 'features/SimilarProducts';
-import { basketSliceReducer } from 'pages/Basket';
 import { relatedProductsSliderReducer } from 'entities/RelatedProductsSlider';
+import { basketSliceReducer } from 'entities/Basket';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,

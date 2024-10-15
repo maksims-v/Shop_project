@@ -27,11 +27,7 @@ import { ProductSaleAndClearanceFilter } from 'features/ProductSaleAndClearanceF
 import { ProductSectionSelector } from 'features/ProductSectionSelector';
 import { ProductsSortingSelector } from 'features/ProductsSortingSelector';
 
-type SectionPageProps = {};
-
-const SectionPage = (props: SectionPageProps) => {
-  const {} = props;
-
+const SectionPage = () => {
   const dispatch = useAppDispatch();
   const pathParams = useParams<PathsParams>();
   const pageCategoryData = useSelector(getPageSectionData);

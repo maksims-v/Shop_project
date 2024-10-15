@@ -1,7 +1,7 @@
 import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Typography } from '@mui/material';
 import { getSaleFilterFlag } from 'entities/Product';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 
@@ -10,15 +10,15 @@ export interface ProductSaleAndClearanceFilterProps {
   sale?: boolean;
 }
 
-export const ProductSaleAndClearanceFilter = (props: ProductSaleAndClearanceFilterProps) => {
+export const ProductSaleAndClearanceFilter = memo((props: ProductSaleAndClearanceFilterProps) => {
   const { isLoading, sale } = props;
 
   const saleFilterFlag = useSelector(getSaleFilterFlag);
   const dispatch = useAppDispatch();
 
-  const handleChange = () => {
+  const handleChange = useCallback(() => {
     dispatch(productListActions.setSale());
-  };
+  }, [dispatch]);
 
   return (
     <Box mb="10px">
@@ -42,4 +42,4 @@ export const ProductSaleAndClearanceFilter = (props: ProductSaleAndClearanceFilt
       </FormControl>
     </Box>
   );
-};
+});

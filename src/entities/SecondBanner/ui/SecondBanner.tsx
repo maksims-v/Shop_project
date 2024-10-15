@@ -29,7 +29,7 @@ export const SecondBanner = memo((props: SecondBannerProps) => {
             sx={{
               width: 'auto',
               position: 'absolute',
-              left: `${data.textPositionLeft}%`,
+              left: `${data?.textPositionLeft}%`,
               top: `${data?.textTopPosition}%`,
               color: data?.textColor,
               display: 'flex',

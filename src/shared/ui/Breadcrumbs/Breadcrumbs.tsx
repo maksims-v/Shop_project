@@ -11,7 +11,7 @@ export const PageBreadcrumbs = memo(() => {
 
   const pathRoutes = useMemo(
     () =>
-      splitPath.map((path, index) => {
+      splitPath?.map((path, index) => {
         accumulatedPath += `/${path}`;
         return (
           <AppLink key={index} color="inherit" to={accumulatedPath}>

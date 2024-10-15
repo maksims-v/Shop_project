@@ -14,7 +14,6 @@ import { ProductsListData } from 'entities/Product/ui/ProductsListData/ProductsL
 import { ProductPriceFilter } from 'features/ProductPriceFilter';
 import { ProductSaleAndClearanceFilter } from 'features/ProductSaleAndClearanceFilter';
 import { ProductsBrandsFilter } from 'features/ProductsBrandsFilter';
-
 import { ProductSizesFilter } from 'features/ProductSizesFilter';
 import { ProductsSortingSelector } from 'features/ProductsSortingSelector';
 import { ProductsSubCategoryFilter } from 'features/ProductsSubCategoryFilter';
@@ -24,11 +23,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
 
-type CategoryPageProps = {};
-
-const CategoryPage = (props: CategoryPageProps) => {
-  const {} = props;
-
+const CategoryPage = () => {
   const dispatch = useAppDispatch();
   const pathParams = useParams<PathsParams>();
   const subCategoryData = useSelector(getPageSubCategoryData);
@@ -49,10 +44,10 @@ const CategoryPage = (props: CategoryPageProps) => {
   return (
     <Box>
       <PageBreadcrumbs />
-      <Box mt="50px">
-        <Box display="flex">
-          <Box flex="1 1 10%">
-            <Box maxWidth="195px">
+      <Box sx={{ mt: '50px' }}>
+        <Box sx={{ display: 'flex' }}>
+          <Box sx={{ flex: '1 1 10%' }}>
+            <Box sx={{ maxWidth: '195px' }}>
               <ProductPriceFilter />
               <ProductSaleAndClearanceFilter />
               <ProductsSubCategoryFilter data={subCategoryData} />
@@ -60,8 +55,8 @@ const CategoryPage = (props: CategoryPageProps) => {
               <ProductSizesFilter data={sizesData} />
             </Box>
           </Box>
-          <Box flex="1 1 80%">
-            <Box display="flex" justifyContent="space-between" mb="20px">
+          <Box sx={{ flex: '1 1 80%' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '20px' }}>
               <Typography variant="h3" sx={{ fontSize: '22px', fontWeight: '600' }}>
                 {pathParams?.pageCategory?.toUpperCase()}
                 <Typography component="span" sx={{ pl: '5px', color: '#989c9b' }}>

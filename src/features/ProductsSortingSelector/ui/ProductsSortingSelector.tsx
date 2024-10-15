@@ -1,7 +1,7 @@
 import { Box, NativeSelect } from '@mui/material';
 import { getFetchStatus, getSortValue } from 'entities/Product';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 
@@ -13,9 +13,12 @@ export const ProductsSortingSelector = memo(({}: ProductsSortingSelectorProps) =
 
   const fetchStatus = useSelector(getFetchStatus);
 
-  const changeSortValue = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(productListActions.setSortValue(event.target.value));
-  };
+  const changeSortValue = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      dispatch(productListActions.setSortValue(event.target.value));
+    },
+    [dispatch],
+  );
 
   return (
     fetchStatus == 'resolved' && (

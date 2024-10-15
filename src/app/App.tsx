@@ -13,7 +13,7 @@ import { fetchBrandSectionData } from 'entities/BrandSection';
 import { fetchPopularSectionData } from 'entities/PopularSection';
 import { fetchSecondBannerData } from 'entities/SecondBanner';
 import { fetchClearanceSliderData } from 'entities/ClearanceSlider';
-import { fetchProductsListData } from 'entities/Product';
+import { basketSliceActions } from 'entities/Basket';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +21,7 @@ const App = () => {
   const inited = useSelector(getUserInited);
 
   useEffect(() => {
+    dispatch(basketSliceActions.getBasketFromLocalStorage());
     dispatch(userActions.initAuthData());
     dispatch(fetchNavbarData());
     dispatch(fetchSliderData());

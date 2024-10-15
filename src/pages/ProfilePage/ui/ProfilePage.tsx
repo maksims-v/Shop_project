@@ -34,9 +34,12 @@ const ProfilePage = () => {
     };
   }, []);
 
-  const handleChange = (event: React.SyntheticEvent, value: any) => {
-    setValue(value);
-  };
+  const handleChange = useCallback(
+    (event: React.SyntheticEvent, value: any) => {
+      setValue(value);
+    },
+    [setValue],
+  );
 
   const changeEmail = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
