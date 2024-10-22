@@ -11,6 +11,7 @@ import {
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
 import { ProductsListData } from 'entities/Product/ui/ProductsListData/ProductsListData';
+import { fetchProductsListBanner } from 'entities/ProductsListBanner';
 import { ProductPriceFilter } from 'features/ProductPriceFilter';
 import { ProductSaleAndClearanceFilter } from 'features/ProductSaleAndClearanceFilter';
 import { ProductsBrandsFilter } from 'features/ProductsBrandsFilter';
@@ -35,6 +36,7 @@ const CategoryPage = () => {
 
   useEffect(() => {
     dispatch(productListActions.clearAllFilters());
+    dispatch(fetchProductsListBanner(pathParams));
   }, [pathParams]);
 
   useEffect(() => {

@@ -17,7 +17,7 @@ import { ProductsBrandsFilter } from 'features/ProductsBrandsFilter';
 import { ProductsCategorySelector } from 'features/ProductsCategorySelector';
 import { ProductsSubCategoryFilter } from 'features/ProductsSubCategoryFilter';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
@@ -26,6 +26,7 @@ import { ProductPriceFilter } from 'features/ProductPriceFilter';
 import { ProductSaleAndClearanceFilter } from 'features/ProductSaleAndClearanceFilter';
 import { ProductSectionSelector } from 'features/ProductSectionSelector';
 import { ProductsSortingSelector } from 'features/ProductsSortingSelector';
+import { fetchProductsListBanner } from 'entities/ProductsListBanner';
 
 const SectionPage = () => {
   const dispatch = useAppDispatch();
@@ -41,11 +42,14 @@ const SectionPage = () => {
 
   useEffect(() => {
     dispatch(productListActions.clearAllFilters());
+    dispatch(fetchProductsListBanner(pathParams));
   }, [pathParams]);
 
   useEffect(() => {
     dispatch(fetchProductsListData(pathParams));
   }, [pathParams, searchFlag]);
+
+  console.log(pathParams);
 
   return (
     <Box>

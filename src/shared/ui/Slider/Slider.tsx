@@ -38,6 +38,8 @@ export const Slider = memo((props: SliderProps) => {
     () => removeNullAttributes?.map((item) => <ProductCard product={item} />),
     [removeNullAttributes],
   );
+  console.log(data);
+  if (!data?.length) return null;
 
   return (
     <Box sx={{ m: '0 auto', width: '100%' }}>

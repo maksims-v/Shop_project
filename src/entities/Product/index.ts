@@ -26,3 +26,5 @@ export { getFetchStatus } from './model/selectors/getFetchStatus';
 export { ProductDetail } from './ui/ProductDetail/ProductDetail';
 export { getProductId } from './model/selectors/getProductId';
 export { getInputSearchValue } from './model/selectors/getInputSearchValue';
+export { getTotalPages } from './model/selectors/pagination/getTotalPages';
+export { getCurrentPage } from './model/selectors/pagination/getCurrentPage';
