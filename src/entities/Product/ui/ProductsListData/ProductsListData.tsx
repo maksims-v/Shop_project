@@ -3,9 +3,9 @@ import { Product } from 'entities/Product/model/types/Product';
 import { memo, useMemo } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
-import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
 import { Pagination } from 'features/Pagination';
+import { useAppDispatch } from 'shared/lib/hooks/hook';
 
 export interface ProductItemProps {
   data?: Product[];
@@ -46,7 +46,8 @@ export const ProductsListData = memo((props: ProductItemProps) => {
         {' '}
         {productsListRender}{' '}
       </Box>
-      <Pagination changePage={changePage} />
+
+      <Pagination />
     </Box>
   );
 });

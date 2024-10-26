@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/index.scss';
-import { Container } from '@mui/material';
+import { Container, ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
 import { AppRouter } from './providers/router';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
@@ -14,6 +14,11 @@ import { fetchPopularSectionData } from 'entities/PopularSection';
 import { fetchSecondBannerData } from 'entities/SecondBanner';
 import { fetchClearanceSliderData } from 'entities/ClearanceSlider';
 import { basketSliceActions } from 'entities/Basket';
+
+
+import { fetchFooterData, Footer } from 'entities/Footer';
+import { theme } from './styles/theme';
+import { fetchProductDetailData } from 'entities/Product/model/services/fetchProductDetailData';
 import { postProducts } from 'entities/Product/model/services/postProducts';
 
 const App = () => {
@@ -31,18 +36,25 @@ const App = () => {
     dispatch(fetchPopularSectionData());
     dispatch(fetchSecondBannerData());
     dispatch(fetchClearanceSliderData());
+<<<<<<< HEAD
     // dispatch(postProducts());
+=======
+
+    // dispatch(postProducts());
+    dispatch(fetchFooterData());
+>>>>>>> 97816667cca58ef03624167be74d8845ad462bf8
   }, [dispatch]);
 
   useEffect(() => {}, []);
 
   return (
-    <div className="app">
+    <ThemeProvider theme={theme}>
       <Navbar />
       <Container maxWidth="lg">
         <div className="content-page">{inited && <AppRouter />}</div>
       </Container>
-    </div>
+      <Footer />
+    </ThemeProvider>
   );
 };
 

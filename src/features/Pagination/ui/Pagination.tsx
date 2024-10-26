@@ -1,17 +1,14 @@
 import { Stack, Pagination as PaginationComponent } from '@mui/material';
-import { getCurrentPage, getTotalPages } from 'entities/Product';
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 type PaginationProps = {
-  changePage: (event: React.ChangeEvent<unknown>, page: number) => void;
+  pages?: number;
+  currentPage?: number;
+  changePage?: () => void;
 };
 
 export const Pagination = (props: PaginationProps) => {
-  const { changePage } = props;
-
-  const pages = useSelector(getTotalPages);
-  const currentPage = useSelector(getCurrentPage);
+  const { pages = 1, currentPage = 1, changePage } = props;
 
   return (
     <Stack spacing={2}>

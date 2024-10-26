@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { ILinkListItem, IResponse, NavbarSchema } from '../../types/navbar';
+import { ILinkListItem, IResponse } from '../../types/navbar';
 const qs = require('qs');
 
 const fetchQuery = qs.stringify({
@@ -15,9 +15,7 @@ export const fetchNavbarData = createAsyncThunk<ILinkListItem[], void, { rejectV
   'navbar/fetchData',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get<IResponse>(
-        `http://127.0.0.1:1337/api/layout-headers?${fetchQuery}`,
-      );
+      const response = await axios.get<IResponse>(`${__API__}/api/layout-headers?${fetchQuery}`);
       if (!response.data) {
         throw new Error('error');
       }

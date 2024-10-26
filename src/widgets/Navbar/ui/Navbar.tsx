@@ -19,8 +19,6 @@ export const Navbar = memo(() => {
 
   const basketProductsQnty = useAppSelector(getBasketProducts);
 
-  console.log(basketProductsQnty.length);
-
   const onCloseModal = useCallback(() => {
     setIsAuthModal(false);
     dispatch(loginActions.clearUserState());
