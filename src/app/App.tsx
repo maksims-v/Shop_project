@@ -15,7 +15,6 @@ import { fetchSecondBannerData } from 'entities/SecondBanner';
 import { fetchClearanceSliderData } from 'entities/ClearanceSlider';
 import { basketSliceActions } from 'entities/Basket';
 
-
 import { fetchFooterData, Footer } from 'entities/Footer';
 import { theme } from './styles/theme';
 import { fetchProductDetailData } from 'entities/Product/model/services/fetchProductDetailData';
@@ -36,13 +35,9 @@ const App = () => {
     dispatch(fetchPopularSectionData());
     dispatch(fetchSecondBannerData());
     dispatch(fetchClearanceSliderData());
-<<<<<<< HEAD
-    // dispatch(postProducts());
-=======
 
     // dispatch(postProducts());
     dispatch(fetchFooterData());
->>>>>>> 97816667cca58ef03624167be74d8845ad462bf8
   }, [dispatch]);
 
   useEffect(() => {}, []);
