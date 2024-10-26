@@ -14,7 +14,6 @@ import { fetchPopularSectionData } from 'entities/PopularSection';
 import { fetchSecondBannerData } from 'entities/SecondBanner';
 import { fetchClearanceSliderData } from 'entities/ClearanceSlider';
 import { basketSliceActions } from 'entities/Basket';
-import { fetchProductDetailData } from 'entities/Product/model/services/fetchProductDetailData';
 import { postProducts } from 'entities/Product/model/services/postProducts';
 
 const App = () => {
@@ -32,7 +31,7 @@ const App = () => {
     dispatch(fetchPopularSectionData());
     dispatch(fetchSecondBannerData());
     dispatch(fetchClearanceSliderData());
-    dispatch(postProducts());
+    // dispatch(postProducts());
   }, [dispatch]);
 
   useEffect(() => {}, []);
