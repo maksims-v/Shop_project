@@ -4,7 +4,7 @@ import React from 'react';
 type PaginationProps = {
   pages?: number;
   currentPage?: number;
-  changePage: () => void;
+  changePage?: () => void;
 };
 
 export const Pagination = (props: PaginationProps) => {

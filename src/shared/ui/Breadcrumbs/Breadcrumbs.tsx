@@ -13,11 +13,13 @@ export const PageBreadcrumbs = memo(() => {
     () =>
       splitPath?.map((path, index) => {
         accumulatedPath += `/${path}`;
-        return (
-          <AppLink key={index} color="inherit" to={accumulatedPath}>
-            <Box sx={onHoverLine}>{path.toUpperCase()}</Box>
-          </AppLink>
-        );
+        if (index < 3) {
+          return (
+            <AppLink key={index} color="inherit" to={accumulatedPath}>
+              <Box sx={onHoverLine}>{path.toUpperCase()}</Box>
+            </AppLink>
+          );
+        }
       }),
     [splitPath],
   );

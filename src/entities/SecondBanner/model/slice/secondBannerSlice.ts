@@ -17,7 +17,7 @@ export const SecondBannerSlice = createSlice({
         fetchSecondBannerData.fulfilled,
         (state, action: PayloadAction<SecondBannerResponse>) => {
           state.isLoading = false;
-          state.data = action.payload.data[0].attributes;
+          state.data = action.payload?.data[0]?.attributes;
         },
       )
       .addCase(fetchSecondBannerData.rejected, (state) => {

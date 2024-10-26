@@ -3,7 +3,9 @@ import { Product } from 'entities/Product/model/types/Product';
 import { memo, useMemo } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/removeNullValuesInProduct';
+import { productListActions } from 'entities/Product/model/slice/productsListSlice';
 import { Pagination } from 'features/Pagination';
+import { useAppDispatch } from 'shared/lib/hooks/hook';
 
 export interface ProductItemProps {
   data?: Product[];
@@ -14,6 +16,8 @@ export interface ProductItemProps {
 export const ProductsListData = memo((props: ProductItemProps) => {
   const { data = [], error, isLoading } = props;
 
+  const dispatch = useAppDispatch();
+
   const removeNullAttributes = data.map((item) => removeNullValuesInProduct(item));
 
   const productsListRender = useMemo(
@@ -23,6 +27,10 @@ export const ProductsListData = memo((props: ProductItemProps) => {
       )),
     [data],
   );
+
+  const changePage = (event: React.ChangeEvent<unknown>, page: number) => {
+    dispatch(productListActions.setCurrentPage(page));
+  };
 
   return (
     <Box sx={{ m: '0 auto', width: '100%' }}>
@@ -38,7 +46,8 @@ export const ProductsListData = memo((props: ProductItemProps) => {
         {' '}
         {productsListRender}{' '}
       </Box>
-      {/* <Pagination changePage={changePage} currentPage={} pages={} /> */}
+
+      <Pagination />
     </Box>
   );
 });

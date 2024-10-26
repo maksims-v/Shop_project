@@ -30,8 +30,7 @@ export const BrandSection = memo((props: BrandSectionProps) => {
   );
 
   return (
-    productsRender?.length &&
-    data?.isShow && (
+    productsRender?.length && (
       <Box mb="60px">
         <Typography variant="h2" sx={{ textAlign: 'center', mb: '15px' }}>
           {data?.brandSection?.title}

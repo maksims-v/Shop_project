@@ -1,14 +1,17 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Skeleton } from '@mui/material';
 import React, { memo } from 'react';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { BannerAttributes } from '../model/types/banner';
 
 type BannerProps = {
+  isLoading?: boolean;
   data?: BannerAttributes;
 };
 
 export const Banner = memo((props: BannerProps) => {
-  const { data } = props;
+  const { data, isLoading } = props;
+
+  if (isLoading) return <Skeleton width={'100%'} height={'500px'} />;
 
   if (!data) return null;
 
@@ -30,6 +33,7 @@ export const Banner = memo((props: BannerProps) => {
           }}>
           {data?.title}
         </Typography>
+
         <Button
           size="large"
           variant="contained"
@@ -54,7 +58,7 @@ export const Banner = memo((props: BannerProps) => {
           style={{
             width: '100%',
             objectFit: 'cover',
-            height: 'auto',
+            maxHeight: '600px',
           }}
           src={`${__API__}${data?.image?.data?.attributes?.url}`}
         />
