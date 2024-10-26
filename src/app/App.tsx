@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/index.scss';
-import { Container } from '@mui/material';
+import { Container, ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
 import { AppRouter } from './providers/router';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
@@ -14,6 +14,8 @@ import { fetchPopularSectionData } from 'entities/PopularSection';
 import { fetchSecondBannerData } from 'entities/SecondBanner';
 import { fetchClearanceSliderData } from 'entities/ClearanceSlider';
 import { basketSliceActions } from 'entities/Basket';
+import { fetchFooterData, Footer } from 'entities/Footer';
+import { theme } from './styles/theme';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -30,15 +32,17 @@ const App = () => {
     dispatch(fetchPopularSectionData());
     dispatch(fetchSecondBannerData());
     dispatch(fetchClearanceSliderData());
+    dispatch(fetchFooterData());
   }, [dispatch]);
 
   return (
-    <div className="app">
+    <ThemeProvider theme={theme}>
       <Navbar />
       <Container maxWidth="lg">
         <div className="content-page">{inited && <AppRouter />}</div>
       </Container>
-    </div>
+      <Footer />
+    </ThemeProvider>
   );
 };
 
