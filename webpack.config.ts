@@ -7,7 +7,9 @@ export default (env: BuildEnv) => {
   const mode = env.mode || 'development';
   const isDev = mode === 'development';
   const PORT = env.port || 3001;
-  const apiUrl = env.apiUrl || 'http://127.0.0.1:1337';
+  const apiUrl = 'https://shop-z684.onrender.com';
+
+  // const apiUrl = env.apiUrl || 'http://127.0.0.1:1337';
 
   const paths: BuildPaths = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),

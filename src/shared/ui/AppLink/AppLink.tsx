@@ -16,6 +16,20 @@ export interface AppLinkProps extends LinkProps {
 export const AppLink: FC<AppLinkProps> = memo((props) => {
   const { to, theme = 'primary', className, children, ...otherProps } = props;
 
+  const isExternal =
+    typeof to === 'string' && (to.startsWith('http://') || to.startsWith('https://'));
+
+  if (isExternal) {
+    return (
+      <a
+        href={to as string}
+        className={classNames(cls.AppLink, { [cls[theme]]: true }, [className])}
+        {...otherProps}>
+        {children}
+      </a>
+    );
+  }
+
   return (
     <Link
       to={to}

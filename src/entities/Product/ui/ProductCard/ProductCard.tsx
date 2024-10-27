@@ -29,7 +29,7 @@ export const ProductCard = (props: ProductCardProps) => {
           <CardMedia
             component="img"
             sx={{ p: '0px 5px', flexGrow: '1' }}
-            image={`${__API__}${
+            image={`${
               typeof product?.image === 'string'
                 ? product?.image
                 : product?.image?.data?.[0]?.attributes?.formats?.small?.url

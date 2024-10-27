@@ -17,14 +17,11 @@ import { basketSliceActions } from 'entities/Basket';
 
 import { fetchFooterData, Footer } from 'entities/Footer';
 import { theme } from './styles/theme';
-import { fetchProductDetailData } from 'entities/Product/model/services/fetchProductDetailData';
-import { postProducts } from 'entities/Product/model/services/postProducts';
 
 const App = () => {
   const dispatch = useAppDispatch();
 
   const inited = useSelector(getUserInited);
-
   useEffect(() => {
     dispatch(basketSliceActions.getBasketFromLocalStorage());
     dispatch(userActions.initAuthData());
@@ -35,8 +32,6 @@ const App = () => {
     dispatch(fetchPopularSectionData());
     dispatch(fetchSecondBannerData());
     dispatch(fetchClearanceSliderData());
-
-    // dispatch(postProducts());
     dispatch(fetchFooterData());
   }, [dispatch]);
 
