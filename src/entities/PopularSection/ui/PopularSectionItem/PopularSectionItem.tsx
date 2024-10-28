@@ -26,7 +26,7 @@ export const PopularSectionItem = memo((props: PopularSectionItemProps) => {
         <Box sx={{ '&:hover': { scale: '1.1', transition: '0.9s' } }}>
           <Box sx={{ '&:hover': { scale: '1.1', transition: '0.9s' } }}>
             <img
-              src={`${__API__}${itemData?.image?.data?.attributes?.url}`}
+              src={`${itemData?.image?.data?.attributes?.url}`}
               alt={itemData?.title}
               style={{ objectFit: 'cover' }}
               loading="lazy"

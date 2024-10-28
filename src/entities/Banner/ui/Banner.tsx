@@ -60,7 +60,7 @@ export const Banner = memo((props: BannerProps) => {
             objectFit: 'cover',
             maxHeight: '600px',
           }}
-          src={`${__API__}${data?.image?.data?.attributes?.url}`}
+          src={`${data?.image?.data?.attributes?.url}`}
         />
       </AppLink>
     </Box>

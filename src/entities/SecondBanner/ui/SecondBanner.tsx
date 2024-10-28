@@ -65,7 +65,7 @@ export const SecondBanner = memo((props: SecondBannerProps) => {
           <img
             alt="banner"
             style={{ height: '450px', objectFit: 'cover', width: '100%' }}
-            src={`${__API__}${data?.image?.data?.attributes?.url}`}
+            src={`${data?.image?.data?.attributes?.url}`}
           />
         </AppLink>
       </Box>

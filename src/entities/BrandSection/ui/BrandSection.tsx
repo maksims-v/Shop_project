@@ -49,7 +49,7 @@ export const BrandSection = memo((props: BrandSectionProps) => {
               <img
                 alt="banner"
                 style={{ width: '100%', objectFit: 'cover', height: '720px' }}
-                src={`${__API__}${data?.brandSection?.image?.data?.attributes?.url}`}
+                src={`${data?.brandSection?.image?.data?.attributes?.url}`}
               />
             </AppLink>
           </Box>
