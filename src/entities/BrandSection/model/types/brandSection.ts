@@ -8,7 +8,7 @@ export interface BrandSectionItem {
     data: ProductImage;
     id: number;
   };
-  products: {
+  items: {
     data: ProductItem[];
     id: number;
   };

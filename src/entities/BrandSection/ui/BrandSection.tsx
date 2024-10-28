@@ -15,7 +15,7 @@ type BrandSectionProps = {
 export const BrandSection = memo((props: BrandSectionProps) => {
   const { data, isError, isLoading } = props;
 
-  const removeIdFromData = data?.brandSection?.products?.data.map((item) => item.attributes);
+  const removeIdFromData = data?.brandSection?.items?.data.map((item) => item.attributes);
 
   const removeNullAttributes = removeIdFromData
     ? removeIdFromData?.map((item) => removeNullValuesInProduct(item ?? {}))
@@ -30,7 +30,7 @@ export const BrandSection = memo((props: BrandSectionProps) => {
   );
 
   return (
-    productsRender?.length && (
+    productsRender && (
       <Box mb="60px">
         <Typography variant="h2" sx={{ textAlign: 'center', mb: '15px' }}>
           {data?.brandSection?.title}

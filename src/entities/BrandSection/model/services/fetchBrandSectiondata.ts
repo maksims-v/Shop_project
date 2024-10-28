@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { BrandSectionItem, BrandSectionResponse } from '../types/brandSection';
+import { BrandSectionResponse } from '../types/brandSection';
 
 const qs = require('qs');
 const query = qs.stringify({
   populate: {
     brandSection: {
-      populate: { image: true, products: { populate: { image: true } } },
+      populate: { image: true, items: { populate: { image: true } } },
     },
   },
 });
