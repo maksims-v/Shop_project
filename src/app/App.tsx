@@ -17,6 +17,7 @@ import { basketSliceActions } from 'entities/Basket';
 
 import { fetchFooterData, Footer } from 'entities/Footer';
 import { theme } from './styles/theme';
+import { fetchSectionCategoryData } from 'entities/SectionCategory';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ const App = () => {
     dispatch(fetchPopularSectionData());
     dispatch(fetchSecondBannerData());
     dispatch(fetchClearanceSliderData());
+    dispatch(fetchSectionCategoryData());
     dispatch(fetchFooterData());
   }, [dispatch]);
 

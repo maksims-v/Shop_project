@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import { PopularSectionItem } from './../PopularSectionItem/PopularSectionItem';
 import { PopularSectionItem as PopularItems } from './../../model/types/popularSection';
 
@@ -9,6 +9,8 @@ type PopularSectionProps = {
 
 export const PopularSection = memo((props: PopularSectionProps) => {
   const { data = [] } = props;
+
+  const mobileScreen = useMediaQuery('(max-width:570px)');
 
   const renderData = useMemo(
     () =>
@@ -21,11 +23,17 @@ export const PopularSection = memo((props: PopularSectionProps) => {
   return (
     data &&
     data?.length !== 0 && (
-      <Box sx={{ m: '0 auto 60px auto', width: '100%', p: '0px 5px' }}>
-        <Typography variant="h2" sx={{ textAlign: 'center', mb: ' 15px' }}>
-          Popular Categories
-        </Typography>
-
+      <Box
+        sx={{
+          m: mobileScreen ? '0 auto' : '0 auto 60px auto',
+          width: '100%',
+          p: mobileScreen ? '0px' : '0px 5px',
+        }}>
+        {!mobileScreen && (
+          <Typography variant="h2" sx={{ textAlign: 'center', mb: ' 15px' }}>
+            Popular Categories
+          </Typography>
+        )}
         <Box
           mb="20px"
           sx={{

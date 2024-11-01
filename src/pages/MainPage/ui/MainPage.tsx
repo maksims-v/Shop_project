@@ -6,6 +6,7 @@ import { getSecondBannerData, SecondBanner } from 'entities/SecondBanner';
 import { NewArrivalsSlider } from 'entities/NewArrivalsSlider';
 import { useSelector } from 'react-redux';
 import { getBannerIsLoading } from 'entities/Banner/model/selectors/getBannerIsLoading';
+import { getSectionCategoryData, SectionCategory } from 'entities/SectionCategory';
 
 const MainPage = () => {
   const bannerData = useSelector(getBannerData);
@@ -13,13 +14,14 @@ const MainPage = () => {
   const popularSectionData = useSelector(getPopularSectionData);
   const secondBannerData = useSelector(getSecondBannerData);
   const bannerIsloading = useSelector(getBannerIsLoading);
-
+  const sectionCategoryData = useSelector(getSectionCategoryData);
   return (
     <>
       <Banner data={bannerData} isLoading={bannerIsloading} />
       <PopularSection data={popularSectionData} />
       <NewArrivalsSlider />
       <BrandSection data={brandSectionData} />
+      <SectionCategory data={sectionCategoryData} />
       <SecondBanner data={secondBannerData} />
       <ClearanceSlider />
     </>

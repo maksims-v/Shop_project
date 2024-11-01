@@ -14,6 +14,7 @@ import { SimilarProductsSchema } from 'features/SimilarProducts';
 import { RelatedProductsShema } from 'entities/RelatedProductsSlider';
 import { BasketSchema } from 'entities/Basket';
 import { FooterSchema } from 'entities/Footer';
+import { SectionCategorySchema } from 'entities/SectionCategory';
 
 export interface StateSchema {
   user: UserSchema;
@@ -31,6 +32,7 @@ export interface StateSchema {
   similarProducts?: SimilarProductsSchema;
   relatedProductsSlider?: RelatedProductsShema;
   basket?: BasketSchema;
+  sectionCategory: SectionCategorySchema;
   footer?: FooterSchema;
 }
 

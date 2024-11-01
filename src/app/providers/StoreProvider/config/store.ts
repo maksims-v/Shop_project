@@ -15,6 +15,7 @@ import { similarProductsReducer } from 'features/SimilarProducts';
 import { relatedProductsSliderReducer } from 'entities/RelatedProductsSlider';
 import { basketSliceReducer } from 'entities/Basket';
 import { footerReducer } from 'entities/Footer';
+import { sectionCategoryReducer } from 'entities/SectionCategory';
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   user: userReducer,
@@ -30,6 +31,7 @@ const rootReducers: ReducersMapObject<StateSchema> = {
   similarProducts: similarProductsReducer,
   relatedProductsSlider: relatedProductsSliderReducer,
   basket: basketSliceReducer,
+  sectionCategory: sectionCategoryReducer,
   footer: footerReducer,
 };
 

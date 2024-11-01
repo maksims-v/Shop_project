@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import React, { memo } from 'react';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { PopularSectionItem as PopularItem } from '../../model/types/popularSection';
@@ -8,15 +8,17 @@ type PopularSectionItemProps = {
 };
 
 export const PopularSectionItem = memo((props: PopularSectionItemProps) => {
+  const mobileScreen = useMediaQuery('(max-width:570px)');
+
   const { itemData } = props;
   return (
     <Box
       sx={{
         height: '300px',
-        width: '270px',
+        width: mobileScreen ? '49.5%' : '270px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: mobileScreen ? 'space-around' : 'center',
         flexDirection: 'column',
         position: 'relative',
         borderRadius: '3px',
