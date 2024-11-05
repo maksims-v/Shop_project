@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
-import { Box, Container } from '@mui/material';
+import { Box, Container, useMediaQuery } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/hook';
 import { LoginModal } from 'features/AuthByUserName/ui/LoginModal/LoginModal';
 import { getUserAuthData, userActions } from 'entities/User';
@@ -9,8 +9,11 @@ import { NavbarLinks } from './NavbarLinks/NavbarLinks';
 import { Logo } from 'shared/ui/Logo/Logo';
 import { NavbarRightPanel } from './NavbarRightPanel/NavbarRightPanel';
 import { getBasketProducts } from 'entities/Basket';
+import { MobileNavbar } from './MobileNavbar/MobileNavbar';
 
 export const Navbar = memo(() => {
+  const mobileScreen = useMediaQuery('(max-width:570px)');
+
   const [isAuthModal, setIsAuthModal] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -33,7 +36,9 @@ export const Navbar = memo(() => {
     setIsAuthModal(false);
   }, [dispatch]);
 
-  return (
+  return mobileScreen ? (
+    <MobileNavbar />
+  ) : (
     <Box
       sx={{
         width: '100%',
@@ -43,7 +48,14 @@ export const Navbar = memo(() => {
         zIndex: '99',
       }}>
       <Container maxWidth="xl" sx={{ height: '100%', width: '100%' }}>
-        <Logo />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '52%',
+            transform: 'translate(0%, -50%)',
+          }}>
+          <Logo />
+        </Box>
         <NavbarLinks data={data} />
         <NavbarRightPanel
           onShowModal={onShowModal}

@@ -21,12 +21,7 @@ export const SimilarProducts = memo((props: SimilarProductsProps) => {
       data?.map((item) => (
         <AppLink key={item.slug} to={`/${pageCategory}/${category}/${subcategory}/${item.slug}`}>
           <CardActionArea sx={{ p: '0 10px' }}>
-            <CardMedia
-              component="img"
-              height="60"
-              image={`${__API__}${item.imageUrl}`}
-              alt="Paella dish"
-            />
+            <CardMedia component="img" height="60" image={`${item.imageUrl}`} alt="Paella dish" />
           </CardActionArea>
         </AppLink>
       )),

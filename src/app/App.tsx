@@ -14,7 +14,6 @@ import { fetchPopularSectionData } from 'entities/PopularSection';
 import { fetchSecondBannerData } from 'entities/SecondBanner';
 import { fetchClearanceSliderData } from 'entities/ClearanceSlider';
 import { basketSliceActions } from 'entities/Basket';
-
 import { fetchFooterData, Footer } from 'entities/Footer';
 import { theme } from './styles/theme';
 import { fetchSectionCategoryData } from 'entities/SectionCategory';
