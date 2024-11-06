@@ -11,13 +11,15 @@ export const SecondBanner = memo((props: SecondBannerProps) => {
   const { data } = props;
 
   const largeScreen = useMediaQuery('(min-width:1200px)');
+  const mobileScreen = useMediaQuery('(max-width:570px)');
+
   if (!data) return null;
 
   return (
     data?.isShow && (
       <Box
         sx={{
-          mb: '60px',
+          mb: mobileScreen ? '20px' : '60px',
           maxHeight: '450px',
           height: '100%',
           position: 'relative',

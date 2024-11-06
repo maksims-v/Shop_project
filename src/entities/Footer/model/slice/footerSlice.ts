@@ -18,11 +18,11 @@ export const footerSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchFooterData.fulfilled, (state, action: PayloadAction<FooterAttributes>) => {
-        state.isLoading = false;
         state.data = action.payload;
+        state.isLoading = false;
       })
       .addCase(fetchFooterData.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoading = true;
       });
   },
 });

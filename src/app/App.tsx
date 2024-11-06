@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/index.scss';
-import { Container, ThemeProvider } from '@mui/material';
+import { Box, Container, ThemeProvider, useMediaQuery } from '@mui/material';
 import { useEffect } from 'react';
 import { AppRouter } from './providers/router';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
@@ -20,6 +20,7 @@ import { fetchSectionCategoryData } from 'entities/SectionCategory';
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const mobileScreen = useMediaQuery('(max-width:570px)');
 
   const inited = useSelector(getUserInited);
   useEffect(() => {
@@ -42,7 +43,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Navbar />
       <Container maxWidth="lg">
-        <div className="content-page">{inited && <AppRouter />}</div>
+        <Box sx={{ pt: mobileScreen ? '40px' : '80px' }}>{inited && <AppRouter />}</Box>
       </Container>
       <Footer />
     </ThemeProvider>

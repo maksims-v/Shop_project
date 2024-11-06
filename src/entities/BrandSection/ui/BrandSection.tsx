@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import { ProductCard } from 'entities/Product';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { BrandSectionTypes } from '../model/types/brandSection';
@@ -14,6 +14,8 @@ type BrandSectionProps = {
 
 export const BrandSection = memo((props: BrandSectionProps) => {
   const { data, isError, isLoading } = props;
+
+  const mobileScreen = useMediaQuery('(max-width:570px)');
 
   const removeIdFromData = data?.brandSection?.items?.data.map((item) => item.attributes);
 
@@ -30,7 +32,8 @@ export const BrandSection = memo((props: BrandSectionProps) => {
   );
 
   return (
-    productsRender && (
+    productsRender &&
+    !mobileScreen && (
       <Box mb="60px">
         <Typography variant="h2" sx={{ textAlign: 'center', mb: '15px' }}>
           {data?.brandSection?.title}

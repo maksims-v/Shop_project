@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { ProductListResponse } from '../types/Product';
 import { StateSchema } from 'app/providers/StoreProvider';
-import { productListActions } from '../slice/productsListSlice';
 
 type Paths = 'pageCategory' | 'category' | 'subcategory' | 'productdetail';
 

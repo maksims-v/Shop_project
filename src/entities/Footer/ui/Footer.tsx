@@ -1,12 +1,19 @@
 import React from 'react';
-import { Box, Container, Typography, List, ListItem } from '@mui/material';
+import { Box, Container, Typography, List, ListItem, useMediaQuery } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { getFooterData } from '../model/selectors/getFooterData';
+import { MobileFooter } from './MobileFooter/MobileFooter';
+import { getFooterIsLoading } from '../model/selectors/getFooterIsLoading';
 
 export const Footer = () => {
   const data = useSelector(getFooterData);
+  const isLoading = useSelector(getFooterIsLoading);
 
-  return (
+  const mobileScreen = useMediaQuery('(max-width:570px)');
+
+  return mobileScreen ? (
+    <MobileFooter data={data} isLoading={isLoading} />
+  ) : (
     <Box
       sx={{
         minHeight: '300px',

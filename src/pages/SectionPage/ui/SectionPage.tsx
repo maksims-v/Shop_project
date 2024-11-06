@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import {
   fetchProductsListData,
   getPageBrandsData,
@@ -17,7 +17,7 @@ import { ProductsBrandsFilter } from 'features/ProductsBrandsFilter';
 import { ProductsCategorySelector } from 'features/ProductsCategorySelector';
 import { ProductsSubCategoryFilter } from 'features/ProductsSubCategoryFilter';
 import { useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
@@ -27,8 +27,11 @@ import { ProductSaleAndClearanceFilter } from 'features/ProductSaleAndClearanceF
 import { ProductSectionSelector } from 'features/ProductSectionSelector';
 import { ProductsSortingSelector } from 'features/ProductsSortingSelector';
 import { fetchProductsListBanner } from 'entities/ProductsListBanner';
+import { SectionPageMobile } from './SectionPageMobile/SectionPageMobile';
 
 const SectionPage = () => {
+  const mobileScreen = useMediaQuery('(max-width:570px)');
+
   const dispatch = useAppDispatch();
   const pathParams = useParams<PathsParams>();
   const pageCategoryData = useSelector(getPageSectionData);
@@ -49,9 +52,9 @@ const SectionPage = () => {
     dispatch(fetchProductsListData(pathParams));
   }, [pathParams, searchFlag]);
 
-  console.log(pathParams);
-
-  return (
+  return mobileScreen ? (
+    <SectionPageMobile />
+  ) : (
     <Box>
       <PageBreadcrumbs />
       <Box mt="50px">

@@ -21,8 +21,8 @@ const MainPage = () => {
       <PopularSection data={popularSectionData} />
       <NewArrivalsSlider />
       <BrandSection data={brandSectionData} />
-      <SectionCategory data={sectionCategoryData} />
       <SecondBanner data={secondBannerData} />
+      <SectionCategory data={sectionCategoryData} />
       <ClearanceSlider />
     </>
   );
