@@ -7,10 +7,11 @@ import { FilterCheckbox } from 'shared/ui/FilterCheckbox/FilterCheckbox';
 export interface ProductsSubCategoryFilterProps {
   data?: string[];
   isLoading?: boolean;
+  mobile?: boolean;
 }
 
 export const ProductsSubCategoryFilter = memo((props: ProductsSubCategoryFilterProps) => {
-  const { data = [], isLoading } = props;
+  const { data = [], isLoading, mobile } = props;
 
   const dispatch = useAppDispatch();
 
@@ -22,7 +23,7 @@ export const ProductsSubCategoryFilter = memo((props: ProductsSubCategoryFilterP
   );
   return (
     <Box mb="10px">
-      <FilterCheckbox data={data} handleChange={handleChange} title={'category'} />
+      <FilterCheckbox data={data} handleChange={handleChange} mobile={mobile} title={'category'} />
     </Box>
   );
 });

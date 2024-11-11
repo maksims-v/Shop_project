@@ -1,3 +1,4 @@
+import React from 'react';
 import { Stack, Chip } from '@mui/material';
 import {
   getBrandFilterCheckedData,
@@ -6,7 +7,6 @@ import {
   getSizesCheckedData,
   getSubCategoryFilterCheckedData,
 } from 'entities/Product';
-import React from 'react';
 import { useSelector } from 'react-redux';
 
 export const MobileFiltersChip = () => {

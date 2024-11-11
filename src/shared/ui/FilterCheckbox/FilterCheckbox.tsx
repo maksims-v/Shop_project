@@ -6,16 +6,19 @@ export interface FilterCheckboxProps {
   data?: string[];
   title?: string | '';
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  mobile?: boolean;
 }
 
 export const FilterCheckbox = memo((props: FilterCheckboxProps) => {
-  const { data = [], handleChange, title } = props;
+  const { data = [], handleChange, title, mobile = false } = props;
 
   return (
     <>
-      <Typography sx={{ mb: '2px' }} fontWeight="bold">
-        {title?.toUpperCase()}
-      </Typography>
+      {!mobile && (
+        <Typography sx={{ mb: '2px' }} fontWeight="bold">
+          {title?.toUpperCase()}
+        </Typography>
+      )}
       <FormControl sx={{ pl: '8px' }} component="fieldset" variant="standard">
         <FormGroup>
           {data?.length > 0 &&

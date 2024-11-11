@@ -109,6 +109,7 @@ export const productsListSlice = createSlice({
       state.changePrice = [1, 9999];
       state.currentPage = 1;
       state.sortValue = 'Sort By';
+      state.searchFlag = !state.searchFlag;
     },
   },
   extraReducers: (builder) => {

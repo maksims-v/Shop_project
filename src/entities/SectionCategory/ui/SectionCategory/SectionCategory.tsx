@@ -25,7 +25,7 @@ export const SectionCategory = (props: SectionCategoryProps) => {
         return (
           <Box
             sx={{
-              borderRadius: mobileScreen ? undefined : '50%',
+              borderRadius: mobileScreen ? 'none' : '50%',
               overflow: 'hidden',
               width: mobileScreen ? '99%' : '200px',
               height: mobileScreen ? '300px' : '200px',

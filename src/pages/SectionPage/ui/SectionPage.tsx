@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import {
   fetchProductsListData,
@@ -28,6 +28,7 @@ import { ProductSectionSelector } from 'features/ProductSectionSelector';
 import { ProductsSortingSelector } from 'features/ProductsSortingSelector';
 import { fetchProductsListBanner } from 'entities/ProductsListBanner';
 import { SectionPageMobile } from './SectionPageMobile/SectionPageMobile';
+import { useDebounce } from 'shared/lib/hooks/useDebounce';
 
 const SectionPage = () => {
   const mobileScreen = useMediaQuery('(max-width:570px)');
@@ -43,13 +44,19 @@ const SectionPage = () => {
   const totalProducts = useSelector(getTotalProductsCount);
   const searchFlag = useSelector(getSearchFlag);
 
+  const fetchData = useCallback(() => {
+    dispatch(fetchProductsListData(pathParams));
+  }, [dispatch]);
+
+  const debounceFetchData = useDebounce(fetchData, 500);
+
   useEffect(() => {
     dispatch(productListActions.clearAllFilters());
     dispatch(fetchProductsListBanner(pathParams));
   }, [pathParams]);
 
   useEffect(() => {
-    dispatch(fetchProductsListData(pathParams));
+    debounceFetchData();
   }, [pathParams, searchFlag]);
 
   return mobileScreen ? (
@@ -57,10 +64,10 @@ const SectionPage = () => {
   ) : (
     <Box>
       <PageBreadcrumbs />
-      <Box mt="50px">
-        <Box display="flex">
-          <Box flex="1 1 10%">
-            <Box maxWidth="195px">
+      <Box sx={{ mt: '50px' }}>
+        <Box sx={{ display: 'flex' }}>
+          <Box sx={{ flex: '1 1 10%' }}>
+            <Box sx={{ maxWidth: '195px' }}>
               <ProductPriceFilter />
 
               {pathParams.pageCategory === 'all' && (

@@ -43,8 +43,7 @@ export const ProductsListData = memo((props: ProductItemProps) => {
           rowGap: '40px',
           gridTemplateColumns: 'repeat(auto-fill, 235px)',
         }}>
-        {' '}
-        {productsListRender}{' '}
+        {productsListRender}
       </Box>
 
       <Pagination />

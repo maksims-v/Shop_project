@@ -1,4 +1,4 @@
-import { Box, Typography, Slider } from '@mui/material';
+import { Box, Typography, Slider, useMediaQuery } from '@mui/material';
 import { getMinAndMaxPriceData, getSearchInputValue } from 'entities/Product';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
@@ -15,6 +15,8 @@ export interface ProductPriceFilterProps {
 export const ProductPriceFilter = memo((props: ProductPriceFilterProps) => {
   const { resetPriceSlider } = props;
   const params = useParams<PathsParams>();
+
+  const mobileScreen = useMediaQuery('(max-width:570px)');
 
   const [value, setValue] = useState<[number, number]>([1, 9999]);
   const [debouncedValue] = useDebounce(value, 800);
@@ -42,7 +44,7 @@ export const ProductPriceFilter = memo((props: ProductPriceFilterProps) => {
   }, [debouncedValue]);
 
   return (
-    <Box sx={{ width: '85%', textAlign: 'center', mb: '10px' }}>
+    <Box sx={{ width: mobileScreen ? '100%' : '85%', textAlign: 'center', mb: '10px' }}>
       <Typography textAlign="left" fontWeight="bold" mb="15px">
         PRICE
       </Typography>

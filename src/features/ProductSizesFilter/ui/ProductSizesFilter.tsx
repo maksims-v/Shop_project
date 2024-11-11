@@ -1,19 +1,23 @@
 import { Box, Typography, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 
 type ProductSizesFilterProps = {
   data?: string[];
   isLoading?: boolean;
+  mobile?: boolean;
 };
 
 export const ProductSizesFilter = memo((props: ProductSizesFilterProps) => {
-  const { data, isLoading } = props;
+  const { data, isLoading, mobile } = props;
+  const [formats, setFormats] = useState<string[]>();
 
   const dispatch = useAppDispatch();
 
-  const [formats, setFormats] = useState<string[]>();
+  useEffect(() => {
+    setFormats([]);
+  }, [data]);
 
   const handleFormat = useCallback(
     (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
@@ -25,7 +29,6 @@ export const ProductSizesFilter = memo((props: ProductSizesFilterProps) => {
 
   const RenderSizes = useMemo(
     () =>
-      data &&
       data?.map((item) => (
         <ToggleButton
           key={item}
@@ -49,9 +52,11 @@ export const ProductSizesFilter = memo((props: ProductSizesFilterProps) => {
 
   return (
     <Box sx={{ mb: '0px' }}>
-      <Typography sx={{ mb: '2px' }} fontWeight="bold">
-        {'SIZE'}
-      </Typography>
+      {!mobile && (
+        <Typography sx={{ mb: '2px' }} fontWeight="bold">
+          {'SIZE'}
+        </Typography>
+      )}
       <ToggleButtonGroup
         value={formats}
         onChange={handleFormat}
@@ -60,8 +65,9 @@ export const ProductSizesFilter = memo((props: ProductSizesFilterProps) => {
           display: 'flex',
           flexWrap: 'wrap',
           pl: '0px',
+          mb: '5px',
         }}>
-        {RenderSizes}
+        {data && RenderSizes}
       </ToggleButtonGroup>
     </Box>
   );

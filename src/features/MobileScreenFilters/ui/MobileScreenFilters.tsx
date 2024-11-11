@@ -7,6 +7,7 @@ import {
   AccordionDetails,
   Button,
   Stack,
+  useMediaQuery,
 } from '@mui/material';
 import { getPageSectionData, getTotalProductsCount } from 'entities/Product';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -30,7 +31,7 @@ import { PathsParams } from 'entities/Product/model/services/fetchProductsListDa
 
 const buttonStyles = {
   width: '150px',
-  borderRadius: '1px',
+  borderRadius: '3px',
   height: '30px',
   fontSize: '13px',
   color: 'black',
@@ -54,10 +55,10 @@ export const MobileScreenFilters = (props: MobileScreenFiltersProps) => {
 
   const pathParams = useParams<PathsParams>();
   const location = useLocation();
+  const mobileScreen = useMediaQuery('(max-width:570px)');
 
   const [mobileSearchMenuOpen, setMobileSearchMenuOpen] = useState(false);
 
-  const total = useSelector(getTotalProductsCount);
   const pageCategory = useSelector(getPageSectionData);
 
   const [resetPriceSlider, setResetPriceSlider] = useState(false);
@@ -89,28 +90,16 @@ export const MobileScreenFilters = (props: MobileScreenFiltersProps) => {
           {total} results
         </Typography>
       )} */}
-      <MobileFiltersChip />
       <Box sx={{ display: 'flex', justifyContent: 'space-around', mb: '17px' }}>
-        <Button sx={buttonStyles} onClick={handleDrawerToggle}>
+        <Button variant="outlined" size="large" sx={buttonStyles} onClick={handleDrawerToggle}>
           SHOW FILTERS
         </Button>
-        <AppLink to={location?.pathname}>
-          <Button sx={buttonStyles} onClick={clear}>
-            CLEAR FILTERS
-          </Button>
-        </AppLink>
+        <Button variant="outlined" size="large" sx={buttonStyles} onClick={clear}>
+          CLEAR FILTERS
+        </Button>
       </Box>
-      <Box m="0 auto" width="100%">
+      <Box sx={{ m: '0 auto', width: '100%' }}>
         <ProductPriceFilter resetPriceSlider={resetPriceSlider} />
-      </Box>
-      <Box pl="10px" mb="17px" display="flex" justifyContent="space-between">
-        <Box pt="10px">
-          <Typography sx={{ fontWeight: 'bold' }} component="span">
-            {total}
-          </Typography>
-          <Typography component="span"> products</Typography>
-        </Box>
-        <ProductsSortingSelector />
       </Box>
 
       <Drawer
@@ -153,7 +142,7 @@ export const MobileScreenFilters = (props: MobileScreenFiltersProps) => {
                 <Typography fontWeight="bold">GENDER</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ p: '0px 0px 0px 17px' }}>
-                <ProductSectionSelector data={pageCategoryData} />
+                <ProductSectionSelector data={pageCategoryData} mobile={mobileScreen} />
               </AccordionDetails>
             </Accordion>
           )}
@@ -166,7 +155,7 @@ export const MobileScreenFilters = (props: MobileScreenFiltersProps) => {
               <Typography fontWeight="bold">CATEGORIES</Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ p: '0px 0px 0px 17px' }}>
-              <ProductsCategorySelector data={categoryPageFiltersData} />
+              <ProductsCategorySelector data={categoryPageFiltersData} mobile={mobileScreen} />
             </AccordionDetails>
           </Accordion>
 
@@ -180,7 +169,7 @@ export const MobileScreenFilters = (props: MobileScreenFiltersProps) => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ p: '0px 0px 0px 17px' }}>
-              <ProductsSubCategoryFilter data={subCategoryData} />
+              <ProductsSubCategoryFilter data={subCategoryData} mobile={mobileScreen} />
             </AccordionDetails>
           </Accordion>
 
@@ -192,7 +181,7 @@ export const MobileScreenFilters = (props: MobileScreenFiltersProps) => {
               <Typography fontWeight="bold">BRANDS</Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ p: '0px 0px 0px 17px' }}>
-              <ProductsBrandsFilter data={brandsData} />
+              <ProductsBrandsFilter data={brandsData} mobile={mobileScreen} />
             </AccordionDetails>
           </Accordion>
 
@@ -204,16 +193,14 @@ export const MobileScreenFilters = (props: MobileScreenFiltersProps) => {
               <Typography fontWeight="bold">SIZE</Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ p: '0px 0px 0px 17px' }}>
-              <ProductSizesFilter data={sizesData} />
+              <ProductSizesFilter data={sizesData} mobile={mobileScreen} />
             </AccordionDetails>
           </Accordion>
         </Box>
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', pb: '55px' }}>
-          <Stack>
-            <Button onClick={handleDrawerToggle} size="large" sx={buttonStyles} variant="outlined">
-              SHOW
-            </Button>
-          </Stack>
+          <Button onClick={handleDrawerToggle} size="large" sx={buttonStyles} variant="outlined">
+            SHOW
+          </Button>
         </Box>
       </Drawer>
     </>
