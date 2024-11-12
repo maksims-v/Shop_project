@@ -4,7 +4,7 @@ import React from 'react';
 type PaginationProps = {
   pages?: number;
   currentPage?: number;
-  changePage?: () => void;
+  changePage?: (event: React.ChangeEvent<unknown>, page: number) => void;
 };
 
 export const Pagination = (props: PaginationProps) => {
@@ -18,7 +18,7 @@ export const Pagination = (props: PaginationProps) => {
         onChange={changePage}
         variant="outlined"
         shape="rounded"
-        sx={{ m: '0 auto' }}
+        sx={{ display: 'flex', justifyContent: 'center' }}
       />
     </Stack>
   );

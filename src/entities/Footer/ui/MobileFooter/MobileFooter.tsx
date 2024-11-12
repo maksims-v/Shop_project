@@ -1,6 +1,6 @@
 import { Box, Container, Typography, List, ListItem } from '@mui/material';
 import { FooterAttributes } from 'entities/Footer/model/types/footer';
-import { AppLink } from 'shared/ui/AppLink/AppLink';
+import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 
 export interface MobileFooterProps {
   data?: FooterAttributes;
@@ -11,7 +11,7 @@ export const MobileFooter = (props: MobileFooterProps) => {
   const { data, isLoading } = props;
 
   return (
-    <Box sx={{ backgroundColor: '#262624', color: 'white', p: '40px 0px', mt: '20px' }}>
+    <Box sx={{ backgroundColor: '#262624', color: 'white', p: '40px 0px', mt: 'auto' }}>
       <Container maxWidth="md" sx={{ height: '100%' }}>
         {!isLoading && (
           <Box
@@ -20,6 +20,7 @@ export const MobileFooter = (props: MobileFooterProps) => {
               justifyContent: 'space-between',
               height: '100%',
               p: '0px 10px',
+              color: 'white',
             }}>
             <Box>
               <Box>
@@ -29,7 +30,9 @@ export const MobileFooter = (props: MobileFooterProps) => {
                 <List>
                   {data?.supportLinks[0]?.link?.map((item, index) => (
                     <ListItem key={index} sx={{ p: '0px 0px 0px 0px', fontSize: '16px' }}>
-                      <AppLink to={item.href}>{item.label}</AppLink>
+                      <AppLink theme={AppLinkTheme.SECONDARY} to={item.href}>
+                        {item.label}
+                      </AppLink>
                     </ListItem>
                   ))}{' '}
                 </List>
@@ -41,7 +44,9 @@ export const MobileFooter = (props: MobileFooterProps) => {
                 <List>
                   {data?.aboutLinks[0]?.link?.map((item, index) => (
                     <ListItem key={index} sx={{ p: '0px 0px 0px 0px', fontSize: '16px' }}>
-                      <AppLink to={item.href}>{item.label}</AppLink>
+                      <AppLink theme={AppLinkTheme.SECONDARY} to={item.href}>
+                        {item.label}
+                      </AppLink>
                     </ListItem>
                   ))}{' '}
                 </List>
@@ -55,7 +60,9 @@ export const MobileFooter = (props: MobileFooterProps) => {
                 <List>
                   {data?.allProductsLinks[0]?.link?.map((item, index) => (
                     <ListItem key={index} sx={{ p: '0px 0px 0px 0px', fontSize: '16px' }}>
-                      <AppLink to={item.href}>{item.label}</AppLink>
+                      <AppLink theme={AppLinkTheme.SECONDARY} to={item.href}>
+                        {item.label}
+                      </AppLink>
                     </ListItem>
                   ))}
                 </List>
@@ -67,7 +74,9 @@ export const MobileFooter = (props: MobileFooterProps) => {
                 <List>
                   {data?.socialLinks[0]?.link?.map((item, index) => (
                     <ListItem key={index} sx={{ p: '0px 0px 0px 0px', fontSize: '16px' }}>
-                      <AppLink to={item.href}>{item.label}</AppLink>
+                      <AppLink theme={AppLinkTheme.SECONDARY} to={item.href}>
+                        {item.label}
+                      </AppLink>
                     </ListItem>
                   ))}
                 </List>

@@ -28,3 +28,4 @@ export { getProductId } from './model/selectors/getProductId';
 export { getInputSearchValue } from './model/selectors/getInputSearchValue';
 export { getTotalPages } from './model/selectors/pagination/getTotalPages';
 export { getCurrentPage } from './model/selectors/pagination/getCurrentPage';
+export { getProductsListIsLoading } from './model/selectors/getProductsListIsLoading';

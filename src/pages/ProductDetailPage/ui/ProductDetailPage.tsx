@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Alert, Box, Divider, Snackbar, Stack } from '@mui/material';
+import { Alert, Box, Divider, Snackbar, Stack, useMediaQuery } from '@mui/material';
 import { getProductDetailData } from 'entities/Product/model/selectors/getProductDetailData';
 import { fetchProductDetailData } from 'entities/Product/model/services/fetchProductDetailData';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
@@ -18,8 +18,11 @@ import {
 } from 'entities/RelatedProductsSlider';
 import { Slider } from 'shared/ui/Slider/Slider';
 import { basketSliceActions } from 'entities/Basket';
+import { ProductDetailPageMobile } from './ProductDetailPageMobile/ProductDetailPageMobile';
 
 const ProductDetailPage = () => {
+  const mobileScreen = useMediaQuery('(max-width:570px)');
+
   const [qnty, setQnty] = useState(1);
   const [productQnty, setProductQnty] = useState(null);
   const [size, setSize] = useState(null);
@@ -87,7 +90,9 @@ const ProductDetailPage = () => {
     }
   }, [size, productQnty, dispatch, data, qnty, setOpenSuccess, setError, setChangeSizeColor]);
 
-  return (
+  return mobileScreen ? (
+    <ProductDetailPageMobile />
+  ) : (
     <Box sx={{ width: '100%', m: '40px auto 10px auto' }}>
       <PageBreadcrumbs />
       <Box sx={{ display: 'flex', columnGap: '40px' }}>

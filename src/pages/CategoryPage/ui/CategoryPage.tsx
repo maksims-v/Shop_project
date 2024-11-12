@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import {
   fetchProductsListData,
   getPageBrandsData,
@@ -23,8 +23,11 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
+import { CategoryPageMobile } from './CategoryPageMobile/CategoryPageMobile';
 
 const CategoryPage = () => {
+  const mobileScreen = useMediaQuery('(max-width:570px)');
+
   const dispatch = useAppDispatch();
   const pathParams = useParams<PathsParams>();
   const subCategoryData = useSelector(getPageSubCategoryData);
@@ -43,7 +46,9 @@ const CategoryPage = () => {
     dispatch(fetchProductsListData(pathParams));
   }, [searchFlag, pathParams]);
 
-  return (
+  return mobileScreen ? (
+    <CategoryPageMobile />
+  ) : (
     <Box>
       <PageBreadcrumbs />
       <Box sx={{ mt: '50px' }}>

@@ -115,7 +115,7 @@ export const productsListSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductsListData.pending, (state) => {
-        state.status = 'loading';
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(
@@ -136,6 +136,7 @@ export const productsListSlice = createSlice({
           state.sizes = state.newSearch ? action.payload.meta.sizes : state.sizes;
 
           state.status = 'resolved';
+          state.isLoading = false;
         },
       )
       .addCase(fetchProductsListData.rejected, (state) => {

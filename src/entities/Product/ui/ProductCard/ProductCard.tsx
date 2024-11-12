@@ -57,8 +57,11 @@ export const ProductCard = (props: ProductCardProps) => {
             <Typography
               sx={{
                 lineHeight: brandSection ? '15px' : '18px',
-                flex: '1 1 auto',
-                overflow: brandSection ? 'hidden' : undefined,
+                display: '-webkit-box',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
               }}>
               {product?.title}
             </Typography>

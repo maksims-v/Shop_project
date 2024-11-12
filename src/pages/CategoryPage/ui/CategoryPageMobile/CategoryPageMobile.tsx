@@ -1,22 +1,24 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 import {
+  getProductsListIsLoading,
+  getTotalProductsCount,
   getPageSectionData,
   getPageCategoryData,
   getPageSubCategoryData,
   getPageBrandsData,
   getProductsListData,
   getSizesData,
-  getTotalProductsCount,
-  getProductsListIsLoading,
 } from 'entities/Product';
 import { ProductsListData } from 'entities/Product/ui/ProductsListData/ProductsListData';
 import { MobileFiltersChip } from 'features/MobileFiltersChip';
 import { MobileScreenFilters } from 'features/MobileScreenFilters';
 import { ProductsSortingSelector } from 'features/ProductsSortingSelector';
 import { useSelector } from 'react-redux';
-
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
-export const SectionPageMobile = () => {
+
+export interface CategoryPageMobileProps {}
+
+export const CategoryPageMobile = ({}: CategoryPageMobileProps) => {
   const isLoading = useSelector(getProductsListIsLoading);
 
   const total = useSelector(getTotalProductsCount);

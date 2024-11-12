@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import {
   fetchProductsListData,
+  getCurrentPage,
   getPageBrandsData,
   getPageCategoryData,
   getPageSectionData,
@@ -43,6 +44,11 @@ const SectionPage = () => {
   const sizesData = useSelector(getSizesData);
   const totalProducts = useSelector(getTotalProductsCount);
   const searchFlag = useSelector(getSearchFlag);
+  const currentPage = useSelector(getCurrentPage);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   const fetchData = useCallback(() => {
     dispatch(fetchProductsListData(pathParams));

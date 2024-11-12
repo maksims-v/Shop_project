@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import {
   getPageBrandsData,
   getProductsListData,
@@ -20,8 +20,11 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
 import { ProductsSortingSelector } from 'features/ProductsSortingSelector';
+import { SubCategoryPageMobile } from './SubCategoryPageMobile/SubCategoryPageMobile';
 
 const SubCategoryPage = () => {
+  const mobileScreen = useMediaQuery('(max-width:570px)');
+
   const dispatch = useAppDispatch();
   const pathParams = useParams<PathsParams>();
   const brandsData = useSelector(getPageBrandsData);
@@ -38,7 +41,9 @@ const SubCategoryPage = () => {
     dispatch(fetchProductsListData(pathParams));
   }, [searchFlag, pathParams]);
 
-  return (
+  return mobileScreen ? (
+    <SubCategoryPageMobile />
+  ) : (
     <Box>
       <PageBreadcrumbs />
       <Box sx={{ mt: '50px' }}>

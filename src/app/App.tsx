@@ -41,11 +41,20 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
-      <Container maxWidth="lg">
-        <Box sx={{ pt: mobileScreen ? '40px' : '80px' }}>{inited && <AppRouter />}</Box>
-      </Container>
-      <Footer />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh',
+        }}>
+        <Navbar />
+        <Container
+          sx={{ padding: mobileScreen ? '0px 5px' : '0px 16px', mb: '20px' }}
+          maxWidth="lg">
+          <Box sx={{ pt: mobileScreen ? '40px' : '80px' }}>{inited && <AppRouter />}</Box>
+        </Container>
+        <Footer />
+      </Box>
     </ThemeProvider>
   );
 };

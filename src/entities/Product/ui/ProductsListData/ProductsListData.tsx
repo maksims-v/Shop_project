@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { Product } from 'entities/Product/model/types/Product';
 import { memo, useMemo } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
@@ -6,6 +6,9 @@ import { removeNullValuesInProduct } from 'shared/lib/removeNullValuesInProduct/
 import { productListActions } from 'entities/Product/model/slice/productsListSlice';
 import { Pagination } from 'features/Pagination';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
+import { useSelector } from 'react-redux';
+import { getCurrentPage } from 'entities/Product/model/selectors/pagination/getCurrentPage';
+import { getTotalPages } from 'entities/Product/model/selectors/pagination/getTotalPages';
 
 export interface ProductItemProps {
   data?: Product[];
@@ -16,8 +19,11 @@ export interface ProductItemProps {
 export const ProductsListData = memo((props: ProductItemProps) => {
   const { data = [], error, isLoading } = props;
 
-  const dispatch = useAppDispatch();
+  const mobileScreen = useMediaQuery('(max-width:570px)');
 
+  const dispatch = useAppDispatch();
+  const currentPage = useSelector(getCurrentPage);
+  const pages = useSelector(getTotalPages);
   const removeNullAttributes = data.map((item) => removeNullValuesInProduct(item));
 
   const productsListRender = useMemo(
@@ -41,12 +47,14 @@ export const ProductsListData = memo((props: ProductItemProps) => {
           display: 'grid',
           columnGap: '5',
           rowGap: '40px',
-          gridTemplateColumns: 'repeat(auto-fill, 235px)',
+          gridTemplateColumns: mobileScreen
+            ? 'repeat(auto-fill, minmax(180px, 1fr))'
+            : 'repeat(auto-fill, 235px)',
         }}>
         {productsListRender}
       </Box>
 
-      <Pagination />
+      <Pagination pages={pages} currentPage={currentPage} changePage={changePage} />
     </Box>
   );
 });
