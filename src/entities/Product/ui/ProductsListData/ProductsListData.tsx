@@ -48,7 +48,7 @@ export const ProductsListData = memo((props: ProductItemProps) => {
           columnGap: '5',
           rowGap: '40px',
           gridTemplateColumns: mobileScreen
-            ? 'repeat(auto-fill, minmax(180px, 1fr))'
+            ? 'repeat(auto-fill, minmax(170px, 1fr))'
             : 'repeat(auto-fill, 235px)',
         }}>
         {productsListRender}
