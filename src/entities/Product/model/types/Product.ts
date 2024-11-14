@@ -116,7 +116,7 @@ export interface ProductList {
   currentPage: 1;
 }
 
-interface Size {
+export interface Size {
   id: number;
   size: string;
   qnty: number | null;
