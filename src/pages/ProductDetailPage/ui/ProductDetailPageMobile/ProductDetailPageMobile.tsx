@@ -17,7 +17,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import DoneIcon from '@mui/icons-material/Done';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getRelatedProductsData } from 'entities/RelatedProductsSlider';
 import { useSelector } from 'react-redux';
 import { getProductDetailData } from 'entities/Product/model/selectors/getProductDetailData';
@@ -39,6 +39,10 @@ export const ProductDetailPageMobile = ({}: ProductDetailPageMobileProps) => {
   const dispatch = useAppDispatch();
   const data = useSelector(getProductDetailData);
   const relatedProductsData = useSelector(getRelatedProductsData);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [data]);
 
   const handleAlertClose = useCallback(() => {
     setOpenSuccess(false);
@@ -81,8 +85,8 @@ export const ProductDetailPageMobile = ({}: ProductDetailPageMobileProps) => {
 
         <Box flex="1 1 45%" mb="40px">
           <Box m="20px 0 25px 0">
-            <Typography sx={{ fontSize: '16px' }} variant="h2">
-              {data?.attributes?.brand}
+            <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }} variant="h2">
+              Brand: {data?.attributes?.brand}
             </Typography>
             <Typography sx={{ fontSize: '20px', fontWeight: 'bold' }} variant="h3">
               {data?.attributes?.title}
@@ -136,9 +140,14 @@ export const ProductDetailPageMobile = ({}: ProductDetailPageMobileProps) => {
             <Box maxWidth="300px">
               <ToggleButtonGroup
                 sx={{
+                  '& .MuiToggleButtonGroup-firstButton': {
+                    borderRadius: '4px',
+                  },
+
                   '& .MuiToggleButtonGroup-lastButton, & .MuiToggleButtonGroup-middleButton': {
                     borderLeft: '1px solid rgba(0, 0, 0, 0.12)', // Убираем левую границу
                     borderRadius: '4px',
+                    marginLeft: '0px',
                   },
                   display: 'flex',
                   flexWrap: 'wrap',
