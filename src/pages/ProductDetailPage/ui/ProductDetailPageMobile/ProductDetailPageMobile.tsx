@@ -15,11 +15,7 @@ import { Slider } from 'shared/ui/Slider/Slider';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DoneIcon from '@mui/icons-material/Done';
-import { count } from 'console';
-import { size } from 'lodash';
-import AliceCarousel from 'react-alice-carousel';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-import { Link } from 'react-router-dom';
 import { PageBreadcrumbs } from 'shared/ui/Breadcrumbs/Breadcrumbs';
 import { useCallback, useState } from 'react';
 import { getRelatedProductsData } from 'entities/RelatedProductsSlider';
@@ -139,6 +135,15 @@ export const ProductDetailPageMobile = ({}: ProductDetailPageMobileProps) => {
 
             <Box maxWidth="300px">
               <ToggleButtonGroup
+                sx={{
+                  '& .MuiToggleButtonGroup-lastButton, & .MuiToggleButtonGroup-middleButton': {
+                    borderLeft: '1px solid rgba(0, 0, 0, 0.12)', // Убираем левую границу
+                    borderRadius: '4px',
+                  },
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '3px',
+                }}
                 color="primary"
                 value={size}
                 exclusive
@@ -147,6 +152,11 @@ export const ProductDetailPageMobile = ({}: ProductDetailPageMobileProps) => {
                 {data?.attributes?.size?.map((item, index) => {
                   return (
                     <ToggleButton
+                      sx={{
+                        minWidth: '40px',
+                        height: '50px',
+                        borderRadius: '4px',
+                      }}
                       key={index}
                       onClick={() => setProductQnty(item.qnty ? item.qnty : 0)}
                       color={item.qnty === 0 ? 'error' : 'success'}
