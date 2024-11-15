@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Alert, Box, Divider, Snackbar, Stack, useMediaQuery } from '@mui/material';
+import { Box, Divider, useMediaQuery } from '@mui/material';
 import { getProductDetailData } from 'entities/Product/model/selectors/getProductDetailData';
 import { fetchProductDetailData } from 'entities/Product/model/services/fetchProductDetailData';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
-import { ProductsImageGallery } from 'entities/ProductDetail';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
@@ -19,6 +18,8 @@ import {
 import { Slider } from 'shared/ui/Slider/Slider';
 import { basketSliceActions } from 'entities/Basket';
 import { ProductDetailPageMobile } from './ProductDetailPageMobile/ProductDetailPageMobile';
+import { ProductsImageGallery } from 'features/ProductsImageGallery';
+import { AddToCartNotifier } from 'features/AddToCartNotifier';
 
 const ProductDetailPage = () => {
   const mobileScreen = useMediaQuery('(max-width:570px)');
@@ -115,20 +116,12 @@ const ProductDetailPage = () => {
         <Divider sx={{ mb: '10px' }} color="yellow" />
       </Box>
       <Slider data={relatedProductsData} section={'relatedProducts'} />
-      <Stack>
-        <Snackbar open={openSuccess} autoHideDuration={2000} onClose={handleSnackbarClose}>
-          <Alert onClose={handleAlertClose} severity="success" sx={{ width: '100%' }}>
-            The product has been placed in the cart
-          </Alert>
-        </Snackbar>
-      </Stack>
-      <Stack>
-        <Snackbar open={openError} autoHideDuration={2000} onClose={handleSnackbarClose}>
-          <Alert onClose={handleAlertClose} severity="error" sx={{ width: '100%' }}>
-            Please choose the size.
-          </Alert>
-        </Snackbar>
-      </Stack>
+      <AddToCartNotifier
+        handleSnackbarClose={handleSnackbarClose}
+        handleAlertClose={handleAlertClose}
+        openSuccess={openSuccess}
+        openError={openError}
+      />
     </Box>
   );
 };

@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { Box, CardActionArea, CardMedia } from '@mui/material';
+import { Box, CardActionArea, CardMedia, CircularProgress } from '@mui/material';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { PathsParams } from 'entities/Product/model/services/fetchProductsListData';
 import { useParams } from 'react-router-dom';
@@ -28,5 +28,11 @@ export const SimilarProducts = memo((props: SimilarProductsProps) => {
     [data],
   );
 
-  return <Box sx={{ display: 'flex', mb: '10px' }}>{renderData} </Box>;
+  return data ? (
+    <Box sx={{ display: 'flex', mb: '10px' }}>{renderData} </Box>
+  ) : (
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <CircularProgress size="3rem" />
+    </Box>
+  );
 });

@@ -13,7 +13,7 @@
 .overlay {
   width: 100%;
   height: 100%;
-  background: var(--overlay-color);
+  background-color: rgba(14, 13, 13, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +24,6 @@
   border-radius: 12px;
   background: var(--bg-color);
   transition: 0.3s transform;
-  transform: scale(0.5);
   max-width: 60%;
 }
 
@@ -32,9 +31,12 @@
   pointer-events: auto;
   opacity: 1;
   z-index: var(--modal-z-index);
+}
 
+.mobileScreen {
   .content {
     transform: scale(1);
+    max-width: 90%;
   }
 }
 

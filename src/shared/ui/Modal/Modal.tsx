@@ -2,6 +2,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import * as cls from './Modal.module.scss';
 import { Portal } from 'shared/ui/Portal/Portal';
+import { useMediaQuery } from '@mui/material';
 
 interface ModalProps {
   className?: string;
@@ -15,6 +16,8 @@ const ANIMATION_DELAY = 300;
 
 export const Modal = (props: ModalProps) => {
   const { className, children, isOpen, onClose, lazy } = props;
+
+  const mobileScreen = useMediaQuery('(max-width:570px)');
 
   const [isClosing, setIsClosing] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -36,7 +39,6 @@ export const Modal = (props: ModalProps) => {
     }
   }, [onClose]);
 
-  // Новые ссылки!!!
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -66,6 +68,10 @@ export const Modal = (props: ModalProps) => {
     [cls.isClosing]: isClosing,
   };
 
+  const mobileScreenMods: Record<string, boolean> = {
+    [cls.mobileScreen]: mobileScreen,
+  };
+
   if (lazy && !isMounted) {
     return null;
   }
@@ -73,7 +79,7 @@ export const Modal = (props: ModalProps) => {
   return (
     <Portal>
       <div className={classNames(cls.Modal, mods, [className, '', 'app_modal'])}>
-        <div className={cls.overlay} onClick={closeHandler}>
+        <div className={classNames(cls.overlay, mobileScreenMods, [])} onClick={closeHandler}>
           <div className={cls.content} onClick={onContentClick}>
             {children}
           </div>

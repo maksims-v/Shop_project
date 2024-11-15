@@ -25,9 +25,10 @@ import { getProductDetailData } from 'entities/Product/model/selectors/getProduc
 import { basketSliceActions } from 'entities/Basket';
 import { useAppDispatch } from 'shared/lib/hooks/hook';
 import { SimilarProducts } from 'features/SimilarProducts';
-import { ProductsImageGallery } from 'entities/ProductDetail';
 import { SizeSelector } from 'features/SizeSelector';
 import { getProductsListIsLoading } from 'entities/Product';
+import { ProductsImageGallery } from 'features/ProductsImageGallery';
+import { AddToCartNotifier } from 'features/AddToCartNotifier';
 
 export interface ProductDetailPageMobileProps {}
 
@@ -82,16 +83,18 @@ export const ProductDetailPageMobile = ({}: ProductDetailPageMobileProps) => {
   }, [size, productQnty, dispatch, data, qnty, setOpenSuccess, setError, setChangeSizeColor]);
 
   return (
-    <Box width="100%" m="0px auto" p="0px 7px">
+    <Box sx={{ width: '100%', m: '0px auto', p: '0px 7px' }}>
       <PageBreadcrumbs />
       {!data ? (
-        <CircularProgress size="3rem" sx={{ textAlign: 'center' }} />
+        <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: '50px' }}>
+          <CircularProgress size="3rem" />
+        </Box>
       ) : (
         <>
           <Box>
             <ProductsImageGallery data={data} />
 
-            <Box flex="1 1 45%" mb="40px">
+            <Box sx={{ flex: '1 1 45%', mb: '40px' }}>
               <Box m="20px 0 25px 0">
                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold', mb: '10px' }} variant="h2">
                   Brand: <Typography component="span">{data?.attributes?.brand}</Typography>
@@ -125,14 +128,16 @@ export const ProductDetailPageMobile = ({}: ProductDetailPageMobileProps) => {
                   size={size}
                 />
 
-                <Box display="flex" alignItems="center" mt="10px" minHeight="50px">
+                <Box sx={{ display: 'flex', alignItems: 'center', mt: '10px', minHeight: '50px' }}>
                   <Box
-                    display="flex"
-                    alignItems="center"
-                    border="1.5px solid black"
-                    borderRadius="3px"
-                    mr="20px"
-                    p="2px 5px">
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      border: '1.5px solid black',
+                      borderRadius: '3px',
+                      mr: '20px',
+                      p: '2px 5px',
+                    }}>
                     <IconButton disabled={qnty === 1} onClick={() => setQnty(qnty - 1)}>
                       <RemoveIcon />
                     </IconButton>
@@ -171,21 +176,12 @@ export const ProductDetailPageMobile = ({}: ProductDetailPageMobileProps) => {
           <Slider data={relatedProductsData} section={'relatedProducts'} />
         </>
       )}
-
-      <Stack>
-        <Snackbar open={openSuccess} autoHideDuration={2000} onClose={handleSnackbarClose}>
-          <Alert onClose={handleAlertClose} severity="success" sx={{ width: '100%' }}>
-            The product has been placed in the cart
-          </Alert>
-        </Snackbar>
-      </Stack>
-      <Stack>
-        <Snackbar open={openError} autoHideDuration={2000} onClose={handleSnackbarClose}>
-          <Alert onClose={handleAlertClose} severity="error" sx={{ width: '100%' }}>
-            Please choose the size.
-          </Alert>
-        </Snackbar>
-      </Stack>
+      <AddToCartNotifier
+        handleSnackbarClose={handleSnackbarClose}
+        handleAlertClose={handleAlertClose}
+        openSuccess={openSuccess}
+        openError={openError}
+      />
     </Box>
   );
 };

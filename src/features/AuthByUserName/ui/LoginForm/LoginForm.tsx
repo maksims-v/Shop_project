@@ -8,6 +8,7 @@ import {
   TextField,
   DialogActions,
   Button,
+  useMediaQuery,
 } from '@mui/material';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { loginActions, loginReducer } from 'features/AuthByUserName/model/slice/loginSlice';
@@ -29,6 +30,7 @@ export interface LoginFormProps {
 
 const LoginForm = (props: LoginFormProps) => {
   const { onSuccess, className } = props;
+  const mobileScreen = useMediaQuery('(max-width:570px)');
 
   const dispatch = useAppDispatch();
   const identifier = useSelector(getLoginUsername);
@@ -70,7 +72,7 @@ const LoginForm = (props: LoginFormProps) => {
   }, [dispatch, identifier, password]);
 
   return (
-    <div className={classNames(cls.LoginForm, {}, [className])}>
+    <div>
       <DialogTitle id="responsive-dialog-title">{'Adventure Rewards Members'}</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -85,7 +87,14 @@ const LoginForm = (props: LoginFormProps) => {
         </Box>
       )}
 
-      <Box sx={{ margin: '0 auto', gap: '15px', display: 'flex', p: '0px 5px' }}>
+      <Box
+        sx={{
+          margin: '0 auto',
+          gap: '15px',
+          display: 'flex',
+          p: '0px 5px',
+          flexDirection: mobileScreen ? 'column' : 'row',
+        }}>
         <TextField
           value={identifier}
           onChange={(e) => onChangeUsername(e.target.value)}
